@@ -1,14 +1,10 @@
 export default {
   items: [
-    // {
-    //   name: 'Dashboard',
-    //   url: '/dashboard',
-    //   icon: 'icon-speedometer',
-    //   badge: {
-    //     variant: 'info',
-    //     text: 'NEW',
-    //   },
-    // },
+    {
+      name: 'Inicio',
+      url: '/Inicio',
+      icon: 'fa fa-home',
+    },
     // {
     //   title: true,
     //   name: 'Indicadores',
@@ -31,7 +27,7 @@ export default {
     {
       name: 'Indicadores',
       url: '/indicadores',
-      icon: 'icon-puzzle',
+      icon: 'fa fa-th-large',
     },
     {
       divider: true,
@@ -39,30 +35,22 @@ export default {
     {
       name: 'Índices',
       url: '/indices',
-      icon: 'icon-star',
-    },
-    {
-      title: true,
-      name: 'Programas',
-      wrapper: {
-        element:'h6',
-        attributes: {style:{marginBottom:0}},
-      }
+      icon: 'fa fa-tags',
     },
     {
       name: 'Programas',
       url: '/programas',
-      icon: 'icon-star',
+      icon: 'icon-people',
       children:[
         {
           name: 'Programas Gubernamentales',
           url: '/programasGob',
-          icon: 'icon-star',
+          icon: 'fa fa-bank',
         },
         {
           name: 'Programas OSC',
           url: '/programasOsc',
-          icon: 'icon-star',
+          icon: 'fa fa-building',
         }
       ]
     }

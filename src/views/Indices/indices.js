@@ -36,13 +36,13 @@ export default class indices extends Component{
       <div className="animated fadeIn">
         <Row>
           <Col md="12">
-            <Row>
+            {/* <Row>
               <Col sm="12" md={{size: 2, offset: 10}} style={{textAlign:"right"}}>
                 <ButtonToggle color="success" size="lg" style={{marginBottom: "1em"}}>
                   Subir Excel
                 </ButtonToggle>
               </Col>
-            </Row>
+            </Row> */}
           <Card>
               <CardHeader>
                 <Row>
