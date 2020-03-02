@@ -4,6 +4,8 @@ const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Indicadores = React.lazy(() => import('./views/Indicadores/SaludInfantil'))
 const Indices =  React.lazy(() => import('./views/Indices/indices'))
 const Gubernamentales = React.lazy(()=> import('./views/Programas/Gubernamentales'))
+const Repositorios = React.lazy(()=> import('./views/Repositorios/Repositorios'))
+const Estadisticas = React.lazy(()=> import('./views/Estadisticas/Estadisticas'))
 
 const CoreUIIcons = React.lazy(()=> import('./views/Icons/CoreUIIcons/CoreUIIcons'))
 const Flags = React.lazy(()=> import('./views/Icons/Flags/Flags'))
@@ -18,6 +20,8 @@ const routes = [
   { path: '/indices', exact: true, name: 'Indices', component: Indices },
   { path: '/programasGob', exact: true, name: 'Gubernamentales', component: Gubernamentales },
   { path: '/programasOsc', exact: true, name: 'OSC', component: Gubernamentales },
+  { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },
+  { path: '/estadisticas', exact: true, name: 'statics', component: Estadisticas },
   // { path: '/theme/colors', name: 'Colors', component: Colors },
   // { path: '/theme/typography', name: 'Typography', component: Typography },
   // { path: '/base', exact: true, name: 'Base', component: Cards },

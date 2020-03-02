@@ -53,7 +53,17 @@ export default {
           icon: 'fa fa-building',
         }
       ]
-    }
+    },
+    {
+      name: 'Estadisticas',
+      url: '/estadisticas',
+      icon: 'fa fa-bar-chart',
+    },
+    {
+      name: 'Repositorios',
+      url: '/repositorios',
+      icon: 'fa fa-tags',
+    },
 
     // {
     //   name: 'Pages',
