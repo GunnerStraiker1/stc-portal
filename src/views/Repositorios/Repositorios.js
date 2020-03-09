@@ -14,9 +14,9 @@ export default class Repositorios extends Component{
                 <Table responsive size="lg">
                   <thead>
                   <tr>
-                    <th>Fecha</th>
-                    <th>Nombre del Repositorio</th>
+                    <th>Nombre del Archivo</th>
                     <th>Descripción</th>
+                    <th>Fuente</th>
                     <th>Descarga</th>
                   </tr>
                   </thead>

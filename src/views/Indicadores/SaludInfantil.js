@@ -122,19 +122,27 @@ export default class SaludInfantil extends Component {
                 <Row>
                 <Col xs="12" sm="4" md="4">
                     <Label>Seleccionar Índicador</Label>
-                    <Input type="select" name="select" id="edo">
+                    <Input type="select" name="select" id="indicador">
+                      <option>Generales</option>
+                      <option>Servicios de Salud</option>
+                      <option>Prevención del SIDA</option>
                       <option>Salud Infantil</option>
                       <option>Salud Materna</option>
                       <option>Seguridad Alimentaria</option>
                       <option>Acceso y calidad del agua</option>
+                      <option>Desastres Naturales</option>
+                      <option>Instalaciones Sanitarias y Desechos</option>
                     </Input>
                   </Col>
                   <Col xs="12" sm="3" md="3">
-                    <Label>Seleccionar Estado</Label>
+                    <Label>Seleccionar Municipio</Label>
                     <Input type="select" name="select" id="edo">
-                      <option>Mérida</option>
-                      <option>Campeche</option>
-                      <option>Quintana Roo</option>
+                      <option>Mérida, Yucatán</option>
+                      <option>Campeche,Campeche</option>
+                      <option>Cancun, Quintana Roo</option>
+                      <option>José María Morelos, Quintana Roo</option>
+                      <option>Puerto Morelos, Quintana Roo</option>
+                      <option>Solidaridad, Quintana Roo</option>
                     </Input>
                   </Col>
                   <Col xs="12" sm="3" md="3">
@@ -153,7 +161,7 @@ export default class SaludInfantil extends Component {
               </CardHeader>
               <CardBody>
                 <Row>
-                  <Col xs="12" md="4">
+                  <Col xs="12" md="6">
                     <Card>
                       <CardHeader><h4>¿Usted ha sido beneficiario de algún programa de Gobierno?</h4></CardHeader>
                       <CardBody>
@@ -163,7 +171,7 @@ export default class SaludInfantil extends Component {
                       </CardBody>
                     </Card>
                   </Col>
-                  <Col xs="12" md="4">
+                  <Col xs="12" md="6">
                     <Card>
                       <CardHeader><h4>¿De qué programa ha sido beneficiario?</h4><br/></CardHeader>
                       <CardBody>
@@ -173,7 +181,17 @@ export default class SaludInfantil extends Component {
                       </CardBody>
                     </Card>
                   </Col>
-                  <Col xs="12" md="4">
+                  <Col xs="12" md="6">
+                    <Card>
+                      <CardHeader><h4>Su hijo o hija recibió atención médica durante su 1er mes de vida?</h4></CardHeader>
+                      <CardBody>
+                        <div className="chart-wrapper">
+                          <Pie data={pie3} height={200} />
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                  <Col xs="12" md="6">
                     <Card>
                       <CardHeader><h4>Su hijo o hija recibió atención médica durante su 1er mes de vida?</h4></CardHeader>
                       <CardBody>

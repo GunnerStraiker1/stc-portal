@@ -47,27 +47,41 @@ export default class Gubernamentales extends Component{
         <Row>
           <Col md="12">
             <Row>
-              <Col md="2">
+              <Col md="4">
+                <Label>
+                  <h5>Seleccionar Estado</h5>
+                </Label>
+                <Input type="select" name="select" id="program">
+                  <option>Yucatán</option>
+                  <option>Campeche</option>
+                  <option>Quintana Roo</option>
+                </Input>
+              </Col>
+              <Col md="6">
                 <Label>
                   <h5>Seleccionar Programa</h5>
                 </Label>
-              </Col>
-              <Col md="5">
                 <Input type="select" name="select" id="program">
-                <option>Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</option>
-                <option>Programa de Atención a la Salud Materna y Perinatal. Arranque Parejo en la Vida</option>
-                <option>Planificación Familiar y Anticoncepción. Salud Reproductiva</option>
-                <option>Programa de Atención a la Salud de la Adolescencia (PASA)</option>
-                <option>Programa de Vacunación Universal</option>
-                <option>Promoción de la Salud Escolar</option>
-                <option>Determinantes de la Salud</option>
-                <option>Programa de Actividad Física Preventiva y Terapéutica en Yucatán</option>
-                <option>Atención a la Salud Bucal en Yucatán</option>
-                <option>Programa Estatal para la Prevención y Control del VIH, SIDA e Infecciones </option>
-                <option>de Transmisión Sexual</option>
-                <option>Atención a la Salud de la Infancia</option>
-                <option>Prevención y Tratamiento del Cáncer en la Infancia y la Adolescencia</option>
+                  <option>Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</option>
+                  <option>Programa de Atención a la Salud Materna y Perinatal. Arranque Parejo en la Vida</option>
+                  <option>Planificación Familiar y Anticoncepción. Salud Reproductiva</option>
+                  <option>Programa de Atención a la Salud de la Adolescencia (PASA)</option>
+                  <option>Programa de Vacunación Universal</option>
+                  <option>Promoción de la Salud Escolar</option>
+                  <option>Determinantes de la Salud</option>
+                  <option>Programa de Actividad Física Preventiva y Terapéutica en Yucatán</option>
+                  <option>Atención a la Salud Bucal en Yucatán</option>
+                  <option>Programa Estatal para la Prevención y Control del VIH, SIDA e Infecciones de Transmisión Sexual</option>
+                  <option>Atención a la Salud de la Infancia</option>
+                  <option>Prevención y Tratamiento del Cáncer en la Infancia y la Adolescencia</option>
+                  <option>Programa de Prevención y Control del Cólera</option>
+                  <option>Resolución Alterna de Conflictos del Acto Médico en Yucatán (Comisión de Arbitraje Médico del Estado de Yucatán)</option>
                 </Input>
+              </Col>
+              <Col md="2">
+                <ButtonToggle color="primary" style={{marginTop: "1em"}} size="lg">
+                  Visualizar
+                </ButtonToggle>
               </Col>
             </Row>
           </Col>
@@ -144,7 +158,7 @@ export default class Gubernamentales extends Component{
           <Card className="mb-0">
             <CardHeader id="headingThree">
               <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseFive">
-                <h5 className="m-0 p-0">Cobertura del Programa</h5>
+                <h5 className="m-0 p-0">Requisitos del Programa</h5>
               </Button>
             </CardHeader>
             <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseFive">
