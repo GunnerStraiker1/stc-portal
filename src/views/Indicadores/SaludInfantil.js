@@ -137,6 +137,7 @@ export default class SaludInfantil extends Component {
                   <Col xs="12" sm="3" md="3">
                     <Label>Seleccionar Municipio</Label>
                     <Input type="select" name="select" id="edo">
+                      <option>Chikindzonot, Yucatán</option>
                       <option>Mérida, Yucatán</option>
                       <option>Campeche,Campeche</option>
                       <option>Cancun, Quintana Roo</option>
