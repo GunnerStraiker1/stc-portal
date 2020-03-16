@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table, Label, Input, ButtonToggle } from 'reactstrap';
+import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table, Label, Input, Button } from 'reactstrap';
+
 
 export default class Estadisticas extends Component{
   render(){
@@ -29,9 +30,9 @@ export default class Estadisticas extends Component{
                     </Input>
                   </Col>
                   <Col xs="12" sm="2" md="2">
-                    <ButtonToggle color="primary" style={{marginTop: "1em"}} size="lg">
+                    <Button color="primary" style={{marginTop: "1em"}} size="lg">
                       Visualizar
-                      </ButtonToggle>
+                      </Button>
                   </Col>
                 </Row>
               </CardHeader>

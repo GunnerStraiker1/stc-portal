@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import { Card, CardBody, CardColumns, CardHeader,
-Col, Row, Fade, Collapse, Badge, Label, Input, ButtonToggle} from 'reactstrap';
+Col, Row, Fade, Collapse, Badge, Label, Input, Button} from 'reactstrap';
 
 const pie1 = {
   labels:[
@@ -112,9 +112,9 @@ export default class SaludInfantil extends Component {
           <Col xs="12" md="12">
             {/* <Row>
               <Col sm="12" md={{size: 2, offset: 10}} style={{textAlign:"right"}}>
-                <ButtonToggle color="success" size="lg" style={{marginBottom: "1em"}}>
+                <Button color="success" size="lg" style={{marginBottom: "1em"}}>
                   Subir Excel
-                </ButtonToggle>
+                </Button>
               </Col>
             </Row> */}
             <Card>
@@ -153,9 +153,9 @@ export default class SaludInfantil extends Component {
                     </Input>
                   </Col>
                   <Col xs="12" sm="2" md="2">
-                    <ButtonToggle color="primary" style={{marginTop: "1em"}} size="lg">
+                    <Button color="primary" style={{marginTop: "1em"}} size="lg">
                       Visualizar
-                      </ButtonToggle>
+                      </Button>
                   </Col>
                 </Row>
               </CardHeader>
