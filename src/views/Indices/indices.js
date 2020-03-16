@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import { Card, CardBody, CardColumns, CardHeader, Button,
-Col, Row, Fade, Collapse, Badge, Label, Input, ButtonToggle} from 'reactstrap';
+Col, Row, Fade, Collapse, Badge, Label, Input} from 'reactstrap';
 
 export default class indices extends Component{
 
@@ -38,9 +38,9 @@ export default class indices extends Component{
           <Col md="12">
             {/* <Row>
               <Col sm="12" md={{size: 2, offset: 10}} style={{textAlign:"right"}}>
-                <ButtonToggle color="success" size="lg" style={{marginBottom: "1em"}}>
+                <Button color="success" size="lg" style={{marginBottom: "1em"}}>
                   Subir Excel
-                </ButtonToggle>
+                </Button>
               </Col>
             </Row> */}
           <Card>
@@ -80,9 +80,9 @@ export default class indices extends Component{
                         </Input>
                       </Col>
                       <Col md="2">
-                        <ButtonToggle color="primary" style={{marginTop: "1em"}} size="lg">
+                        <Button color="primary" style={{marginTop: "1em"}} size="lg">
                           Visualizar
-                        </ButtonToggle>
+                        </Button>
                       </Col>
                     </Row>
                   </Col>

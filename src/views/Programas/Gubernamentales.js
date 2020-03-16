@@ -1,14 +1,42 @@
 import React, { Component } from "react";
 import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+import axios from 'axios';
 import { Card, CardBody, CardColumns, CardHeader, Button,
-Col, Row, Fade, Collapse, Badge, Label, Input, ButtonToggle} from 'reactstrap';
+Col, Row, Fade, Collapse, Badge, Label, Input} from 'reactstrap';
 
 export default class Gubernamentales extends Component{
+
+  componentDidCatch(){
+    axios.get('https://stc-backend-new.appspot.com/programas')
+    .then(res => {
+      const programs = res.data;
+      this.setState({programs})
+    })
+  }
+
+  componentDidMount(){
+    axios.get('https://stc-backend-new.appspot.com/programas')
+    .then(res => {
+      const programs = res.data;
+      this.setState({programs})
+    })
+  }
+
   constructor(props){
     super(props);
     this.state={
       collapse: false,
       accordion: [true, true, true, true, true, true, true],
+      programs: [],
+      nombre:'',
+      objetivo:'',
+      descripcion:'',
+      cobertura:'',
+      requisitos:'',
+      programa:'',
+      periodo:'',
+      edo: '',
+      program:''
     }
   }
 
@@ -30,16 +58,43 @@ export default class Gubernamentales extends Component{
     });
   }
 
+  changeSelection= (e) =>{
+    switch (e.currentTarget.id) {
+      case 'edo':
+        this.setState({
+          edo: e.target.value
+        })
+        break;
+    
+      case 'program':
+        this.setState({program: e.target.value})
+        break;
+    }
+  }
+
+  visualizeClick = () =>{
+    this.setState({
+      nombre: this.state.programs[this.state.program-1].nombre,
+      objetivo: this.state.programs[this.state.program-1].objetivo,
+      descripcion: this.state.programs[this.state.program-1].descripcion,
+      cobertura: this.state.programs[this.state.program-1].cobertura,
+      requisitos: this.state.programs[this.state.program-1].requisitos,
+      programa: this.state.programs[this.state.program-1].programa,
+      periodo: this.state.programs[this.state.program-1].periodo
+    })
+  }
+
   render(){
     return(
     <div className="animated fadeIn">
 <Row>
   <Col md="12">
+    {console.log(this.state)}
     {/* <Row>
       <Col sm="12" md={{size: 2, offset: 10}} style={{textAlign:"right"}}>
-        <ButtonToggle color="success" size="lg" style={{marginBottom: "1em"}}>
+        <Button color="success" size="lg" style={{marginBottom: "1em"}}>
           Subir Excel
-        </ButtonToggle>
+        </Button>
       </Col>
     </Row> */}
   <Card>
@@ -51,37 +106,38 @@ export default class Gubernamentales extends Component{
                 <Label>
                   <h5>Seleccionar Estado</h5>
                 </Label>
-                <Input type="select" name="select" id="program">
-                  <option>Yucatán</option>
-                  <option>Campeche</option>
-                  <option>Quintana Roo</option>
+                <Input type="select" name="select" id="edo" onChange={this.changeSelection}>
+                  <option value='yuc'>Yucatán</option>
+                  <option value='camp' disabled>Campeche</option>
+                  <option value='qroo' disabled>Quintana Roo</option>
                 </Input>
               </Col>
               <Col md="6">
                 <Label>
                   <h5>Seleccionar Programa</h5>
                 </Label>
-                <Input type="select" name="select" id="program">
-                  <option>Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</option>
-                  <option>Programa de Atención a la Salud Materna y Perinatal. Arranque Parejo en la Vida</option>
-                  <option>Planificación Familiar y Anticoncepción. Salud Reproductiva</option>
-                  <option>Programa de Atención a la Salud de la Adolescencia (PASA)</option>
-                  <option>Programa de Vacunación Universal</option>
-                  <option>Promoción de la Salud Escolar</option>
-                  <option>Determinantes de la Salud</option>
-                  <option>Programa de Actividad Física Preventiva y Terapéutica en Yucatán</option>
-                  <option>Atención a la Salud Bucal en Yucatán</option>
-                  <option>Programa Estatal para la Prevención y Control del VIH, SIDA e Infecciones de Transmisión Sexual</option>
-                  <option>Atención a la Salud de la Infancia</option>
-                  <option>Prevención y Tratamiento del Cáncer en la Infancia y la Adolescencia</option>
-                  <option>Programa de Prevención y Control del Cólera</option>
-                  <option>Resolución Alterna de Conflictos del Acto Médico en Yucatán (Comisión de Arbitraje Médico del Estado de Yucatán)</option>
+                <Input type="select" name="select" id="program" onChange={this.changeSelection}>
+                  <option selected>Selecciona el programa</option>
+                  <option value='1'>Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</option>
+                  <option value='2'>Programa de Atención a la Salud Materna y Perinatal. Arranque Parejo en la Vida</option>
+                  <option value='3'>Planificación Familiar y Anticoncepción. Salud Reproductiva</option>
+                  <option value='4'>Programa de Atención a la Salud de la Adolescencia (PASA)</option>
+                  <option value='5'>Programa de Vacunación Universal</option>
+                  <option disabled>Promoción de la Salud Escolar</option>
+                  <option disabled>Determinantes de la Salud</option>
+                  <option disabled>Programa de Actividad Física Preventiva y Terapéutica en Yucatán</option>
+                  <option disabled>Atención a la Salud Bucal en Yucatán</option>
+                  <option disabled>Programa Estatal para la Prevención y Control del VIH, SIDA e Infecciones de Transmisión Sexual</option>
+                  <option disabled>Atención a la Salud de la Infancia</option>
+                  <option disabled>Prevención y Tratamiento del Cáncer en la Infancia y la Adolescencia</option>
+                  <option disabled>Programa de Prevención y Control del Cólera</option>
+                  <option disabled>Resolución Alterna de Conflictos del Acto Médico en Yucatán (Comisión de Arbitraje Médico del Estado de Yucatán)</option>
                 </Input>
               </Col>
               <Col md="2">
-                <ButtonToggle color="primary" style={{marginTop: "1em"}} size="lg">
+                <Button color="primary" style={{marginTop: "1em"}} size="lg" onClick={this.visualizeClick}>
                   Visualizar
-                </ButtonToggle>
+                </Button>
               </Col>
             </Row>
           </Col>
@@ -94,7 +150,7 @@ export default class Gubernamentales extends Component{
           <Card className="mb-0">
             <CardHeader id="headingOne">
               {/* <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(0)} aria-expanded={this.state.accordion[0]} aria-controls="collapseOne"> */}
-                <h5 className="m-0 p-0">Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</h5>
+              <h5 className="m-0 p-0">{this.state.nombre}</h5>
               {/* </Button> */}
             </CardHeader>
             {/* <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
@@ -111,10 +167,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
               <CardBody>
-              Disminuir la prevalencia de desnutrición en los menores de 5 años, mediante consultas
-              de vigilancia nutricional y acciones de capacitación que promueven la lactancia
-              materna exclusiva y alimentación complementaria, sesiones, talleres y eventos
-              educativos.
+              {this.state.objetivo}
               </CardBody>
             </Collapse>
           </Card>
@@ -126,13 +179,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
               <CardBody>
-              Promoción de los beneficios de la lactancia materna exclusiva y relevancia de la
-              alimentación complementaria correcta como elemento preventivo contra la desnutrición,
-              en los menores de 5 años de edad. Se otorgaron consultas de vigilancia nutricional y
-              pláticas de orientación alimentaria dirigidas a los responsables del cuidado del niño.
-              Asimismo, como refuerzo a la educación para la salud se impartieron sesiones
-              educativas, talleres y espacios de consejería co¬munitaria a mujeres embarazadas o en
-              periodo de lactancia, así como a mujeres y hombres en edad fértil.
+              {this.state.descripcion}
               </CardBody>
             </Collapse>
           </Card>
@@ -144,14 +191,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseFour">
               <CardBody>
-              125 localidades rurales de alta y muy alta marginación de 63 municipios: Bokobá,
-              Buctzotz, Cantamayec, Cenotillo, Celestún, Chacsinkín, Chankom, Chapab, Chemax,
-              Chichimilá, Chikindzonot, Chumayel, Conkal, Cuncunul, Dzan, Dzitás, Dzoncahuich,
-              Espita, Halachó, Hocabá, Hunucmá, Izamal, Kanunil, Maní, Maxcanú, Mayapán, Mérida,
-              Moco¬chá, Motul, Muxupip, Opichén, Oxukutzcab, Panabá, Peto, Progreso, Río Lagartos,
-              Samahil, Sanahacat, San Felipe, Santa Elena, Sinanché, Sotuta, Sucilá, Sudzal,
-              Tahdziú, Teabo, Tecoh, Tekax, Tekom, Temozón, Teya, Ticul, Tinum, Tixcacalcupul,
-              Tizimín, Tunkás, Tzucacab, Uayma, Ucú, Va¬lladolid, Yaxcaba, Yaxkukul y Yobaín.
+              {this.state.cobertura}
               </CardBody>
             </Collapse>
           </Card>
@@ -163,13 +203,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="collapseFive">
               <CardBody>
-              <ul>
-                <li>Ser niña o niño menor de 5 años de edad </li>
-                <li>Ser habitante de algunas de las 125 localidades rura¬les de los 63 municipios de cobertura del Programa </li>
-                <li>Cartilla de vacunación </li>
-                <li>Número de Póliza de Seguro Popular </li>
-                <li>Estar embarazada o en periodo de lactancia para las pláticas de prevención </li>
-              </ul>
+              {this.state.requisitos}
               </CardBody>
             </Collapse>
           </Card>
@@ -181,7 +215,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="collapseSix">
               <CardBody>
-              53 Salud Infantil
+              {this.state.programa}
               </CardBody>
             </Collapse>
           </Card>
@@ -193,7 +227,7 @@ export default class Gubernamentales extends Component{
             </CardHeader>
             <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="collapseSeven">
               <CardBody>
-              2012-2018
+              {this.state.periodo}
               </CardBody>
             </Collapse>
           </Card>
