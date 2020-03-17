@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 
 export default class Repositorios extends Component{
+
+  constructor(props){
+    super(props);
+    this.state={
+      repos: [],
+      archivo:'',
+      descripcion:'',
+      fuente:'',
+      estado:'',
+      descarga:''
+    }
+  }
+
+  componentDidMount(){
+    axios.get('https://stc-backend-new.appspot.com/repositorios')
+    .then(res => {
+      const repos = res.data;
+      this.setState({repos})
+    })
+  }
+
+
   render(){
     return(
       <div className="animated fadeIn">
@@ -13,68 +36,34 @@ export default class Repositorios extends Component{
               <CardBody>
                 <Table responsive size="lg">
                   <thead>
-                  <tr>
+                  <tr style={{textAlign:"center"}}>
                     <th>Nombre del Archivo</th>
                     <th>Descripción</th>
                     <th>Fuente</th>
+                    <th>Estado</th>
                     <th>Descarga</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
+                  {
+                    this.state.repos.map((repo) =>{
+                      return(
+                        <tr>
+                          <td>{repo.archivo}</td>
+                          <td>{repo.descripcion}</td>
+                          <td style={{textAlign:"center"}}>{repo.fuente}</td>
+                          <td style={{textAlign:"center"}}>{repo.estado}</td>
+                          <td style={{textAlign:"center"}}>
+                            <a href={repo.descarga}>
+                            <i className="fa fa-file-pdf-o fa-lg mt-4"></i>
+                            </a>
+                            <br />
+                            {/* <Badge color="success">Active</Badge> */}
+                          </td>
+                        </tr>
+                      )
+                    })
+                  }
                   </tbody>
                 </Table>
                 <Pagination>
