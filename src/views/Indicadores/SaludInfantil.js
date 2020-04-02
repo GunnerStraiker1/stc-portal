@@ -21,7 +21,7 @@ export default class SaludInfantil extends Component {
       estado: ""
     }
   };
-  
+
   componentDidMount(){
     axios.get('https://stc-backend-new.appspot.com/indicadores')
     .then(res => {
@@ -91,12 +91,12 @@ export default class SaludInfantil extends Component {
       this.setState({año: e.currentTarget.value})
     }
   }
-  
+
 
   visualizeGraphs = () =>{
     var indicadoresFiltered = [];
     this.state.indicadores.map((indicadorData) =>{
-      if (((indicadorData.indicador.toUpperCase() === this.state.indicador.toUpperCase()) || (indicadorData.indicador.toUpperCase() === this.state.auxindicador.toUpperCase())) 
+      if (((indicadorData.indicador.toUpperCase() === this.state.indicador.toUpperCase()) || (indicadorData.indicador.toUpperCase() === this.state.auxindicador.toUpperCase()))
       && indicadorData.año === this.state.año
       && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
         indicadoresFiltered.push(indicadorData)
@@ -126,7 +126,7 @@ export default class SaludInfantil extends Component {
       })
       for (let i = 0; i < 2; i++) {
         var randomColor ="#"+Math.floor(Math.random()*16777215).toString(16);
-        colors[i] = randomColor;        
+        colors[i] = randomColor;
       }
       /**
        * 
