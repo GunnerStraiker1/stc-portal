@@ -3,6 +3,9 @@ import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import { Card, CardBody, CardColumns, CardHeader,
 Col, Row, Fade, Collapse, Badge, Label, Input, Button} from 'reactstrap';
 import axios from 'axios'
+// import 'chartjs-plugin-labels'
+
+//chartjs-plugin-labels
 
 export default class SaludInfantil extends Component {
 
@@ -113,7 +116,7 @@ export default class SaludInfantil extends Component {
 
       indi.respuestas.split("#$%&").map((res, key) =>{
         if (key != indi.respuestas.split("#$%&").length-1) {
-          labels.push(res)
+          labels.push(res.toUpperCase())
         }
       })
       indi.votos.split("#$%&").map((voto, key) =>{
@@ -121,17 +124,38 @@ export default class SaludInfantil extends Component {
           data.push(voto)
         }
       })
-      for (let i = 0; i < labels.length; i++) {
+      for (let i = 0; i < 2; i++) {
         var randomColor ="#"+Math.floor(Math.random()*16777215).toString(16);
         colors[i] = randomColor;        
       }
+      /**
+       * 
+       * const data = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [65, 59, 80, 81, 56, 55, 40]
+    }
+  ]
+};
+       * 
+       */
 
       var datapie = {
         labels: labels,
         datasets:[{
+          label: "PERSONAS ENCUESTADAS",
+          borderColor: 'rgba(0,0,0,1)',
+          borderWidth: 1,
           data: data,
-          backgroundColor: colors,
-          hoverBackgroundColor: colors
+          backgroundColor: '#33DDFF',
+          hoverBackgroundColor: '#42019D'          
         }]
       }
       var dataInfo = {"pregunta": indi.pregunta, "dataPie": datapie};
@@ -197,10 +221,20 @@ export default class SaludInfantil extends Component {
                       return(
                         <Col xs="12" md="12" key={key}>
                           <Card>
-                      <CardHeader><h4>{pregunta.pregunta}</h4></CardHeader>
+                      <CardHeader style={{backgroundColor: '#FFAEBA'}}><h4>{key +1 + ".- " + pregunta.pregunta}</h4></CardHeader>
                             <CardBody>
                               <div className="chart-wrapper">
-                                <Pie data={pregunta.dataPie} height={200} />
+                                <Bar data={pregunta.dataPie} height={100} width={100} 
+                                options={{
+                                  tooltips:{
+                                    enabled: true,
+                                    mode: "nearest",
+                                    position: 'nearest',
+                                    titleFontSize	: 15,
+                                    bodyFontSize: 13,
+                                    
+                                  }, 
+                                  maintainAspectRatio: false}} />
                               </div>
                             </CardBody>
                           </Card>
