@@ -13,13 +13,22 @@ export default class Estadisticas extends Component{
               <CardHeader>
               <Row>
               <Col xs="12" sm="3" md="3">
-                    <Label>Seleccionar Estado</Label>
-                    <Input type="select" name="select" id="edo">
-                      <option>Mérida</option>
-                      <option>Campeche</option>
-                      <option>Quintana Roo</option>
-                    </Input>
-                  </Col>
+                  <Label>Seleccionar Año</Label>
+                  <Input type="select" name="select" id="edo">
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                  </Input>
+                </Col>
+              <Col xs="12" sm="3" md="3">
+                  <Label>Seleccionar Estado</Label>
+                  <Input type="select" name="select" id="edo">
+                    <option>Mérida</option>
+                    <option>Campeche</option>
+                    <option>Quintana Roo</option>
+                  </Input>
+                </Col>
                 <Col xs="12" sm="4" md="4">
                     <Label>Seleccionar Índicador</Label>
                     <Input type="select" name="select" id="edo">
@@ -40,10 +49,10 @@ export default class Estadisticas extends Component{
                 <Table responsive size="lg">
                   <thead>
                   <tr>
-                    <th>Fecha</th>
-                    <th>Nombre de la Estadistica</th>
-                    <th>Descripción</th>
-                    <th>Descarga</th>
+                    <th style={{width: "10%"}}>Fecha</th>
+                    <th style={{width:"30%"}}>Nombre del Archivo</th>
+                    <th style={{width:"50%"}}>Descripción</th>
+                    <th style={{width:"10%", textAlign:"center"}}>Descarga</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -51,68 +60,14 @@ export default class Estadisticas extends Component{
                     <td>2012/01/01</td>
                     <td>Carwyn Fachtna</td>
                     <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
+                    <td style={{textAlign:"center"}}>
+                      <i className="fa fa-download fa-lg mt-4"></i><br />
                       {/* <Badge color="success">Active</Badge> */}
                     </td>
                   </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2012/01/01</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>Carwyn Fachtna</td>
-                    <td>
-                      <i className="fa fa-file-pdf-o fa-lg mt-4"></i><br />
-                      {/* <Badge color="success">Active</Badge> */}
-                    </td>
-                  </tr>
+                 
                   </tbody>
                 </Table>
-                <Pagination>
-                  {/* <PaginationItem><PaginationLink previous tag="button">Prev</PaginationLink></PaginationItem> */}
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  {/* <PaginationItem><PaginationLink tag="button">2</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink tag="button">3</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink tag="button">4</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink next tag="button">Next</PaginationLink></PaginationItem> */}
-                </Pagination>
               </CardBody>
             </Card>
           </Col>

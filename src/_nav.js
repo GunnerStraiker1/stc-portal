@@ -28,6 +28,10 @@ export default {
       name: 'Indicadores',
       url: '/indicadores',
       icon: 'fa fa-th-large',
+      children:[
+        {name: 'Indicadores Adultos', url:'/indicadores', icon:'fa fa-th-large'},
+        {name: 'Indicadores Infantiles', url:'/indicadoresInfantiles', icon:'fa fa-th-large'},
+      ]
     },
     {
       divider: true,

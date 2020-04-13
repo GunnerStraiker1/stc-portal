@@ -12,7 +12,7 @@
     "@coreui/react": "^2.5.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.3",
     "chartjs-plugin-labels": "^1.1.0",
     "classnames": "^2.2.6",
     "core-js": "^3.1.4",
@@ -31,6 +31,7 @@
     "react-router-dom": "^5.0.1",
     "react-test-renderer": "^16.8.6",
     "reactstrap": "^8.0.0",
+    "recharts": "^1.8.5",
     "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
