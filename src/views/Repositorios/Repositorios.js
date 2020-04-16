@@ -17,7 +17,7 @@ export default class Repositorios extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://stc-backend-new.appspot.com/repositorios')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
     .then(res => {
       const repos = res.data;
       this.setState({repos})

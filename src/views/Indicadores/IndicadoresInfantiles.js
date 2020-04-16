@@ -35,7 +35,7 @@ export default class IndicadoresInfantiles extends Component {
   };
 
   componentDidMount(){
-    axios.get('https://stc-backend-new.appspot.com/indicadoresInfantil')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicadoresInfantil')
     .then(res => {
       const indicadores = res.data;
       this.setState({indicadores})
@@ -66,7 +66,7 @@ export default class IndicadoresInfantiles extends Component {
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('https://stc-backend-new.appspot.com/menuIndicadoresInfantil/' + e.currentTarget.value)
+          axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuIndicadoresInfantil/' + e.currentTarget.value)
           .then(res => {
             const indicadoresMenu = res.data;
             this.setState({indicadoresMenu})
@@ -185,8 +185,8 @@ export default class IndicadoresInfantiles extends Component {
                     this.state.preguntas.preguntas.map((pregunta, key) =>{
                       return(
                         <Col xs="12" md="12" key={key}>
-                          <Card>
-                            <CardHeader style={{backgroundColor: '#FFAEBA'}}><h4>{key +1 + ".- " + pregunta}</h4></CardHeader>
+                          <Card style={{marginTop:"3em"}}>
+                            <CardHeader><h4>{key +1 + ".- " + pregunta}</h4></CardHeader>
                             <CardBody>
                               <ResponsiveContainer width='100%' aspect={4.0/1.8}>
                                 <BarChart data={this.state.preguntas.data[key]} >

@@ -7,7 +7,7 @@ Col, Row, Fade, Collapse, Badge, Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('https://stc-backend-new.appspot.com/programas')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
@@ -15,7 +15,7 @@ export default class Gubernamentales extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://stc-backend-new.appspot.com/programas')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
