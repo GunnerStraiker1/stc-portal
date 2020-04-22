@@ -36,7 +36,7 @@ class DefaultAside extends Component {
 
     return (
       <React.Fragment>
-        <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+        <DropdownItem onClick={e => this.props.onLogin(e)}><i className="fa fa-lock"></i> Iniciar Sesión</DropdownItem>
         {/* <div>
           <span className="fa fa-lock"></span>
           <h5>Logout</h5>

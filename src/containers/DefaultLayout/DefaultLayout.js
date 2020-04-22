@@ -28,7 +28,7 @@ class DefaultLayout extends Component {
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
-  signOut(e) {
+  signIn(e) {
     e.preventDefault()
     this.props.history.push('/login')
   }
@@ -79,7 +79,7 @@ class DefaultLayout extends Component {
           </main>
           <AppAside fixed>
             <Suspense fallback={this.loading()}>
-              <DefaultAside onLogout={e=>this.signOut(e)} />
+              <DefaultAside onLogin={e=>this.signIn(e)} />
             </Suspense>
           </AppAside>
         </div>

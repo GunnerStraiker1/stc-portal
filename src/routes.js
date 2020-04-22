@@ -12,6 +12,7 @@ const CoreUIIcons = React.lazy(()=> import('./views/Icons/CoreUIIcons/CoreUIIcon
 const Flags = React.lazy(()=> import('./views/Icons/Flags/Flags'))
 const FontAwesome = React.lazy(()=> import('./views/Icons/FontAwesome/FontAwesome'))
 const SimpleLineIcons = React.lazy(()=> import('./views/Icons/SimpleLineIcons/SimpleLineIcons'))
+const Admin = React.lazy(() => import('././views/Admin/AdminHome'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
   { path: '/programasOsc', exact: true, name: 'OSC', component: Gubernamentales },
   { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },
   { path: '/estadisticas', exact: true, name: 'statics', component: Estadisticas },
+  { path: '/admin', exact: true, name:'Admin', component: Admin },
   // { path: '/theme/colors', name: 'Colors', component: Colors },
   // { path: '/theme/typography', name: 'Typography', component: Typography },
   // { path: '/base', exact: true, name: 'Base', component: Cards },
