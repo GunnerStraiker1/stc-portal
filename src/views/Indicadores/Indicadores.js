@@ -45,48 +45,6 @@ export default class Indicadores extends Component {
   changeSelection = (e) =>{
     if (e.currentTarget.id === "indicador") {
       this.setState({indicador: e.target.value})
-      // switch(e.target.value){
-      //   case "grales":
-      //     this.setState({indicador: "Generales"});
-      //     // this.setState({auxindicador: "General"});
-      //   break;
-      //   case "salud":
-      //     this.setState({indicador: "Servicios de Salud"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "sida":
-      //     this.setState({indicador: "Prevención del SIDA"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "infantil":
-      //     this.setState({indicador: "Salud Infantil"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "materna":
-      //     this.setState({indicador: "Salud Materna"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "seguridad":
-      //     this.setState({indicador: "Seguridad Alimentaria"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "agua":
-      //     this.setState({indicador: "Acceso y calidad del agua"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "desastres":
-      //     this.setState({indicador: "Desastres Naturales"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "desechos":
-      //     this.setState({indicador: "Instalaciones Sanitarias y Desechos"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      //   case "gral":
-      //     this.setState({indicador: "General"});
-      //     // this.setState({auxindicador: ""});
-      //   break;
-      // }
     }
     else{
       if (e.currentTarget.id === "edo") {

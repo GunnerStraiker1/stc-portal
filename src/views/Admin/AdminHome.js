@@ -6,6 +6,7 @@ import {Tabs,Tab} from 'react-bootstrap'
 import axios, {post} from 'axios';
 import Programas from './Programas'
 import Repositorios from './Repositorios'
+import Indicadores from './Indicadores'
 
 class AdminHome extends Component{
 
@@ -87,28 +88,8 @@ render(){
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="indicadores" title="Indicadores Adultos">
-                                        <Col sm="12">
-                                            <Card>
-                                                <CardHeader>
-                                                    <h2>Añadir Indicadores de Adultos</h2>
-                                                </CardHeader>
-                                                <CardBody>
-                                                <form id="indicadorForm"
-                                                    onSubmit={this.submitProgram}
-                                                >
-                                                    <div style={{marginTop:"1em", marginLeft:"1em"}}>
-                                                        <input type="file" name="file" onChange={this.changeHandler}/> <br/>
-                                                    </div>
-                                                    <Alert color="success" isOpen={this.state.visible} toggle={this.onToogle} style={{marginTop:"1em"}}>
-                                                        Documento cargado con éxito
-                                                    </Alert>
-                                                    <div style={{textAlign:"right", marginRight:"2em"}}>
-                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
-                                                    </div>
-                                                </form>
-                                                </CardBody>
-                                            </Card>
-                                        </Col>
+                                        <Indicadores submitProgram={this.submitProgram} visible={this.state.visible} 
+                                            changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="infantil" title="Indicadores Infantiles">
                                         <Col sm="12">
