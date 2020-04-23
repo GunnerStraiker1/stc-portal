@@ -1,9 +1,9 @@
 import React, { Component, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, 
+import { Button, Card, CardBody, CardGroup, Col, Container, Form,
     Input, InputGroup, InputGroupAddon, InputGroupText, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
 import {Tabs,Tab} from 'react-bootstrap'
-import axios, {post} from 'axios'; 
+import axios, {post} from 'axios';
 
 export default class Indicadores extends Component{
 
@@ -40,12 +40,12 @@ export default class Indicadores extends Component{
             this.setState({indicadores})
         })
     }
-    
-   
+
+
 
     /**
-     * 
-        
+     *
+
      */
 
     onConfirmation = (e) =>{
@@ -54,7 +54,7 @@ export default class Indicadores extends Component{
             id: e.currentTarget.id,
             key: e.currentTarget.value,
             modalVisible: true,
-            
+
         })
     }
 
@@ -77,7 +77,7 @@ export default class Indicadores extends Component{
                 <Col sm="12">
                     <Card>
                         <CardHeader>
-                            <h2>Añadir Repositorios</h2>
+                            <h2>Añadir Indicadores</h2>
                         </CardHeader>
                         <CardBody>
                         <form id="indicadorForm"
@@ -102,7 +102,7 @@ export default class Indicadores extends Component{
                         this.state.indicadores.map((program, key) =>{
                             return(
                                 <div key={key}>
-                                    <Card key={key}> 
+                                    <Card key={key}>
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
@@ -112,7 +112,7 @@ export default class Indicadores extends Component{
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
                                                 </Col>
                                                 <Col sm={1}>
-                                                    <Button color="danger" style={styles.buttons} 
+                                                    <Button color="danger" style={styles.buttons}
                                                     onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
                                                 </Col>
                                             </Row>
