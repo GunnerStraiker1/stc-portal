@@ -1,12 +1,12 @@
-import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, 
-    Input, InputGroup, InputGroupAddon, InputGroupText, Row, CardHeader, Alert} from 'reactstrap';
+import React, { Component } from 'react';
+// import { Link, NavLink } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Row, CardHeader, Alert} from 'reactstrap';
 import {Tabs,Tab} from 'react-bootstrap'
-import axios, {post} from 'axios';
+import {post} from 'axios';
 import Programas from './Programas'
 import Repositorios from './Repositorios'
 import Indicadores from './Indicadores'
+import IndicadoresInfantiles from './IndicadoresInfantiles';
 
 class AdminHome extends Component{
 
@@ -40,9 +40,9 @@ class AdminHome extends Component{
             case 'programForm':
                 url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadPrograma';
                 break;
-            case 'repoForm':
-                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadRepo';
-                break;
+            // case 'repoForm':
+            //     url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/createNewRepo';
+            //     break;
             case 'indicadorForm':
                 url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadIndicador';
                 break;
@@ -92,7 +92,10 @@ render(){
                                             changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="infantil" title="Indicadores Infantiles">
-                                        <Col sm="12">
+                                        <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                                changeHandler={this.changeHandler} onToogle={this.onToogle}/>
+                                        {/* <Col sm="12">
+                                        
                                             <Card>
                                                 <CardHeader>
                                                     <h2>Añadir Indicadores Infantiles</h2>
@@ -108,12 +111,12 @@ render(){
                                                         Documento cargado con éxito
                                                     </Alert>
                                                     <div style={{textAlign:"right", marginRight:"2em"}}>
-                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
+                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary"/>
                                                     </div>
                                                 </form>
                                                 </CardBody>
                                             </Card>
-                                        </Col>
+                                        </Col> */}
                                     </Tab>
                                     <Tab eventKey="estadisticas" title="Estadisticas" disabled>
                                         <Col sm="12">
@@ -132,7 +135,7 @@ render(){
                                                         Documento cargado con éxito
                                                     </Alert>
                                                     <div style={{textAlign:"right", marginRight:"2em"}}>
-                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
+                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" />
                                                     </div>
                                                 </form>
                                                 </CardBody>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table, Label, Input, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Label, Input, Button } from 'reactstrap';
 
 
 export default class Estadisticas extends Component{

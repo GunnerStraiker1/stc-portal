@@ -1,9 +1,9 @@
-import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, 
-    Input, InputGroup, InputGroupAddon, InputGroupText, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
-import {Tabs,Tab} from 'react-bootstrap'
-import axios, {post} from 'axios'; 
+import React, { Component } from 'react';
+// import { Link, NavLink } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Form,
+    Input, Row, CardHeader, Modal, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
+// import {} from 'react-bootstrap'
+import axios from 'axios'; 
 
 export default class Repositories extends Component{
 
@@ -13,7 +13,15 @@ export default class Repositories extends Component{
             repos:[],
             modalVisible: false,
             id: 0,
-            key: 0
+            key: 0,
+            success: false,
+            url: "",
+            error: false,
+            errorMessage: "",
+            nombre: "",
+            fuente: "",
+            descripcion: "",
+            estado: ""
         }
     }
 
@@ -70,11 +78,67 @@ export default class Repositories extends Component{
         this.setState({modalVisible: !this.state.modalVisible})
     }
 
+    submitFileRepo = () =>{
+        let file = this.uploadInput.files[0];
+        let fileParts = this.uploadInput.files[0].name.split('.');
+        let fileName = fileParts[0];
+        let fileType = fileParts[1];
+        axios.post("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/uploadFileRepo",{
+            fileName : fileName,
+            fileType : fileType
+        })
+        .then(response =>{
+            var returnData = response.data.data.returnData;
+            var signedRequest = returnData.signedRequest;
+            var url = returnData.url;
+            console.log(url)
+            this.setState({url: url})
+
+            var options = {
+                headers: {
+                  'Content-Type': fileType
+                }
+            };
+
+            axios.put(signedRequest,file,options)
+            .then(result => {
+                this.setState({success: true});
+            })
+            .catch(error => {
+                alert("ERROR " + JSON.stringify(error));
+            })
+
+            const data = {
+                "archivo" : this.state.nombre,
+                "descripcion": this.state.descripcion,
+                "fuente" : this.state.fuente,
+                "estado": this.state.estado,
+                "descarga": fileName+"."+fileType
+            }
+            axios.post('http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/createNewRepo', data)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error =>{
+                alert("ERROR " + JSON.stringify(error));
+            })
+
+        })
+        .catch(error => {
+            alert(JSON.stringify(error));
+        })
+
+        
+    }
+
+    handleChangeRepoFile= (ev) =>{
+        this.setState({success: false, url : ""});
+    }
+
     render(){
         return(
             <Row>
-                {console.log(this.state)}
-                <Col sm="12">
+                {/* <Col sm="6">
                     <Card>
                         <CardHeader>
                             <h2>Añadir Repositorios</h2>
@@ -84,7 +148,7 @@ export default class Repositories extends Component{
                             onSubmit={this.props.submitProgram}
                         >
                             <div style={{marginTop:"1em", marginLeft:"1em"}}>
-                                <input type="file" name="file" onChange={this.props.changeHandler}/> <br/>
+                                <input type="file" name="file" onChange={this.props.changeHandler} /> <br/>
                             </div>
                             <Alert color="success" isOpen={this.props.visible} toggle={this.props.onToogle} style={{marginTop:"1em"}}>
                                 Documento cargado con éxito
@@ -93,6 +157,93 @@ export default class Repositories extends Component{
                                 <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
                             </div>
                         </form>
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col sm="6">
+                    <Card>
+                        <CardHeader>
+                            <h2>Añadir Archivo del Repositorio</h2>
+                        </CardHeader>
+                        <CardBody>
+                        <form id="fileRepoForm"
+                        >
+                            <div style={{marginTop:"1em", marginLeft:"1em"}}>
+                                <input type="file" name="file" onChange={this.handleChangeRepoFile} ref={(ref) => {this.uploadInput = ref;}}/> <br/>
+                            </div>
+                             <Alert color="success" isOpen={this.props.visible} toggle={this.props.onToogle} style={{marginTop:"1em"}}>
+                                Documento cargado con éxito
+                            </Alert> *
+                            <div style={{textAlign:"right", marginRight:"2em"}}>
+                                <button type="button" value="Upload" name="submit" 
+                                className="btn btn-outline-primary" id="sendprogram" onClick={this.submitFileRepo}>Subir Archivo</button>
+                            </div>
+                        </form>
+                        </CardBody>
+                    </Card>
+                </Col> */}
+                <Col sm={12}>
+                    <Card>
+                        <CardHeader>
+                            <h2>Insertar nuevo Repositorio</h2>
+                        </CardHeader>
+                        <CardBody>
+                            <Form>
+                                <Row form>
+                                    <Col sm={12}>
+                                        <FormGroup>
+                                            <Label for="nombreRepo">Nombre del Repositorio</Label>
+                                            <Input type="text" id="nombreRepo" onChange={(e) => this.setState({nombre : e.target.value})}/>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={6}>
+                                        <FormGroup>
+                                            <Label for="fuenteRepo">Fuente del Repositorio</Label>
+                                            <Input type="text" id="fuenteRepo" onChange={(e) => this.setState({fuente : e.target.value})}/>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={6}>
+                                        <FormGroup>
+                                            <Label for="edoRepo">Estado Originario del Repositorio</Label>
+                                            <Input type="text" id="edoRepo" onChange={(e) => this.setState({estado : e.target.value})}/>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={12}>
+                                        <FormGroup>
+                                            <Label for="descrRepo">Descripción del Repositorio</Label>
+                                            <Input type="textarea" id="descrRepo" rows={5} onChange={(e) => this.setState({descripcion : e.target.value})}/>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm ={12}>
+                                    <div style={{marginTop:"1em", marginLeft:"1em"}}>
+                                        <label>Archivo de Repositorio</label> <br/>
+                                        <input type="file" name="file" onChange={this.handleChangeRepoFile} ref={(ref) => {this.uploadInput = ref;}}/> <br/>
+                                    </div>
+                            {/* <Alert color="success" isOpen={this.props.visible} toggle={this.props.onToogle} style={{marginTop:"1em"}}>
+                                Documento cargado con éxito
+                            </Alert> */}
+                                    </Col>
+                                </Row>
+                                <div style={{textAlign:"right", marginRight:"2em"}}>
+                                    <button type="button" value="Upload" name="submit" 
+                                    className="btn btn-outline-primary" id="sendprogram" onClick={this.submitFileRepo}>Subir Repositorio</button>
+                                </div>                
+                            </Form>
+                            {/* <Form>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Nombre del Repositorio</Form.Label>
+                                    <Form.Control></Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Fuente del Repositorio</Form.Label>
+                                    <Form.Control></Form.Control>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Descripción del Repositorio</Form.Label>
+                                    <Form.Control as="textarea" rows="5" />
+                                </Form.Group>
+                                
+                            </Form> */}
                         </CardBody>
                     </Card>
                 </Col>
@@ -119,7 +270,11 @@ export default class Repositories extends Component{
                                         </CardHeader>
                                         <CardBody>
                                             <Row>
-                                                <Col sm={6}>
+                                                <Col sm={3}>
+                                                    <h5>Archivo</h5>
+                                                    {program.descarga}
+                                                </Col>
+                                                <Col sm={3}>
                                                     <h5>Estado</h5>
                                                     {program.estado}
                                                 </Col>

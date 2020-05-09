@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 
 export default class Repositorios extends Component{
 
@@ -54,7 +54,7 @@ export default class Repositorios extends Component{
                           <td style={{textAlign:"center"}}>{repo.fuente}</td>
                           <td style={{textAlign:"center"}}>{repo.estado}</td>
                           <td style={{textAlign:"center"}}>
-                            <a href={repo.descarga}>
+                            <a href={"http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/fileRepositorio/" + repo.descarga} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-file-pdf-o fa-lg mt-4"></i>
                             </a>
                             <br />

@@ -1,9 +1,10 @@
+/* eslint-disable default-case */
 import React, { Component } from "react";
 // import { Bar, Doughnut, Pie } from 'react-chartjs-2';
-import { Card, CardBody, CardColumns, CardHeader,
-Col, Row, Fade, Collapse, Badge, Label, Input, Button} from 'reactstrap';
+import { Card, CardBody, CardHeader,
+Col, Row, Label, Input, Button} from 'reactstrap';
 import axios from 'axios'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text} from "recharts";
 // import 'chartjs-plugin-labels'
 
 //chartjs-plugin-labels
@@ -89,6 +90,7 @@ export default class IndicadoresInfantiles extends Component {
       && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
        indicadoresFiltered.push(indicadorData)
       }
+      return true
     })
 
     console.log(indicadoresFiltered)

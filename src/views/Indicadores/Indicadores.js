@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import { Bar, Doughnut, Pie } from 'react-chartjs-2';
-import { Card, CardBody, CardColumns, CardHeader,
-Col, Row, Fade, Collapse, Badge, Label, Input, Button} from 'reactstrap';
+import { Card, CardBody, CardHeader,
+Col, Row, Label, Input, Button} from 'reactstrap';
 import axios from 'axios'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text} from "recharts";
 // import 'chartjs-plugin-labels'
 
 //chartjs-plugin-labels
@@ -48,6 +48,7 @@ export default class Indicadores extends Component {
     }
     else{
       if (e.currentTarget.id === "edo") {
+        // eslint-disable-next-line default-case
         switch(e.target.value){
           case "yuc":
             this.setState({estado: "Yucatan"});
@@ -89,6 +90,7 @@ export default class Indicadores extends Component {
       && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
        indicadoresFiltered.push(indicadorData)
       }
+      return true
     })
 
     console.log(indicadoresFiltered)
@@ -148,16 +150,6 @@ export default class Indicadores extends Component {
                           )
                         })
                       }
-                      {/* <option value="gral">General</option>
-                      <option value="grales">Generales</option>
-                      <option value="salud">Servicios de Salud</option>
-                      <option value="sida">Prevención del SIDA</option>
-                      <option value="infantil">Salud Infantil</option>
-                      <option value="materna">Salud Materna</option>
-                      <option value="seguridad">Seguridad Alimentaria</option>
-                      <option value="agua">Acceso y calidad del agua</option>
-                      <option value="desastres">Desastres Naturales</option>
-                      <option value="desechos">Instalaciones Sanitarias y Desechos</option> */}
                     </Input>
                   </Col>
                   <Col xs="12" sm="3" md="3">
@@ -191,7 +183,6 @@ export default class Indicadores extends Component {
                             <CardBody>
                               <ResponsiveContainer width='100%' aspect={4.0/1.8}>
                                 <BarChart data={this.state.preguntas.data[key]} >
-                                  {console.log(this.state.preguntas.data[key])}
                                   <CartesianGrid strokeDasharray="2 2" />
                                   <XAxis tick={<CustomizedAxisTick/>} dataKey="name" height={180} interval={0} label={{value: 'Respuestas'}}/>
                                   <YAxis label={{value: '# de votos', angle: -90, position: 'insideLeft'}}/>

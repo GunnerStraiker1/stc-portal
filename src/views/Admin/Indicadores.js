@@ -1,9 +1,9 @@
-import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form,
-    Input, InputGroup, InputGroupAddon, InputGroupText, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
-import {Tabs,Tab} from 'react-bootstrap'
-import axios, {post} from 'axios';
+import React, { Component } from 'react';
+// import { Link, NavLink } from 'react-router-dom';
+import { Button, Card, CardBody, Col,
+    Input, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter, Table, Label} from 'reactstrap';
+// import {Tabs,Tab} from 'react-bootstrap'
+import axios from 'axios';
 
 export default class Indicadores extends Component{
 
@@ -11,6 +11,11 @@ export default class Indicadores extends Component{
         super(props)
         this.state={
             indicadores:[],
+            indicador:"",
+            estado:"",
+            indicadoresMenu:[],
+            indicadoresTable: [],
+            statusDisabled: false,
             modalVisible: false,
             id: 0,
             key: 0
@@ -21,17 +26,19 @@ export default class Indicadores extends Component{
         axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicadores')
         .then(res => {
             const indicadores = res.data;
+            console.log(indicadores)
             this.setState({indicadores})
         })
     }
 
-    componentDidUpdate = () =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicadores')
-        .then(res => {
-            const indicadores = res.data;
-            this.setState({indicadores})
-        })
-    }
+    // componentDidUpdate = () =>{
+    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicadores')
+    //     .then(res => {
+    //         const indicadores = res.data;
+    //         console.log(indicadores)
+    //         this.setState({indicadores})
+    //     })
+    // }
 
     componentDidMount(){
         axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicadores')
@@ -42,6 +49,59 @@ export default class Indicadores extends Component{
     }
 
 
+    changeSelection = (e) =>{
+        if (e.currentTarget.id === "indicador") {
+          this.setState({indicador: e.target.value})
+        }
+        else{
+          if (e.currentTarget.id === "edo") {
+            // eslint-disable-next-line default-case
+            switch(e.target.value){
+              case "yuc":
+                this.setState({estado: "Yucatan"});
+              break;
+              case "chik":
+                this.setState({estado: "Chikindzonot"});
+              break;
+              case "camp":
+                this.setState({estado: "Campeche"});
+              break;
+              case "qroo":
+                this.setState({estado: "Quintana Roo"});
+              break;
+            }
+          }
+          else{
+            if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
+              this.setState({statusDisabled: false, año: e.currentTarget.value})
+              axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuIndicadores/' + e.currentTarget.value)
+              .then(res => {
+                const indicadoresMenu = res.data;
+                this.setState({indicadoresMenu})
+              })
+            }
+            else{
+              this.setState({statusDisabled: true})
+            }
+          }
+        }
+      }
+
+      visualizeGraphs = () =>{
+        //  || (indicadorData.indicador.toUpperCase() === this.state.auxindicador.toUpperCase())
+        var indicadoresFiltered = [];
+        this.state.indicadores.map((indicadorData) =>{
+          if (indicadorData.indicador.toUpperCase() === this.state.indicador.toUpperCase()
+          && indicadorData.año === this.state.año
+          && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
+           return indicadoresFiltered.push(indicadorData)
+          }
+          return true
+        })
+        console.log(indicadoresFiltered)
+        this.setState({indicadoresTable : indicadoresFiltered})
+        // this.createPies(indicadoresFiltered);
+      }
 
     /**
      *
@@ -73,7 +133,6 @@ export default class Indicadores extends Component{
     render(){
         return(
             <Row>
-                {console.log(this.state)}
                 <Col sm="12">
                     <Card>
                         <CardHeader>
@@ -98,45 +157,213 @@ export default class Indicadores extends Component{
                 </Col>
                 <Col sm={12}>
                     <h4>Información en Base de Datos</h4>
+                    <Row>
+                        <Col xs="12" sm="3" md="3">
+                            <Label>Seleccionar Año</Label>
+                            <Input type="select" name="select" id="año" onChange={this.changeSelection}>
+                                <option unselectable>Selecciona un año</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                            </Input>
+                        </Col>
+                        <Col xs="12" sm="4" md="4">
+                            <Label>Seleccionar Índicador</Label>
+                            <Input type="select" name="select" id="indicador" onChange={this.changeSelection} disabled={this.state.statusDisabled ? true:null}>
+                            <option unselectable>Selecciona un indicador</option>
+                            {
+                                this.state.indicadoresMenu.map((indicadorOption, key) =>{
+                                return(
+                                    <option key={key} value={indicadorOption.indicador}>{indicadorOption.indicador.toUpperCase()}</option>
+                                )
+                                })
+                            }
+                            </Input>
+                        </Col>
+                        <Col xs="12" sm="3" md="3">
+                            <Label>Seleccionar Estado</Label>
+                            <Input type="select" name="select" id="edo" onChange={this.changeSelection} disabled={this.state.statusDisabled ? true:null}>
+                            <option unselectable>Selecciona un estado</option>
+                            <option value="yuc">Merida, Kanasin, Yucatán</option>
+                            <option value="chik">Chikindzonot, Yucatán</option>
+                            <option value="qroo">Puerto Morelos, Solidaridad, José Maria Morelos, Quintana Roo</option>
+                            <option value="camp" disabled={this.state.año === '2020' ? true: null}>Campeche,Campeche</option>
+                            </Input>
+                        </Col>
+                        <Col xs="12" sm="2" md="2">
+                            <Button color="primary" style={{marginTop: "1em"}} size="lg"
+                            onClick={this.visualizeGraphs}>
+                            Visualizar
+                            </Button>
+                        </Col>
+
+                    </Row>
                     {
-                        this.state.indicadores.map((program, key) =>{
+                        this.state.indicadoresTable.length > 0 ? 
+                        this.state.indicadoresTable.map((indicador,key) =>{
+                            let respuestas = indicador.respuestas.split('#$%&')
+                            let votos = indicador.votos.split('#$%&')
+                            let porcentajes = indicador.porcentajes.split('#$%&')
                             return(
                                 <div key={key}>
-                                    <Card key={key}>
+                                    <Card style={{marginTop: "1em"}}>
                                         <CardHeader>
                                             <Row>
-                                                <Col sm={10}>
-                                                    <h4>{program.pregunta}</h4>
-                                                </Col>
-                                                <Col sm={1}>
-                                                    <Button color="primary" style={styles.buttons}>Modificar</Button>
-                                                </Col>
-                                                <Col sm={1}>
-                                                    <Button color="danger" style={styles.buttons}
-                                                    onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
-                                                </Col>
+                                                 <Col sm={10}>
+                                                     <h4>{indicador.pregunta}</h4>
+                                                 </Col>
+                                                 <Col sm={1}>
+                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
+                                                 </Col>
+                                                 <Col sm={1}>
+                                                     <Button color="danger" style={styles.buttons}
+                                                     onClick={this.onConfirmation} id={indicador.id} value={key}>Eliminar</Button>
+                                                 </Col>
                                             </Row>
                                         </CardHeader>
                                         <CardBody>
-                                            <Row>
-                                                <Col sm={3}>
-                                                    <h5>Estado</h5>
-                                                    {program.estado}
-                                                </Col>
-                                                <Col sm={3}>
-                                                    <h5>Tipo de Indicador</h5>
-                                                    {program.indicador}
-                                                </Col>
-                                                <Col sm={3}>
-                                                    <h5>Año</h5>
-                                                    {program.año}
-                                                </Col>
-                                            </Row>
+                                            <Table bordered responsive>
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        {respuestas.map((respues, key) =>{
+                                                            if (key !== respuestas.length-1) {
+                                                                return(
+                                                                    <th key={key}>{respues.toUpperCase()}</th>
+                                                                )   
+                                                            }
+                                                            return true
+                                                        })}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row"># de Respuestas</th>
+                                                        {votos.map((voto, key) =>{
+                                                            if (key !== votos.length-1) {
+                                                                return (<td key={key}>{voto}</td>)
+                                                            }
+                                                            return true
+                                                        })}
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Porcentaje</th>
+                                                        {porcentajes.map((porcen, key) =>{
+                                                            if (key !== porcentajes.length-1) {
+                                                                return (<td key={key}>{porcen}</td>)
+                                                            }
+                                                            return true
+                                                        })}
+                                                    </tr>
+                                                </tbody>
+                                            </Table>
                                         </CardBody>
                                     </Card>
                                 </div>
                             )
                         })
+                        : null
+                        // this.state.indicadores.map((program, key) =>{
+                        //     return(
+                        //         <div key={key}>
+                        //             <Card key={key}>
+                        //                 <CardHeader>
+                        //                     <Row>
+                        //                         <Col sm={10}>
+                        //                             <h4>{program.pregunta}</h4>
+                        //                         </Col>
+                        //                         <Col sm={1}>
+                        //                             <Button color="primary" style={styles.buttons}>Modificar</Button>
+                        //                         </Col>
+                        //                         <Col sm={1}>
+                        //                             <Button color="danger" style={styles.buttons}
+                        //                             onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
+                        //                         </Col>
+                        //                     </Row>
+                        //                 </CardHeader>
+                        //                 <CardBody>
+                        //                     <Row>
+                        //                         <Col sm={3}>
+                        //                             <h5>Estado</h5>
+                        //                             {program.estado}
+                        //                         </Col>
+                        //                         <Col sm={3}>
+                        //                             <h5>Tipo de Indicador</h5>
+                        //                             {program.indicador}
+                        //                         </Col>
+                        //                         <Col sm={3}>
+                        //                             <h5>Año</h5>
+                        //                             {program.año}
+                        //                         </Col>
+                        //                     </Row>
+                        //                     <br/>
+                        //                     <Row>
+                        //                         <Col sm={12}>
+                        //                             <Table bordered responsive>
+                        //                                 {
+                        //                                     // this.state.indicadores.map((indicador, key) =>{
+                        //                                     //     let respuestas = indicador.respuestas.split('#$%&')
+                        //                                     //     console.log(respuestas)
+                        //                                     //     let votos = indicador.votos.split('#$%&')
+                        //                                     //     let porcentajes = indicador.porcentajes.split('#$%&')
+                                                                
+                        //                                     //     return(
+                        //                                     //         <thead>
+                        //                                     //         {/* {respuestas.map((respuesta) =>{
+                        //                                     //             return (<th>{respuesta}</th>)
+                        //                                     //         })}     */}
+                        //                                     //         </thead>
+                                                                    
+
+                        //                                     //     )
+                                                                
+                                                                
+                        //                                     // }})
+                        //                                 }
+                        //                                 <thead>
+                        //                                     <tr>
+                        //                                         <th></th>
+                        //                                         <th>R1</th>
+                        //                                         <th>R2</th>
+                        //                                         <th>R3</th>
+                        //                                         <th>R4</th>
+                        //                                         <th>R1</th>
+                        //                                         <th>R2</th>
+                        //                                         <th>R3</th>
+                        //                                         <th>R4</th>
+                        //                                     </tr>
+                        //                                 </thead>
+                        //                                 <tbody>
+                        //                                     <tr>
+                        //                                         <th scope="row"># de Respuestas</th>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                     </tr>
+                        //                                     <tr>
+                        //                                         <th scope="row">Porcentajes</th>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                         <td>Hola</td>
+                        //                                     </tr>
+                        //                                 </tbody>
+                        //                             </Table>
+                        //                         </Col>
+                        //                     </Row>
+                        //                 </CardBody>
+                        //             </Card>
+                        //         </div>
+                        //     )
+                        // })
                     }
                 </Col>
                 <div>

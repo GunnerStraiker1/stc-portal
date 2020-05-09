@@ -26,7 +26,7 @@ var CustomTootip= ({ active, payload, label}) =>{
   return null;
 }
 
-export default class indices extends Component{
+export default class indicesInfantiles extends Component{
 
   constructor(props){
     super(props);
@@ -47,14 +47,14 @@ export default class indices extends Component{
   }
 
   componentWillReceiveProps = (props) =>{
-    axios.get('http://localhost:3001/indicesAdultosAnio')
+    axios.get('http://localhost:3001/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
 }
 componentDidMount(){
-    axios.get('http://localhost:3001/indicesAdultosAnio')
+    axios.get('http://localhost:3001/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
@@ -88,7 +88,7 @@ componentDidMount(){
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('http://localhost:3001/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('http://localhost:3001/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName, statusMenu: false})
@@ -97,7 +97,7 @@ componentDidMount(){
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('http://localhost:3001/indicesEstados/' + e.currentTarget.value)
+          axios.get('http://localhost:3001/indicesInfantilesEstados/' + e.currentTarget.value)
           .then(res => {
             const estados = res.data;
             this.setState({estados})
@@ -112,7 +112,7 @@ componentDidMount(){
 
   visualization = () =>{
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("http://localhost:3001/indiceInfo/" + id)
+    axios.get("http://localhost:3001/indiceInfantilInfo/" + id)
     .then(res =>{
       const indiceData = res.data[0]
       indiceData.resultado = parseFloat(indiceData.resultado)
@@ -192,6 +192,7 @@ componentDidMount(){
                     </Row>
                   </Col>
                 </Row>
+                {console.log(this.state)}
               </CardHeader>
               <CardBody>
                 <div id="accordion">

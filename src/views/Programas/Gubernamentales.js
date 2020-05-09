@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+// import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import axios from 'axios';
-import { Card, CardBody, CardColumns, CardHeader, Button,
-Col, Row, Fade, Collapse, Badge, Label, Input} from 'reactstrap';
+import { Card, CardBody, CardHeader, Button,
+Col, Row, Collapse,  Label, Input} from 'reactstrap';
 
 export default class Gubernamentales extends Component{
 
@@ -50,6 +50,7 @@ export default class Gubernamentales extends Component{
       else{
         state.push(x);
       }
+      return true
       // tab === index ? !x : false
     });
 
@@ -59,6 +60,7 @@ export default class Gubernamentales extends Component{
   }
 
   changeSelection= (e) =>{
+    // eslint-disable-next-line default-case
     switch (e.currentTarget.id) {
       case 'edo':
         this.setState({

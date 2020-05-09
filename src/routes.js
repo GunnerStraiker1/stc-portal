@@ -4,6 +4,7 @@ const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Indicadores = React.lazy(() => import('./views/Indicadores/Indicadores'))
 const IndicadoresInfantiles = React.lazy(() => import('./views/Indicadores/IndicadoresInfantiles'))
 const Indices =  React.lazy(() => import('./views/Indices/indices'))
+const IndicesInfantiles =  React.lazy(() => import('./views/Indices/indicesInfantiles'))
 const Gubernamentales = React.lazy(()=> import('./views/Programas/Gubernamentales'))
 const Repositorios = React.lazy(()=> import('./views/Repositorios/Repositorios'))
 const Estadisticas = React.lazy(()=> import('./views/Estadisticas/Estadisticas'))
@@ -21,6 +22,7 @@ const routes = [
   { path: '/indicadores', exact: true, name: 'Indicadores', component: Indicadores },
   { path: '/indicadoresInfantiles', exact: true, name: 'IndicadoresInfantiles', component: IndicadoresInfantiles },
   { path: '/indices', exact: true, name: 'Indices', component: Indices },
+  { path: '/indicesInfantiles', exact: true, name: 'Indices', component: IndicesInfantiles },
   { path: '/programasGob', exact: true, name: 'Gubernamentales', component: Gubernamentales },
   { path: '/programasOsc', exact: true, name: 'OSC', component: Gubernamentales },
   { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },

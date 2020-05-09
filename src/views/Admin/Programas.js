@@ -1,9 +1,8 @@
-import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, 
-    Input, InputGroup, InputGroupAddon, InputGroupText, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
-import {Tabs,Tab} from 'react-bootstrap'
-import axios, {post} from 'axios'; 
+import React, { Component } from 'react';
+// import { Link, NavLink } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
+// import {Tabs,Tab} from 'react-bootstrap'
+import axios from 'axios'; 
 
 export default class Programas extends Component{
 

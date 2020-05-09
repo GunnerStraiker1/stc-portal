@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink, Progress, TabContent, TabPane, ListGroup, ListGroupItem, DropdownItem } from 'reactstrap';
+import { DropdownItem } from 'reactstrap';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { AppSwitch } from '@coreui/react'
-
+// import classNames from 'classnames';
+// import { AppSwitch } from '@coreui/react'
+// Nav, NavItem, NavLink, Progress, TabContent, TabPane, ListGroup, ListGroupItem,
 const propTypes = {
   children: PropTypes.node,
 };

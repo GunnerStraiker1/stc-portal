@@ -40,6 +40,10 @@ export default {
       name: 'Índices',
       url: '/indices',
       icon: 'fa fa-tags',
+      children:[
+        {name: 'Indices Adultos', url:'/indices', icon:'fa fa-tags'},
+        {name: 'Indices Infantiles', url:'/indicesInfantiles', icon:'fa fa-tags'},
+      ]
     },
     {
       name: 'Programas',
