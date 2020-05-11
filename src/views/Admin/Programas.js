@@ -58,7 +58,7 @@ export default class Programas extends Component{
     }
 
     onDelete= () =>{
-        axios.delete("http://localhost:3001/deleteProgram/" + this.state.id)
+        axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
         .then((response) =>{
             this.setState({modalVisible: false, key:0,id:0})
             console.log(response)
