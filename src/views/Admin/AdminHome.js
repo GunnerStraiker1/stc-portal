@@ -7,6 +7,7 @@ import Programas from './Programas'
 import Repositorios from './Repositorios'
 import Indicadores from './Indicadores'
 import IndicadoresInfantiles from './IndicadoresInfantiles';
+import ProgramasOSC from './Programas_OSC';
 
 class AdminHome extends Component{
 
@@ -40,9 +41,6 @@ class AdminHome extends Component{
             case 'programForm':
                 url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadPrograma';
                 break;
-            // case 'repoForm':
-            //     url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/createNewRepo';
-            //     break;
             case 'indicadorForm':
                 url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadIndicador';
                 break;
@@ -83,8 +81,8 @@ render(){
                                         <Programas submitProgram={this.submitProgram} visible={this.state.visible} 
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
-                                    <Tab eventKey="repos" title="Repositorios">
-                                    <Repositorios submitProgram={this.submitProgram} visible={this.state.visible} 
+                                    <Tab eventKey="osc" title="Programas OSC">
+                                        <ProgramasOSC submitProgram={this.submitProgram} visible={this.state.visible} 
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="indicadores" title="Indicadores Adultos">
@@ -94,6 +92,15 @@ render(){
                                     <Tab eventKey="infantil" title="Indicadores Infantiles">
                                         <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
                                                 changeHandler={this.changeHandler} onToogle={this.onToogle}/>
+                                    </Tab>
+                                    <Tab eventKey="indices" title="Indices Adultos">
+                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                                changeHandler={this.changeHandler} onToogle={this.onToogle}/> */}
+                                    </Tab>
+                                    <Tab eventKey="indicesInfantil" title="Indices Infantiles">
+                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                                changeHandler={this.changeHandler} onToogle={this.onToogle}/> */}
+                                    </Tab>
                                         {/* <Col sm="12">
                                         
                                             <Card>
@@ -117,7 +124,7 @@ render(){
                                                 </CardBody>
                                             </Card>
                                         </Col> */}
-                                    </Tab>
+                                    
                                     <Tab eventKey="estadisticas" title="Estadisticas" disabled>
                                         <Col sm="12">
                                             <Card>
@@ -141,6 +148,10 @@ render(){
                                                 </CardBody>
                                             </Card>
                                         </Col>
+                                    </Tab>
+                                    <Tab eventKey="repos" title="Repositorios">
+                                    <Repositorios submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                 </Tabs>
                             </CardBody>

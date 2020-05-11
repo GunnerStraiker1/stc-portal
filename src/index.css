@@ -1,1 +1,16 @@
+.nav-link  .nav-icon{
+    color: rgba(255, 255, 255, 0.9) !important;
+}
 
+.nav-link.active{
+    background-color: aliceblue !important;
+    color: black !important;
+}
+
+.nav-link.active  .nav-icon{
+    color: black !important;
+}
+
+.nav-dropdown.open{
+    background: rgba(0, 0, 0, 0.5) !important;
+}

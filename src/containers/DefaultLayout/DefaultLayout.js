@@ -46,7 +46,7 @@ class DefaultLayout extends Component {
             <Suspense>
             <AppSidebarNav
             className="Hola"
-            style={{fontSize:"1.2rem"}}
+            style={{fontSize:"1rem"}}
               navConfig={navigation} {...this.props} router={router}
             />
             </Suspense>

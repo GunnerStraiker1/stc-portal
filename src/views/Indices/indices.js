@@ -133,6 +133,25 @@ componentDidMount(){
 
     return(
       <div className="animated fadeIn">
+        <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
+            <h4>Gráfica de Resultados del Índice</h4>
+            <ResponsiveContainer width='50%' aspect={4.0/1.8} className="containerBar"> 
+              <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+                <CartesianGrid strokeDasharray= "1 1"/>
+                <XAxis dataKey="result"
+                ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
+                domain = {[0,1]}
+                type="number"
+                interval={0}
+                tick={{stroke: 'white', strokeWidth: 0.5}}
+                />
+                {/* <YAxis /> */}
+                <Tooltip content={<CustomTootip />}/>
+                {/* <Legend /> */}
+                <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         <Row>
           <Col md="12">
           <Card>
@@ -143,7 +162,7 @@ componentDidMount(){
                     <Col xs="12" sm="2" md="2">
                       <Label>Seleccionar Año</Label>
                       <Input type="select" name="select" id="año" onChange={this.changeSelection}>
-                        <option unselectable>Selecciona un año</option>
+                        <option unselectable={"on"}>Selecciona un año</option>
                         {
                           this.state.anios.map((anio, key) =>{
                             return(
@@ -158,7 +177,7 @@ componentDidMount(){
                           Seleccionar Ciudad
                         </Label>
                         <Input type="select" name="select" id="edo" disabled={this.state.statusDisabled ? true:null} onChange={this.changeSelection}>
-                          <option unselectable>Selecciona un Estado</option>
+                          <option unselectable={"on"}>Selecciona un Estado</option>
                           {
                             this.state.estados.map((edo) =>{
                               return(
@@ -174,7 +193,7 @@ componentDidMount(){
                           Seleccionar Indice
                         </Label>
                         <Input type="select" name="select" id="indiceName" disabled={this.state.statusMenu ? true:null} onChange={this.changeSelection}>
-                          <option unselectable>Selecciona un Índice</option>
+                          <option unselectable={"on"}>Selecciona un Índice</option>
                           {
                             this.state.indiceName.map((indice, key) =>{
                               return(
@@ -201,11 +220,6 @@ componentDidMount(){
                         <h5 className="m-0 p-0">{this.state.indiceData !== null ? this.state.indiceData.indice.toUpperCase() : ""}</h5>
                       {/* </Button> */}
                     </CardHeader>
-                    {/* <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
-                      <CardBody>
-                      Índice de calidad de la atención médica infantil
-                      </CardBody>
-                    </Collapse> */}
                   </Card>
                   <Card className="mb-0">
                     <CardHeader id="headingTwo">
@@ -280,24 +294,7 @@ componentDidMount(){
                     </Collapse>
                   </Card>
 
-                  <div style={{paddingTop:"2em", textAlign:"center"}}>
-                    <ResponsiveContainer width='50%' aspect={4.0/1.8} className="containerBar"> 
-                      <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
-                        <CartesianGrid strokeDasharray= "1 1"/>
-                        <XAxis dataKey="result"
-                        ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
-                        domain = {[0,1]}
-                        type="number"
-                        interval={0}
-                        tick={{stroke: 'white', strokeWidth: 0.5}}
-                        />
-                        {/* <YAxis /> */}
-                        <Tooltip content={<CustomTootip />}/>
-                        {/* <Legend /> */}
-                        <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
+                  
                   
                 </div>
               </CardBody>

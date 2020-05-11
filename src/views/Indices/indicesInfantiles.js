@@ -15,7 +15,7 @@ var CustomTootip= ({ active, payload, label}) =>{
         {
           payload[0] !== undefined ? 
           <div>
-            <p style={{margin:0}}>Explicación: </p> <h5>{payload[0].payload.exp}</h5>  
+            <p style={{margin:0}}>Explicación: </p> <h5>{payload[0].payload.exp.toUpperCase()}</h5>  
           </div>
            : <p>Cargue Indices</p>
         }
@@ -32,7 +32,7 @@ export default class indicesInfantiles extends Component{
     super(props);
     this.state = {
       collapse: false,
-      accordion: [true, true, true, true],
+      accordion: [true, true, true, true, true, true, true],
       anios: [],
       año: "",
       estados:[],
@@ -133,6 +133,27 @@ componentDidMount(){
 
     return(
       <div className="animated fadeIn">
+
+        <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
+          <h4>Gráfica de Resultados del Índice</h4>
+          <ResponsiveContainer width='50%' aspect={4.0/1.8} className="containerBar"> 
+            <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+              <CartesianGrid strokeDasharray= "1 1"/>
+              <XAxis dataKey="result"
+              ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
+              domain = {[0,1]}
+              type="number"
+              interval={0}
+              tick={{stroke: 'white', strokeWidth: 0.5}}
+              />
+              {/* <YAxis /> */}
+              <Tooltip content={<CustomTootip />}/>
+              {/* <Legend /> */}
+              <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
         <Row>
           <Col md="12">
           <Card>
@@ -143,7 +164,7 @@ componentDidMount(){
                     <Col xs="12" sm="2" md="2">
                       <Label>Seleccionar Año</Label>
                       <Input type="select" name="select" id="año" onChange={this.changeSelection}>
-                        <option unselectable>Selecciona un año</option>
+                        <option unselectable={"on"}>Selecciona un año</option>
                         {
                           this.state.anios.map((anio, key) =>{
                             return(
@@ -158,11 +179,11 @@ componentDidMount(){
                           Seleccionar Ciudad
                         </Label>
                         <Input type="select" name="select" id="edo" disabled={this.state.statusDisabled ? true:null} onChange={this.changeSelection}>
-                          <option unselectable>Selecciona un Estado</option>
+                          <option unselectable={"on"}>Selecciona un Estado</option>
                           {
-                            this.state.estados.map((edo) =>{
+                            this.state.estados.map((edo, key) =>{
                               return(
-                                <option value={edo.estado}>{edo.estado}</option>
+                                <option value={edo.estado} key={key}>{edo.estado}</option>
                               )
                             })
                           }
@@ -174,7 +195,7 @@ componentDidMount(){
                           Seleccionar Indice
                         </Label>
                         <Input type="select" name="select" id="indiceName" disabled={this.state.statusMenu ? true:null} onChange={this.changeSelection}>
-                          <option unselectable>Selecciona un Índice</option>
+                          <option unselectable={"on"}>Selecciona un Índice</option>
                           {
                             this.state.indiceName.map((indice, key) =>{
                               return(
@@ -202,11 +223,6 @@ componentDidMount(){
                         <h5 className="m-0 p-0">{this.state.indiceData !== null ? this.state.indiceData.indice.toUpperCase() : ""}</h5>
                       {/* </Button> */}
                     </CardHeader>
-                    {/* <Collapse isOpen={this.state.accordion[0]} data-parent="#accordion" id="collapseOne" aria-labelledby="headingOne">
-                      <CardBody>
-                      Índice de calidad de la atención médica infantil
-                      </CardBody>
-                    </Collapse> */}
                   </Card>
                   <Card className="mb-0">
                     <CardHeader id="headingTwo">
@@ -245,61 +261,41 @@ componentDidMount(){
                     </Collapse>
                   </Card>
                   <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                    <CardHeader id="headingFour">
+                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseFour">
                         <h5 className="m-0 p-0">Resultado del Índice</h5>
                       </Button>
                     </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                    <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="headingFour">
                       <CardBody>
                       {this.state.indiceData !== null ? this.state.indiceData.resultado : ""}
                       </CardBody>
                     </Collapse>
                   </Card>
                   <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                    <CardHeader id="headingFive">
+                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseFour">
                         <h5 className="m-0 p-0">Fecha del Índice</h5>
                       </Button>
                     </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                    <Collapse isOpen={this.state.accordion[5]} data-parent="#accordion" id="headingFive">
                       <CardBody>
                       {this.state.indiceData !== null ? this.state.indiceData.fecha : ""}
                       </CardBody>
                     </Collapse>
                   </Card>
                   <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                    <CardHeader id="headingSix">
+                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(6)} aria-expanded={this.state.accordion[6]} aria-controls="collapseFour">
                         <h5 className="m-0 p-0">Lugar del Índice</h5>
                       </Button>
                     </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                    <Collapse isOpen={this.state.accordion[6]} data-parent="#accordion" id="headingSix">
                       <CardBody>
                       {this.state.indiceData !== null ? this.state.indiceData.estado : ""}
                       </CardBody>
                     </Collapse>
                   </Card>
-
-                  <div style={{paddingTop:"2em", textAlign:"center"}}>
-                    <ResponsiveContainer width='50%' aspect={4.0/1.8} className="containerBar"> 
-                      <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
-                        <CartesianGrid strokeDasharray= "1 1"/>
-                        <XAxis dataKey="result"
-                        ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
-                        domain = {[0,1]}
-                        type="number"
-                        interval={0}
-                        tick={{stroke: 'white', strokeWidth: 0.5}}
-                        />
-                        {/* <YAxis /> */}
-                        <Tooltip content={<CustomTootip />}/>
-                        {/* <Legend /> */}
-                        <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                  
                 </div>
               </CardBody>
             </Card>
