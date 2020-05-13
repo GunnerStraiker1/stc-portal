@@ -93,7 +93,7 @@ export default class Indicadores extends Component {
       return true
     })
 
-    console.log(indicadoresFiltered)
+    // console.log(indicadoresFiltered)
     this.createPies(indicadoresFiltered);
   }
 
@@ -146,7 +146,7 @@ export default class Indicadores extends Component {
                       {
                         this.state.indicadoresMenu.map((indicadorOption, key) =>{
                           return(
-                            <option value={indicadorOption.indicador}>{indicadorOption.indicador.toUpperCase()}</option>
+                            <option value={indicadorOption.indicador} key={key}>{indicadorOption.indicador.toUpperCase()}</option>
                           )
                         })
                       }
@@ -171,7 +171,7 @@ export default class Indicadores extends Component {
                   </Col>
                 </Row>
               </CardHeader>
-              {console.log(this.state)}
+              {/* {console.log(this.state)} */}
               {/* <CardBody> */}
                 <Row>
                   {

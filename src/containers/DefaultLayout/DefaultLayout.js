@@ -75,11 +75,11 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
+          {/* <AppAside fixed>
             <Suspense fallback={this.loading()}>
               <DefaultAside onLogin={e=>this.signIn(e)} />
             </Suspense>
-          </AppAside>
+          </AppAside> */}
         </div>
         {/* <AppFooter>
           <Suspense fallback={this.loading()}>

@@ -17,35 +17,29 @@ export default class Programas_OSC extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+        axios.get('http://localhost:3001/programasOSC')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
         })
     }
 
-    componentDidUpdate = () =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
-        .then(res => {
-            const programs = res.data;
-            this.setState({programs})
-        })
-    }
+    // componentDidUpdate = () =>{
+    //     axios.get('http://localhost:3001/programasOSC')
+    //     .then(res => {
+    //         const programs = res.data;
+    //         this.setState({programs})
+    //     })
+    // }
 
     componentDidMount(){
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+        axios.get('http://localhost:3001/programasOSC')
         .then(res => {
             const programs = res.data;
+            // console.log(programs)
             this.setState({programs})
         })
     }
-    
-   
-
-    /**
-     * 
-        
-     */
 
     onConfirmation = (e) =>{
         e.preventDefault();
@@ -58,11 +52,11 @@ export default class Programas_OSC extends Component{
     }
 
     onDelete= () =>{
-        axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
-        .then((response) =>{
-            this.setState({modalVisible: false, key:0,id:0})
-            console.log(response)
-        })
+        // axios.delete("http://localhost:3001/deleteProgram/" + this.state.id)
+        // .then((response) =>{
+        //     this.setState({modalVisible: false, key:0,id:0})
+        //     console.log(response)
+        // })
     }
 
     toggleModal = () =>{
@@ -104,7 +98,7 @@ export default class Programas_OSC extends Component{
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
-                                                    <h4>{program.nombre}</h4>
+                                                    <h4>{program.programa}</h4>
                                                 </Col>
                                                 <Col sm={1}>
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
@@ -117,13 +111,21 @@ export default class Programas_OSC extends Component{
                                         </CardHeader>
                                         <CardBody>
                                             <Row>
-                                                <Col sm={6}>
+                                                <Col sm={6} style={{marginBottom:"2em"}}>
                                                     <h5>Objetivo</h5>
                                                     {program.objetivo}
                                                 </Col>
-                                                <Col sm={6}>
+                                                <Col sm={6} style={{marginBottom:"2em"}}>
                                                     <h5>Descripcion</h5>
                                                     {program.descripcion}
+                                                </Col>
+                                                <Col sm={6} style={{marginBottom:"2em"}}>
+                                                    <h5>Estado</h5>
+                                                    {program.estado}
+                                                </Col>
+                                                <Col sm={6} style={{marginBottom:"2em"}}>
+                                                    <h5>Financiador</h5>
+                                                    {program.financiador}
                                                 </Col>
                                             </Row>
                                         </CardBody>

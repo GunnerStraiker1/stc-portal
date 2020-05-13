@@ -1,7 +1,7 @@
 export default {
   items: [
     {
-      name: 'Inicio',
+      name: 'Landing Page',
       url: '/Inicio',
       icon: 'fa fa-home',
     },

@@ -60,7 +60,7 @@ class Navbars extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink href="#/components/navbars">Components</NavLink>
+                    <NavLink href="components/navbars">Components</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink href="https://github.com/reactstrap/reactstrap" target="_blank">Github</NavLink>
@@ -100,7 +100,7 @@ class Navbars extends Component {
               <Collapse isOpen={!this.state.collapsed} navbar>
                 <Nav navbar>
                   <NavItem>
-                    <NavLink href="#/components/navbars">Components</NavLink>
+                    <NavLink href="components/navbars">Components</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>

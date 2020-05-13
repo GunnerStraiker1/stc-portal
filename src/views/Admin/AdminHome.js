@@ -47,6 +47,9 @@ class AdminHome extends Component{
             case 'infantilIndicadorForm':
                 url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadIndicadorInfantil';
                 break;
+            case 'programOscForm':
+                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadProgramaOSC';
+                break;
             default:
                 break;
         }

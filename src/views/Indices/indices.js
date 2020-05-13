@@ -133,25 +133,6 @@ componentDidMount(){
 
     return(
       <div className="animated fadeIn">
-        <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
-            <h4>Gráfica de Resultados del Índice</h4>
-            <ResponsiveContainer width='50%' aspect={4.0/1.8} className="containerBar"> 
-              <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
-                <CartesianGrid strokeDasharray= "1 1"/>
-                <XAxis dataKey="result"
-                ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
-                domain = {[0,1]}
-                type="number"
-                interval={0}
-                tick={{stroke: 'white', strokeWidth: 0.5}}
-                />
-                {/* <YAxis /> */}
-                <Tooltip content={<CustomTootip />}/>
-                {/* <Legend /> */}
-                <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
         <Row>
           <Col md="12">
           <Card>
@@ -213,90 +194,112 @@ componentDidMount(){
                 </Row>
               </CardHeader>
               <CardBody>
-                <div id="accordion">
-                  <Card className="mb-0">
-                    <CardHeader id="headingOne">
-                      {/* <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(0)} aria-expanded={this.state.accordion[0]} aria-controls="collapseOne"> */}
-                        <h5 className="m-0 p-0">{this.state.indiceData !== null ? this.state.indiceData.indice.toUpperCase() : ""}</h5>
-                      {/* </Button> */}
-                    </CardHeader>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingTwo">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseTwo">
-                        <h5 className="m-0 p-0">Interpretación del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.interpretacion : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseThree">
-                        <h5 className="m-0 p-0">Variables del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.variables : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
-                        <h5 className="m-0 p-0">Ecuación del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.ecuacion : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
-                        <h5 className="m-0 p-0">Resultado del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.resultado : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
-                        <h5 className="m-0 p-0">Fecha del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.fecha : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-                  <Card className="mb-0">
-                    <CardHeader id="headingThree">
-                      <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
-                        <h5 className="m-0 p-0">Lugar del Índice</h5>
-                      </Button>
-                    </CardHeader>
-                    <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
-                      <CardBody>
-                      {this.state.indiceData !== null ? this.state.indiceData.estado : ""}
-                      </CardBody>
-                    </Collapse>
-                  </Card>
-
-                  
-                  
-                </div>
+                <Row>
+                  <Col sm={6}>
+                    <div id="accordion">
+                      <Card className="mb-0">
+                        <CardHeader id="headingOne">
+                          {/* <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(0)} aria-expanded={this.state.accordion[0]} aria-controls="collapseOne"> */}
+                            <h5 className="m-0 p-0">{this.state.indiceData !== null ? this.state.indiceData.indice.toUpperCase() : ""}</h5>
+                          {/* </Button> */}
+                        </CardHeader>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingTwo">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseTwo">
+                            <h5 className="m-0 p-0">Interpretación del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.interpretacion : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseThree">
+                            <h5 className="m-0 p-0">Variables del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.variables : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                            <h5 className="m-0 p-0">Ecuación del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.ecuacion : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                            <h5 className="m-0 p-0">Resultado del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.resultado : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                            <h5 className="m-0 p-0">Fecha del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.fecha : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(3)} aria-expanded={this.state.accordion[3]} aria-controls="collapseFour">
+                            <h5 className="m-0 p-0">Lugar del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[3]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.estado : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card>
+                    </div>
+                  </Col>
+                  <Col sm ={6}>
+                    <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
+                      <h4>Gráfica de Resultados del Índice</h4>
+                      <ResponsiveContainer width='100%' aspect={4.0/1.8} className="containerBar"> 
+                        <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
+                          <CartesianGrid strokeDasharray= "1 1"/>
+                          <XAxis dataKey="result"
+                          ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
+                          domain = {[0,1]}
+                          type="number"
+                          interval={0}
+                          tick={{stroke: 'white', strokeWidth: 0.5}}
+                          />
+                          {/* <YAxis /> */}
+                          <Tooltip content={<CustomTootip />}/>
+                          {/* <Legend /> */}
+                          <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </Col>

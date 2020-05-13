@@ -51,7 +51,7 @@ export default class IndicadoresInfantiles extends Component {
       if (e.currentTarget.id === "edo") {
         switch(e.target.value){
           case "yuc":
-            this.setState({estado: "Yucatan"});
+            this.setState({estado: "Yucatán"});
           break;
           case "chik":
             this.setState({estado: "Chikindzonot"});
@@ -69,8 +69,8 @@ export default class IndicadoresInfantiles extends Component {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
           axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuIndicadoresInfantil/' + e.currentTarget.value)
           .then(res => {
-            const indicadoresMenu = res.data;
-            this.setState({indicadoresMenu})
+            let indicadorDataMenu = res.data;
+            this.setState({indicadoresMenu: indicadorDataMenu})
           })
         }
         else{
@@ -90,10 +90,18 @@ export default class IndicadoresInfantiles extends Component {
       && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
        indicadoresFiltered.push(indicadorData)
       }
+      else{
+        let stateWithoutAccent = this.state.estado.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (indicadorData.indicador.toUpperCase() === this.state.indicador.toUpperCase()
+        && indicadorData.año === this.state.año
+        && indicadorData.estado.toUpperCase() === stateWithoutAccent.toUpperCase()) {
+          indicadoresFiltered.push(indicadorData)
+        } 
+      }
       return true
     })
 
-    console.log(indicadoresFiltered)
+    // console.log(indicadoresFiltered)
     this.createPies(indicadoresFiltered);
   }
 
@@ -168,7 +176,7 @@ export default class IndicadoresInfantiles extends Component {
                       <option value="yuc">Merida, Kanasin, Yucatán</option>
                       <option value="chik">Chikindzonot, Yucatán</option>
                       <option value="qroo">Puerto Morelos, Solidaridad, José Maria Morelos, Quintana Roo</option>
-                      <option value="camp" disabled={this.state.año === '2020' ? true: null}>Campeche,Campeche</option>
+                      <option value="camp" hidden={this.state.año === '2020' ? true: null}>Campeche,Campeche</option>
                     </Input>
                   </Col>
                   
@@ -180,7 +188,7 @@ export default class IndicadoresInfantiles extends Component {
                   </Col>
                 </Row>
               </CardHeader>
-              {console.log(this.state)}
+              {/* {console.log(this.state)} */}
               <CardBody>
                 <Row>
                   {
