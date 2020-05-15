@@ -19,7 +19,7 @@ const Admin = React.lazy(() => import('././views/Admin/AdminHome'))
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/indicadores', exact: true, name: 'Indicadores', component: Indicadores },
   { path: '/indicadoresInfantiles', exact: true, name: 'IndicadoresInfantiles', component: IndicadoresInfantiles },
   { path: '/indices', exact: true, name: 'Indices', component: Indices },
