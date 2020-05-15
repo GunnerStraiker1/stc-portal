@@ -7,18 +7,28 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('http://localhost:3001/programas')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
+      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramas')
+      .then(res =>{
+        const menuEdos = res.data;
+        this.setState({menuEdos})
+      })
     })
   }
 
   componentDidMount(){
-    axios.get('http://localhost:3001/programas')
+    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
+      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramas')
+      .then(res =>{
+        const menuEdos = res.data;
+        this.setState({menuEdos})
+      })
     })
   }
 
@@ -69,11 +79,11 @@ export default class Gubernamentales extends Component{
         this.setState({
           edo: e.target.value
         })
-        // axios.get('http://localhost:3001/menuProgramasOSC/'+ e.target.value)
-        // .then(res=>{
-        //   const menuPrograms = res.data
-        //   this.setState({menuPrograms, disabled: false})
-        // })
+        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuProgramas/'+ e.target.value)
+        .then(res=>{
+          const menuPrograms = res.data
+          this.setState({menuPrograms, disabled: false})
+        })
         break;
     
       case 'program':
@@ -119,7 +129,7 @@ export default class Gubernamentales extends Component{
         <Row>
           <Col md="12">
             <Row>
-              {/* <Col md="4">
+              <Col md="4">
                 <Label>
                   <h5>Seleccionar Estado</h5>
                 </Label>
@@ -133,12 +143,12 @@ export default class Gubernamentales extends Component{
                     })
                   }
                 </Input>
-              </Col> */}
+              </Col>
               <Col md="6">
                 <Label>
                   <h5>Seleccionar Programa</h5>
                 </Label>
-                <Input type="select" name="select" id="program" onChange={this.changeSelection}>
+                <Input type="select" name="select" id="program" onChange={this.changeSelection} disabled={this.state.disabled ? true : null}>
                   <option unselectable>Selecciona el programa</option>
                   {
                     this.state.programs.map((menu, key) =>{

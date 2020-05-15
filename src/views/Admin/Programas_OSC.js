@@ -17,7 +17,7 @@ export default class Programas_OSC extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('http://localhost:3001/programasOSC')
+        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programasOSC')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
@@ -25,7 +25,7 @@ export default class Programas_OSC extends Component{
     }
 
     // componentDidUpdate = () =>{
-    //     axios.get('http://localhost:3001/programasOSC')
+    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programasOSC')
     //     .then(res => {
     //         const programs = res.data;
     //         this.setState({programs})
@@ -33,7 +33,7 @@ export default class Programas_OSC extends Component{
     // }
 
     componentDidMount(){
-        axios.get('http://localhost:3001/programasOSC')
+        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programasOSC')
         .then(res => {
             const programs = res.data;
             // console.log(programs)
@@ -52,7 +52,7 @@ export default class Programas_OSC extends Component{
     }
 
     onDelete= () =>{
-        // axios.delete("http://localhost:3001/deleteProgram/" + this.state.id)
+        // axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
         // .then((response) =>{
         //     this.setState({modalVisible: false, key:0,id:0})
         //     console.log(response)
