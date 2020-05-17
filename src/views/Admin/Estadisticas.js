@@ -10,7 +10,7 @@ export default class Estadisticas extends Component{
     constructor(props){
         super(props)
         this.state={
-            repos:[],
+            stats:[],
             modalVisible: false,
             id: 0,
             key: 0,
@@ -27,26 +27,26 @@ export default class Estadisticas extends Component{
     }
 
     // componentWillReceiveProps = (props) =>{
-    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
     //     .then(res => {
-    //         const repos = res.data;
-    //         this.setState({repos})
+    //         const stats = res.data;
+    //         this.setState({stats})
     //     })
     // }
 
     // componentDidUpdate = () =>{
-    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
     //     .then(res => {
-    //         const repos = res.data;
-    //         this.setState({repos})
+    //         const stats = res.data;
+    //         this.setState({stats})
     //     })
     // }
 
     componentDidMount(){
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
         .then(res => {
-            const repos = res.data;
-            this.setState({repos})
+            const stats = res.data;
+            this.setState({stats})
         })
     }
 
@@ -209,37 +209,37 @@ export default class Estadisticas extends Component{
                 <Col sm={12}>
                     <h4>Información en Base de Datos</h4>
                     {
-                        this.state.repos.map((program, key) =>{
+                        this.state.stats.map((stat, key) =>{
                             return(
                                 <div key={key}>
                                     <Card key={key}> 
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
-                                                    <h4>{program.archivo}</h4>
+                                                    <h4>{stat.nombre}</h4>
                                                 </Col>
                                                 <Col sm={1}>
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
                                                 </Col>
                                                 <Col sm={1}>
                                                     <Button color="danger" style={styles.buttons} 
-                                                    onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
+                                                    onClick={this.onConfirmation} id={stat.id} value={key}>Eliminar</Button>
                                                 </Col>
                                             </Row>
                                         </CardHeader>
                                         <CardBody>
                                             <Row>
                                                 <Col sm={3}>
-                                                    <h5>Archivo</h5>
-                                                    {program.descarga}
+                                                    <h5>Fuente</h5>
+                                                    {stat.fuente}
                                                 </Col>
                                                 <Col sm={3}>
                                                     <h5>Estado</h5>
-                                                    {program.estado}
+                                                    {stat.estado}
                                                 </Col>
                                                 <Col sm={6}>
                                                     <h5>Descripcion</h5>
-                                                    {program.descripcion}
+                                                    {stat.descripcion}
                                                 </Col>
                                             </Row>
                                         </CardBody>
@@ -252,7 +252,7 @@ export default class Estadisticas extends Component{
                 <div>
                     <Modal isOpen={this.state.modalVisible} toggle={this.toggleModal}>
                         <ModalBody>
-                        ¿Desea eliminar el repositorio: "{this.state.repos.length>0 ? this.state.repos[this.state.key].archivo : ''}"
+                        ¿Desea eliminar el repositorio: "{this.state.stats.length>0 ? this.state.stats[this.state.key].nombre : ''}"
                         </ModalBody>
                         <ModalFooter>
                         <Button color="danger" onClick={this.onDelete}>Eliminar</Button>
