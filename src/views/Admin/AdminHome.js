@@ -8,6 +8,7 @@ import Repositorios from './Repositorios'
 import Indicadores from './Indicadores'
 import IndicadoresInfantiles from './IndicadoresInfantiles';
 import ProgramasOSC from './Programas_OSC';
+import Estadisticas from './Estadisticas'
 
 class AdminHome extends Component{
 
@@ -128,29 +129,9 @@ render(){
                                             </Card>
                                         </Col> */}
                                     
-                                    <Tab eventKey="estadisticas" title="Estadisticas" disabled>
-                                        <Col sm="12">
-                                            <Card>
-                                                <CardHeader>
-                                                    <h2>Añadir Estadisticas</h2>
-                                                </CardHeader>
-                                                <CardBody>
-                                                <form id="estadisticasForm"
-                                                    onSubmit={this.submitProgram}
-                                                >
-                                                    <div style={{marginTop:"1em", marginLeft:"1em"}}>
-                                                        <input type="file" name="file" onChange={this.changeHandler}/> <br/>
-                                                    </div>
-                                                    <Alert color="success" isOpen={this.state.visible} toggle={this.onToogle} style={{marginTop:"1em"}}>
-                                                        Documento cargado con éxito
-                                                    </Alert>
-                                                    <div style={{textAlign:"right", marginRight:"2em"}}>
-                                                        <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" />
-                                                    </div>
-                                                </form>
-                                                </CardBody>
-                                            </Card>
-                                        </Col>
+                                    <Tab eventKey="estadisticas" title="Estadisticas" >
+                                        <Estadisticas submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        changeHandler={this.changeHandler} onToogle={this.onToogle} />
                                     </Tab>
                                     <Tab eventKey="repos" title="Repositorios">
                                     <Repositorios submitProgram={this.submitProgram} visible={this.state.visible} 

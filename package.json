@@ -1,7 +1,7 @@
 {
   "name": "scadminapp",
   "version": "2.6.0",
-  "description": "CoreUI React Open Source Bootstrap 4 Admin Template",
+  "description": "Plataforma que describe programas, indices e indicadores de estudios realizados",
   "author": "Victor Perera & Łukasz Holeczek",
   "homepage": "https://stc.rhippie.com/dashboard/",
   "license": "MIT",
