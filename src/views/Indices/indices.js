@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 // import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import {BarChart, CartesianGrid, XAxis, Bar, Tooltip, ResponsiveContainer} from 'recharts'
+import ReactSpeedmeter from 'react-d3-speedometer'
 import { Card, CardBody, CardHeader, Button,
-Col, Row, Collapse, Label, Input} from 'reactstrap';
+Col, Row, Collapse, Label, Input, Container} from 'reactstrap';
 import graphBack from './media/colors.png'
 import axios from 'axios'
 import '../Indices/indices.css'
@@ -281,7 +282,41 @@ componentDidMount(){
                   <Col sm ={6}>
                     <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
                       <h4>Gráfica de Resultados del Índice</h4>
-                      <ResponsiveContainer width='100%' aspect={4.0/1.8} className="containerBar"> 
+                      <Row>
+                        <Col sm={12} style={{marginTop: "5em"}}>
+                          <ReactSpeedmeter
+                            width={700}
+                            height={500}
+                            value={this.state.indiceData !== null ? this.state.indiceData.resultado : 0}
+                            maxValue={1}
+                            minValue={0}
+                            segments= {10}
+                            needleHeightRatio={0.8}
+                            customSegmentStops = {[
+                              0, 0.1, 0.2, 0.3, 0.4, 0.5 ,0.6, 0.7, 0.8, 0.9, 1
+                            ]}
+
+                            currentValueText= {this.state.indiceData !== null ? this.state.indiceData.explicacion.toUpperCase() : "0"}
+                            needleColor="#020202"
+                            segmentColors={[
+                              "#A20606",
+                              "#E42929",
+                              "#D75717",
+                              "#DF753F",
+                              "#E3C812",
+                              "#D7D017",
+                              "#68C05C",
+                              "#39B028",
+                              "#109D6A",
+                              "#276B1A",
+                            ]}
+                            valueTextFontSize={"30px"}
+                            paddingVertical={10}
+                            
+                          />
+                        </Col>
+                      </Row>
+                      {/* <ResponsiveContainer width='100%' aspect={4.0/1.8} className="containerBar"> 
                         <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
                           <CartesianGrid strokeDasharray= "1 1"/>
                           <XAxis dataKey="result"
@@ -291,12 +326,10 @@ componentDidMount(){
                           interval={0}
                           tick={{stroke: 'white', strokeWidth: 0.5}}
                           />
-                          {/* <YAxis /> */}
                           <Tooltip content={<CustomTootip />}/>
-                          {/* <Legend /> */}
                           <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
                         </BarChart>
-                      </ResponsiveContainer>
+                      </ResponsiveContainer> */}
                     </div>
                   </Col>
                 </Row>

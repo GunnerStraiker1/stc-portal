@@ -27,6 +27,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-bootstrap": "^1.0.0",
     "react-chartjs-2": "^2.7.6",
+    "react-d3-speedometer": "^0.11.0",
     "react-dom": "^16.8.6",
     "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
