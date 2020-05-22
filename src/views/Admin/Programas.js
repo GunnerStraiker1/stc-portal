@@ -17,7 +17,7 @@ export default class Programas extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+        axios.get('https://serverstc.rhippie.com/programas')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
@@ -25,7 +25,7 @@ export default class Programas extends Component{
     }
 
     componentDidUpdate = () =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+        axios.get('https://serverstc.rhippie.com/programas')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
@@ -33,7 +33,7 @@ export default class Programas extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+        axios.get('https://serverstc.rhippie.com/programas')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
@@ -58,7 +58,7 @@ export default class Programas extends Component{
     }
 
     onDelete= () =>{
-        axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
+        axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
         .then((response) =>{
             this.setState({modalVisible: false, key:0,id:0})
             console.log(response)

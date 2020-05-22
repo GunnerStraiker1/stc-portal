@@ -26,7 +26,7 @@ export default class Repositories extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+        axios.get('https://serverstc.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -34,7 +34,7 @@ export default class Repositories extends Component{
     }
 
     componentDidUpdate = () =>{
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+        axios.get('https://serverstc.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -42,7 +42,7 @@ export default class Repositories extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+        axios.get('https://serverstc.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -67,7 +67,7 @@ export default class Repositories extends Component{
     }
 
     onDelete= () =>{
-    //     axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
+    //     axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -83,7 +83,7 @@ export default class Repositories extends Component{
         let fileParts = this.uploadInput.files[0].name.split('.');
         let fileName = fileParts[0];
         let fileType = fileParts[1];
-        axios.post("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/uploadFileRepo",{
+        axios.post("https://serverstc.rhippie.com/uploadFileRepo",{
             fileName : fileName,
             fileType : fileType
         })

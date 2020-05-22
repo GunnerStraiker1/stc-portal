@@ -17,7 +17,7 @@ export default class Repositorios extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/repositorios')
+    axios.get('https://serverstc.rhippie.com/repositorios')
     .then(res => {
       const repos = res.data;
       this.setState({repos})
@@ -54,7 +54,7 @@ export default class Repositorios extends Component{
                           <td style={{textAlign:"center"}}>{repo.fuente}</td>
                           <td style={{textAlign:"center"}}>{repo.estado}</td>
                           <td style={{textAlign:"center"}}>
-                            <a href={"http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/fileRepositorio/" + repo.descarga} target="_blank" rel="noopener noreferrer">
+                            <a href={"https://serverstc.rhippie.com/fileRepositorio/" + repo.descarga} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-file-pdf-o fa-lg mt-4"></i>
                             </a>
                             <br />

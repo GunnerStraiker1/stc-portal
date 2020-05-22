@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+    axios.get('https://serverstc.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramas')
+      axios.get('https://serverstc.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class Gubernamentales extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programas')
+    axios.get('https://serverstc.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramas')
+      axios.get('https://serverstc.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,7 +79,7 @@ export default class Gubernamentales extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuProgramas/'+ e.target.value)
+        axios.get('https://serverstc.rhippie.com/menuProgramas/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
           this.setState({menuPrograms, disabled: false})

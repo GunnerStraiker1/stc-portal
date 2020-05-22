@@ -43,23 +43,48 @@ export default class indices extends Component{
       statusDisabled: true,
       statusMenu: true,
       indiceData: null,
-      indiceDataArray:[]
+      indiceDataArray:[],
+      widthGraph: 0,
+      heigthGraph: 0
     }
   }
 
   componentWillReceiveProps = (props) =>{
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicesAdultosAnio')
+    axios.get('https://serverstc.rhippie.com/indicesAdultosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
 }
 componentDidMount(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicesAdultosAnio')
+    axios.get('https://serverstc.rhippie.com/indicesAdultosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
+}
+
+componentWillMount(){
+  let widthInner = window.innerWidth
+  if(widthInner <= 600){
+    this.setState({widthGraph: 2*(widthInner/3)});
+    this.setState({heigthGraph: 250 });
+  }
+  else{
+    this.setState({widthGraph: (widthInner/3)});
+    this.setState({heigthGraph: 500 });
+  }
+
+  window.addEventListener('resize',()=>{
+    if(widthInner <= 600){
+      this.setState({widthGraph: 2*(widthInner/3)});
+      this.setState({heigthGraph: 250 });
+    }
+    else{
+      this.setState({widthGraph: (widthInner/3)});
+      this.setState({heigthGraph: 500 });
+    }
+  });
 }
 
   toggleAccordion(tab) {
@@ -89,7 +114,7 @@ componentDidMount(){
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('https://serverstc.rhippie.com/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName, statusMenu: false})
@@ -98,7 +123,7 @@ componentDidMount(){
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indicesEstados/' + e.currentTarget.value)
+          axios.get('https://serverstc.rhippie.com/indicesEstados/' + e.currentTarget.value)
           .then(res => {
             const estados = res.data;
             this.setState({estados})
@@ -113,7 +138,7 @@ componentDidMount(){
 
   visualization = () =>{
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/indiceInfo/" + id)
+    axios.get("https://serverstc.rhippie.com/indiceInfo/" + id)
     .then(res =>{
       const indiceData = res.data[0]
       indiceData.resultado = parseFloat(indiceData.resultado)
@@ -285,8 +310,8 @@ componentDidMount(){
                       <Row>
                         <Col sm={12} style={{marginTop: "5em"}}>
                           <ReactSpeedmeter
-                            width={700}
-                            height={500}
+                            width={this.state.widthGraph}
+                            height={this.state.heigthGraph}
                             value={this.state.indiceData !== null ? this.state.indiceData.resultado : 0}
                             maxValue={1}
                             minValue={0}
@@ -312,24 +337,11 @@ componentDidMount(){
                             ]}
                             valueTextFontSize={"30px"}
                             paddingVertical={10}
+                            textColor={"#000000"}
                             
                           />
                         </Col>
                       </Row>
-                      {/* <ResponsiveContainer width='100%' aspect={4.0/1.8} className="containerBar"> 
-                        <BarChart data={data} width= {600} height={300} style={{backgroundImage:`url(${graphBack})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
-                          <CartesianGrid strokeDasharray= "1 1"/>
-                          <XAxis dataKey="result"
-                          ticks={[0, 0.1, 0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]}
-                          domain = {[0,1]}
-                          type="number"
-                          interval={0}
-                          tick={{stroke: 'white', strokeWidth: 0.5}}
-                          />
-                          <Tooltip content={<CustomTootip />}/>
-                          <Bar dataKey="pv" fill="#000000" barSize={20} maxBarSize={50}/>
-                        </BarChart>
-                      </ResponsiveContainer> */}
                     </div>
                   </Col>
                 </Row>

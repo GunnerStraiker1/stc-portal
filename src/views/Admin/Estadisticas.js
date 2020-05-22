@@ -27,7 +27,7 @@ export default class Estadisticas extends Component{
     }
 
     // componentWillReceiveProps = (props) =>{
-    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
+    //     axios.get('https://serverstc.rhippie.com/estadisticas')
     //     .then(res => {
     //         const stats = res.data;
     //         this.setState({stats})
@@ -35,7 +35,7 @@ export default class Estadisticas extends Component{
     // }
 
     // componentDidUpdate = () =>{
-    //     axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
+    //     axios.get('https://serverstc.rhippie.com/estadisticas')
     //     .then(res => {
     //         const stats = res.data;
     //         this.setState({stats})
@@ -43,7 +43,7 @@ export default class Estadisticas extends Component{
     // }
 
     componentDidMount(){
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
+        axios.get('https://serverstc.rhippie.com/estadisticas')
         .then(res => {
             const stats = res.data;
             this.setState({stats})
@@ -61,7 +61,7 @@ export default class Estadisticas extends Component{
     }
 
     onDelete= () =>{
-    //     axios.delete("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/deleteProgram/" + this.state.id)
+    //     axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -77,7 +77,7 @@ export default class Estadisticas extends Component{
         let fileParts = this.uploadInput.files[0].name.split('.');
         let fileName = fileParts[0];
         let fileType = fileParts[1];
-        axios.post("http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/uploadFileEsta",{
+        axios.post("https://serverstc.rhippie.com/uploadFileEsta",{
             fileName : fileName,
             fileType : fileType
         })
@@ -112,7 +112,7 @@ export default class Estadisticas extends Component{
                 "estado": this.state.estado,
                 "url": fileName+"."+fileType
             }
-            axios.post('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/createNewEstadistica', data)
+            axios.post('https://serverstc.rhippie.com/createNewEstadistica', data)
             .then(result => {
                 this.setState({visible: true, 
                 nombre: "",

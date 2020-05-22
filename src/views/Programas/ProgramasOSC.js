@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class ProgramasOSC extends Component{
 
   componentDidCatch(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programasOSC')
+    axios.get('https://serverstc.rhippie.com/programasOSC')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramasOSC')
+      axios.get('https://serverstc.rhippie.com/menuEdosProgramasOSC')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class ProgramasOSC extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/programasOSC')
+    axios.get('https://serverstc.rhippie.com/programasOSC')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuEdosProgramasOSC')
+      axios.get('https://serverstc.rhippie.com/menuEdosProgramasOSC')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,7 +79,7 @@ export default class ProgramasOSC extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/menuProgramasOSC/'+ e.target.value)
+        axios.get('https://serverstc.rhippie.com/menuProgramasOSC/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
           this.setState({menuPrograms, disabled: false})

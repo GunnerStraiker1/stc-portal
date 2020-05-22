@@ -13,7 +13,7 @@ export default class Estadisticas extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/estadisticas')
+    axios.get('https://serverstc.rhippie.com/estadisticas')
     .then(res => {
       const stats = res.data;
       console.log(stats)
@@ -53,7 +53,7 @@ export default class Estadisticas extends Component{
                             <td>{stat.estado}</td>
                             <td>{stat.fuente}</td>
                             <td style={{textAlign:"center"}}>
-                              <a href={"http://ec2-18-221-139-227.us-east-2.compute.amazonaws.com/fileEstadistica/" + stat.url} target="_blank" rel="noopener noreferrer">
+                              <a href={"https://serverstc.rhippie.com/fileEstadistica/" + stat.url} target="_blank" rel="noopener noreferrer">
                                 <i className="fa fa-download fa-lg mt-4"></i>
                               </a>
                               <br />
