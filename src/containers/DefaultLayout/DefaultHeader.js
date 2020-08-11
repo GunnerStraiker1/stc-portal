@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 // import { Link, NavLink } from 'react-router-dom';
 import { Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
-//Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, 
+//Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle,
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 // import logo from '../../assets/img/brand/logo.svg'
 import sclogo from '../../assets/img/logo.png'
+import "./DefaultHeader.css"
 // import sygnet from '../../assets/img/brand/sygnet.svg'
 
 const propTypes = {
@@ -24,8 +25,8 @@ class DefaultHeader extends Component {
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
-          full={{ src: sclogo, width: 120, height: 30, alt: 'CoreUI Logo' }}
-          minimized={{ src: sclogo, width: 30, height: 30, alt: 'CoreUI Logo' }}
+          full={{ src: "https://stc.rhippie.com/assets/img/logo.png", width: "80%", height: "100%", alt: 'Save the Children' }}
+          minimized={{ src: "https://stc.rhippie.com/assets/img/logo.png", width: "80%", height: "100%", alt: 'Save the Children' }}
         />
         {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 

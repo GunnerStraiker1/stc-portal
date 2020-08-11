@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, Col, Form,
     Input, Row, CardHeader, Modal, ModalBody, ModalFooter, FormGroup, Label, Alert} from 'reactstrap';
 // import {} from 'react-bootstrap'
-import axios from 'axios'; 
+import axios from 'axios';
 
 export default class Estadisticas extends Component{
 
@@ -27,7 +27,7 @@ export default class Estadisticas extends Component{
     }
 
     // componentWillReceiveProps = (props) =>{
-    //     axios.get('https://serverstc.rhippie.com/estadisticas')
+    //     axios.get('https://stcserver2.rhippie.com/estadisticas')
     //     .then(res => {
     //         const stats = res.data;
     //         this.setState({stats})
@@ -35,7 +35,7 @@ export default class Estadisticas extends Component{
     // }
 
     // componentDidUpdate = () =>{
-    //     axios.get('https://serverstc.rhippie.com/estadisticas')
+    //     axios.get('https://stcserver2.rhippie.com/estadisticas')
     //     .then(res => {
     //         const stats = res.data;
     //         this.setState({stats})
@@ -43,7 +43,7 @@ export default class Estadisticas extends Component{
     // }
 
     componentDidMount(){
-        axios.get('https://serverstc.rhippie.com/estadisticas')
+        axios.get('https://stcserver2.rhippie.com/estadisticas')
         .then(res => {
             const stats = res.data;
             this.setState({stats})
@@ -56,12 +56,12 @@ export default class Estadisticas extends Component{
             id: e.currentTarget.id,
             key: e.currentTarget.value,
             modalVisible: true,
-            
+
         })
     }
 
     onDelete= () =>{
-    //     axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
+    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -77,7 +77,7 @@ export default class Estadisticas extends Component{
         let fileParts = this.uploadInput.files[0].name.split('.');
         let fileName = fileParts[0];
         let fileType = fileParts[1];
-        axios.post("https://serverstc.rhippie.com/uploadFileEsta",{
+        axios.post("https://stcserver2.rhippie.com/uploadFileEsta",{
             fileName : fileName,
             fileType : fileType
         })
@@ -112,9 +112,9 @@ export default class Estadisticas extends Component{
                 "estado": this.state.estado,
                 "url": fileName+"."+fileType
             }
-            axios.post('https://serverstc.rhippie.com/createNewEstadistica', data)
+            axios.post('https://stcserver2.rhippie.com/createNewEstadistica', data)
             .then(result => {
-                this.setState({visible: true, 
+                this.setState({visible: true,
                 nombre: "",
                 descripcion: "",
                 fuente: "",
@@ -184,9 +184,9 @@ export default class Estadisticas extends Component{
                                     </Col>
                                 </Row>
                                 <div style={{textAlign:"right", marginRight:"2em"}}>
-                                    <button type="button" value="Upload" name="submit" 
+                                    <button type="button" value="Upload" name="submit"
                                     className="btn btn-outline-primary" id="sendStat" onClick={this.submitFileRepo}>Subir Estadistica</button>
-                                </div>                
+                                </div>
                             </Form>
                             {/* <Form>
                                 <Form.Group as={Col}>
@@ -201,7 +201,7 @@ export default class Estadisticas extends Component{
                                     <Form.Label>Descripción del Repositorio</Form.Label>
                                     <Form.Control as="textarea" rows="5" />
                                 </Form.Group>
-                                
+
                             </Form> */}
                         </CardBody>
                     </Card>
@@ -212,7 +212,7 @@ export default class Estadisticas extends Component{
                         this.state.stats.map((stat, key) =>{
                             return(
                                 <div key={key}>
-                                    <Card key={key}> 
+                                    <Card key={key}>
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
@@ -222,7 +222,7 @@ export default class Estadisticas extends Component{
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
                                                 </Col>
                                                 <Col sm={1}>
-                                                    <Button color="danger" style={styles.buttons} 
+                                                    <Button color="danger" style={styles.buttons}
                                                     onClick={this.onConfirmation} id={stat.id} value={key}>Eliminar</Button>
                                                 </Col>
                                             </Row>

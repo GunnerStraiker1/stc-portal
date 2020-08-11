@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class ProgramasOSC extends Component{
 
   componentDidCatch(){
-    axios.get('https://serverstc.rhippie.com/programasOSC')
+    axios.get('https://stcserver2.rhippie.com/programasOSC')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://serverstc.rhippie.com/menuEdosProgramasOSC')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramasOSC')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class ProgramasOSC extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://serverstc.rhippie.com/programasOSC')
+    axios.get('https://stcserver2.rhippie.com/programasOSC')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://serverstc.rhippie.com/menuEdosProgramasOSC')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramasOSC')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,13 +79,13 @@ export default class ProgramasOSC extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('https://serverstc.rhippie.com/menuProgramasOSC/'+ e.target.value)
+        axios.get('https://stcserver2.rhippie.com/menuProgramasOSC/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
           this.setState({menuPrograms, disabled: false})
         })
         break;
-    
+
       case 'program':
         this.setState({program: e.target.value})
         break;
@@ -273,7 +273,7 @@ export default class ProgramasOSC extends Component{
             <Card className="mb-0">
                 <CardHeader id="headingEight">
                   <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(7)} aria-expanded={this.state.accordion[7]} aria-controls="collapseEight">
-                    <h5 className="m-0 p-0">ONG</h5>
+                    <h5 className="m-0 p-0">OSC</h5>
                   </Button>
                 </CardHeader>
                 <Collapse isOpen={this.state.accordion[7]} data-parent="#accordion" id="collapseEight">

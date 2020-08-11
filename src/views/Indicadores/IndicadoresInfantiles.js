@@ -5,6 +5,7 @@ import { Card, CardBody, CardHeader,
 Col, Row, Label, Input, Button} from 'reactstrap';
 import axios from 'axios'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Text} from "recharts";
+import "./indicadores.css"
 // import 'chartjs-plugin-labels'
 
 //chartjs-plugin-labels
@@ -12,8 +13,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 class CustomizedAxisTick extends Component{
   render () {
     const {x, y, payload} = this.props;
-		
-   	return <Text x={x} y={y} width={100} textAnchor="middle" verticalAnchor="start">{payload.value}</Text>
+
+    return <Text x={x} y={y} width={100} textAnchor="middle" verticalAnchor="start" className="AxisXData">{payload.value}</Text>
   }
 };
 
@@ -36,7 +37,7 @@ export default class IndicadoresInfantiles extends Component {
   };
 
   componentDidMount(){
-    axios.get('https://serverstc.rhippie.com/indicadoresInfantil')
+    axios.get('https://stcserver2.rhippie.com/indicadoresInfantil')
     .then(res => {
       const indicadores = res.data;
       this.setState({indicadores})
@@ -67,7 +68,7 @@ export default class IndicadoresInfantiles extends Component {
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('https://serverstc.rhippie.com/menuIndicadoresInfantil/' + e.currentTarget.value)
+          axios.get('https://stcserver2.rhippie.com/menuIndicadoresInfantil/' + e.currentTarget.value)
           .then(res => {
             let indicadorDataMenu = res.data;
             this.setState({indicadoresMenu: indicadorDataMenu})
@@ -96,7 +97,7 @@ export default class IndicadoresInfantiles extends Component {
         && indicadorData.año === this.state.año
         && indicadorData.estado.toUpperCase() === stateWithoutAccent.toUpperCase()) {
           indicadoresFiltered.push(indicadorData)
-        } 
+        }
       }
       return true
     })
@@ -128,14 +129,14 @@ export default class IndicadoresInfantiles extends Component {
     this.setState({preguntas: copyPreg})
   }
 
-  
+
   render(){
     return(
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" md="12">
             <Card>
-             
+
               <CardHeader>
                 <Row>
                 <Col xs="12" sm="3" md="3">
@@ -179,7 +180,7 @@ export default class IndicadoresInfantiles extends Component {
                       <option value="camp" hidden={this.state.año === '2020' ? true: null}>Campeche,Campeche</option>
                     </Input>
                   </Col>
-                  
+
                   <Col xs="12" sm="2" md="2">
                     <Button color="primary" style={{marginTop: "1em"}} size="lg"
                     onClick={this.visualizeGraphs}>

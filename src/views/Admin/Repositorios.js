@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, Col, Form,
     Input, Row, CardHeader, Modal, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
 // import {} from 'react-bootstrap'
-import axios from 'axios'; 
+import axios from 'axios';
 
 export default class Repositories extends Component{
 
@@ -26,7 +26,7 @@ export default class Repositories extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://serverstc.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -34,7 +34,7 @@ export default class Repositories extends Component{
     }
 
     componentDidUpdate = () =>{
-        axios.get('https://serverstc.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -42,18 +42,18 @@ export default class Repositories extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://serverstc.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com/repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
         })
     }
-    
-   
+
+
 
     /**
-     * 
-        
+     *
+
      */
 
     onConfirmation = (e) =>{
@@ -62,12 +62,12 @@ export default class Repositories extends Component{
             id: e.currentTarget.id,
             key: e.currentTarget.value,
             modalVisible: true,
-            
+
         })
     }
 
     onDelete= () =>{
-    //     axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
+    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -83,7 +83,7 @@ export default class Repositories extends Component{
         let fileParts = this.uploadInput.files[0].name.split('.');
         let fileName = fileParts[0];
         let fileType = fileParts[1];
-        axios.post("https://serverstc.rhippie.com/uploadFileRepo",{
+        axios.post("https://stcserver2.rhippie.com/uploadFileRepo",{
             fileName : fileName,
             fileType : fileType
         })
@@ -115,7 +115,7 @@ export default class Repositories extends Component{
                 "estado": this.state.estado,
                 "descarga": fileName+"."+fileType
             }
-            axios.post('http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/createNewRepo', data)
+            axios.post('https://stcserver2.rhippie.com/createNewRepo', data)
             .then(result => {
                 console.log(result)
             })
@@ -128,7 +128,7 @@ export default class Repositories extends Component{
             alert(JSON.stringify(error));
         })
 
-        
+
     }
 
     handleChangeRepoFile= (ev) =>{
@@ -175,7 +175,7 @@ export default class Repositories extends Component{
                                 Documento cargado con éxito
                             </Alert> *
                             <div style={{textAlign:"right", marginRight:"2em"}}>
-                                <button type="button" value="Upload" name="submit" 
+                                <button type="button" value="Upload" name="submit"
                                 className="btn btn-outline-primary" id="sendprogram" onClick={this.submitFileRepo}>Subir Archivo</button>
                             </div>
                         </form>
@@ -225,9 +225,9 @@ export default class Repositories extends Component{
                                     </Col>
                                 </Row>
                                 <div style={{textAlign:"right", marginRight:"2em"}}>
-                                    <button type="button" value="Upload" name="submit" 
+                                    <button type="button" value="Upload" name="submit"
                                     className="btn btn-outline-primary" id="sendprogram" onClick={this.submitFileRepo}>Subir Repositorio</button>
-                                </div>                
+                                </div>
                             </Form>
                             {/* <Form>
                                 <Form.Group as={Col}>
@@ -242,7 +242,7 @@ export default class Repositories extends Component{
                                     <Form.Label>Descripción del Repositorio</Form.Label>
                                     <Form.Control as="textarea" rows="5" />
                                 </Form.Group>
-                                
+
                             </Form> */}
                         </CardBody>
                     </Card>
@@ -253,7 +253,7 @@ export default class Repositories extends Component{
                         this.state.repos.map((program, key) =>{
                             return(
                                 <div key={key}>
-                                    <Card key={key}> 
+                                    <Card key={key}>
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
@@ -263,7 +263,7 @@ export default class Repositories extends Component{
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
                                                 </Col>
                                                 <Col sm={1}>
-                                                    <Button color="danger" style={styles.buttons} 
+                                                    <Button color="danger" style={styles.buttons}
                                                     onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
                                                 </Col>
                                             </Row>

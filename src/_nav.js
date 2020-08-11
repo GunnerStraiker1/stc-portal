@@ -26,7 +26,6 @@ export default {
     // },
     {
       name: 'Indicadores',
-      url: '/indicadores',
       icon: 'fa fa-th-large',
       children:[
         {name: 'Indicadores Adultos', url:'/indicadores', icon:'fa fa-th-large'},
@@ -38,18 +37,18 @@ export default {
     },
     {
       name: 'Índices',
-      url: '/indices',
       icon: 'fa fa-tags',
       children:[
+        {name: 'Metodología Utilizada', url:'/metodologiaIndices', icon:'fa fa-th-large'},
         {name: 'Indices Adultos', url:'/indices', icon:'fa fa-tags'},
         {name: 'Indices Infantiles', url:'/indicesInfantiles', icon:'fa fa-tags'},
       ]
     },
     {
       name: 'Programas',
-      url: '/programas',
       icon: 'icon-people',
       children:[
+        {name: 'Introducción a los Programas', url:'/metodologiaPrograma', icon:'fa fa-building'},
         {
           name: 'Programas Gubernamentales',
           url: '/programasGob',
@@ -64,13 +63,27 @@ export default {
     },
     {
       name: 'Estadisticas',
-      url: '/estadisticas',
       icon: 'fa fa-bar-chart',
+      children:[
+        {name: 'Introducción a las Estadísticas', url:'/metodologiaEstadistica', icon:'fa fa-bar-chart'},
+        {
+          name: 'Estadisticas',
+          url: '/estadisticas',
+          icon: 'fa fa-bar-chart'
+        }
+      ]
     },
     {
       name: 'Repositorios',
-      url: '/repositorios',
       icon: 'fa fa-tags',
+      children:[
+        {name: 'Introducción a los Repositorios', url:'/metodologiaRepositorio', icon:'fa fa-tags'},
+        {
+          name: 'Repositorios',
+          url: '/repositorios',
+          icon: 'fa fa-tags',
+        }
+      ]
     },
 
     // {

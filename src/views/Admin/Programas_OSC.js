@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Link, NavLink } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Row, CardHeader, Alert, Modal, ModalBody, ModalFooter} from 'reactstrap';
 // import {Tabs,Tab} from 'react-bootstrap'
-import axios from 'axios'; 
+import axios from 'axios';
 
 export default class Programas_OSC extends Component{
 
@@ -17,7 +17,7 @@ export default class Programas_OSC extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://serverstc.rhippie.com/programasOSC')
+        axios.get('https://stcserver2.rhippie.com/programasOSC')
         .then(res => {
             const programs = res.data;
             this.setState({programs})
@@ -25,7 +25,7 @@ export default class Programas_OSC extends Component{
     }
 
     // componentDidUpdate = () =>{
-    //     axios.get('https://serverstc.rhippie.com/programasOSC')
+    //     axios.get('https://stcserver2.rhippie.com/programasOSC')
     //     .then(res => {
     //         const programs = res.data;
     //         this.setState({programs})
@@ -33,7 +33,7 @@ export default class Programas_OSC extends Component{
     // }
 
     componentDidMount(){
-        axios.get('https://serverstc.rhippie.com/programasOSC')
+        axios.get('https://stcserver2.rhippie.com/programasOSC')
         .then(res => {
             const programs = res.data;
             // console.log(programs)
@@ -47,12 +47,12 @@ export default class Programas_OSC extends Component{
             id: e.currentTarget.id,
             key: e.currentTarget.value,
             modalVisible: true,
-            
+
         })
     }
 
     onDelete= () =>{
-        // axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
+        // axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
         // .then((response) =>{
         //     this.setState({modalVisible: false, key:0,id:0})
         //     console.log(response)
@@ -94,7 +94,7 @@ export default class Programas_OSC extends Component{
                         this.state.programs.map((program, key) =>{
                             return(
                                 <div key={key}>
-                                    <Card key={key}> 
+                                    <Card key={key}>
                                         <CardHeader>
                                             <Row>
                                                 <Col sm={10}>
@@ -104,7 +104,7 @@ export default class Programas_OSC extends Component{
                                                     <Button color="primary" style={styles.buttons}>Modificar</Button>
                                                 </Col>
                                                 <Col sm={1}>
-                                                    <Button color="danger" style={styles.buttons} 
+                                                    <Button color="danger" style={styles.buttons}
                                                     onClick={this.onConfirmation} id={program.id} value={key}>Eliminar</Button>
                                                 </Col>
                                             </Row>

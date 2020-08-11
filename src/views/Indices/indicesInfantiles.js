@@ -14,9 +14,9 @@ var CustomTootip= ({ active, payload, label}) =>{
       <div className="custom-tooltip" style={{backgroundColor: "white"}}>
         <h4 className="label"> Resultado: {`${label}`}</h4>
         {
-          payload[0] !== undefined ? 
+          payload[0] !== undefined ?
           <div>
-            <p style={{margin:0}}>Explicación: </p> <h5>{payload[0].payload.exp.toUpperCase()}</h5>  
+            <p style={{margin:0}}>Explicación: </p> <h5>{payload[0].payload.exp.toUpperCase()}</h5>
           </div>
            : <p>Cargue Indices</p>
         }
@@ -50,14 +50,14 @@ export default class indicesInfantiles extends Component{
   }
 
   componentWillReceiveProps = (props) =>{
-    axios.get('https://serverstc.rhippie.com/indicesNiniosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
 }
 componentDidMount(){
-    axios.get('https://serverstc.rhippie.com/indicesNiniosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
@@ -71,8 +71,14 @@ componentWillMount(){
     this.setState({heigthGraph: 250 });
   }
   else{
-    this.setState({widthGraph: (widthInner/3)});
-    this.setState({heigthGraph: 500 });
+    if(widthInner <= 1440){
+      this.setState({widthGraph: (widthInner/3)});
+      this.setState({heigthGraph: 300 });
+    }
+    else{
+      this.setState({widthGraph: (widthInner/3)});
+      this.setState({heigthGraph: 500 });
+    }
   }
 
   window.addEventListener('resize',()=>{
@@ -114,7 +120,8 @@ componentWillMount(){
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('https://serverstc.rhippie.com/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
+        console.log(estadoParam)
+        axios.get('https://stcserver2.rhippie.com/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName, statusMenu: false})
@@ -123,7 +130,7 @@ componentWillMount(){
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('https://serverstc.rhippie.com/indicesInfantilesEstados/' + e.currentTarget.value)
+          axios.get('https://stcserver2.rhippie.com/indicesInfantilesEstados/' + e.currentTarget.value)
           .then(res => {
             const estados = res.data;
             this.setState({estados})
@@ -138,7 +145,7 @@ componentWillMount(){
 
   visualization = () =>{
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("https://serverstc.rhippie.com/indiceInfantilInfo/" + id)
+    axios.get("https://stcserver2.rhippie.com/indiceInfantilInfo/" + id)
     .then(res =>{
       const indiceData = res.data[0]
       indiceData.resultado = parseFloat(indiceData.resultado)
@@ -152,7 +159,7 @@ componentWillMount(){
 
     var data = [
       {
-        result: this.state.indiceData !== null ? this.state.indiceData.resultado : 0, 
+        result: this.state.indiceData !== null ? this.state.indiceData.resultado : 0,
         uv: 4000, pv: 500, exp: this.state.indiceData !== null ? this.state.indiceData.explicacion : "Seleccione un Indice",
       },
     ];
@@ -192,7 +199,7 @@ componentWillMount(){
                               )
                             })
                           }
-                          
+
                         </Input>
                       </Col>
                       <Col md="4">
@@ -232,26 +239,14 @@ componentWillMount(){
                         </CardHeader>
                       </Card>
                       <Card className="mb-0">
-                        <CardHeader id="headingTwo">
-                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseTwo">
-                            <h5 className="m-0 p-0">Interpretación del Índice</h5>
+                        <CardHeader id="headingFour">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseFour">
+                            <h5 className="m-0 p-0">Resultado del Índice</h5>
                           </Button>
                         </CardHeader>
-                        <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
+                        <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="headingFour">
                           <CardBody>
-                          {this.state.indiceData !== null ? this.state.indiceData.interpretacion : ""}
-                          </CardBody>
-                        </Collapse>
-                      </Card>
-                      <Card className="mb-0">
-                        <CardHeader id="headingThree">
-                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseThree">
-                            <h5 className="m-0 p-0">Variables del Índice</h5>
-                          </Button>
-                        </CardHeader>
-                        <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
-                          <CardBody>
-                          {this.state.indiceData !== null ? this.state.indiceData.variables : ""}
+                          {this.state.indiceData !== null ? this.state.indiceData.resultado : ""}
                           </CardBody>
                         </Collapse>
                       </Card>
@@ -267,18 +262,32 @@ componentWillMount(){
                           </CardBody>
                         </Collapse>
                       </Card>
-                      <Card className="mb-0">
-                        <CardHeader id="headingFour">
-                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(4)} aria-expanded={this.state.accordion[4]} aria-controls="collapseFour">
-                            <h5 className="m-0 p-0">Resultado del Índice</h5>
+                      {/* <Card className="mb-0">
+                        <CardHeader id="headingTwo">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(1)} aria-expanded={this.state.accordion[1]} aria-controls="collapseTwo">
+                            <h5 className="m-0 p-0">Interpretación del Índice</h5>
                           </Button>
                         </CardHeader>
-                        <Collapse isOpen={this.state.accordion[4]} data-parent="#accordion" id="headingFour">
+                        <Collapse isOpen={this.state.accordion[1]} data-parent="#accordion" id="collapseTwo">
                           <CardBody>
-                          {this.state.indiceData !== null ? this.state.indiceData.resultado : ""}
+                          {this.state.indiceData !== null ? this.state.indiceData.interpretacion : ""}
+                          </CardBody>
+                        </Collapse>
+                      </Card> */}
+                      <Card className="mb-0">
+                        <CardHeader id="headingThree">
+                          <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(2)} aria-expanded={this.state.accordion[2]} aria-controls="collapseThree">
+                            <h5 className="m-0 p-0">Variables del Índice</h5>
+                          </Button>
+                        </CardHeader>
+                        <Collapse isOpen={this.state.accordion[2]} data-parent="#accordion" id="collapseThree">
+                          <CardBody>
+                          {this.state.indiceData !== null ? this.state.indiceData.variables : ""}
                           </CardBody>
                         </Collapse>
                       </Card>
+
+
                       <Card className="mb-0">
                         <CardHeader id="headingFive">
                           <Button block color="link" className="text-left m-0 p-0" onClick={() => this.toggleAccordion(5)} aria-expanded={this.state.accordion[5]} aria-controls="collapseFour">
@@ -304,7 +313,7 @@ componentWillMount(){
                         </Collapse>
                       </Card>
                     </div>
-                    
+
                   </Col>
                   <Col sm={6}>
                   <div style={{paddingTop:"2em", paddingBottom:"2em", textAlign:"center"}}>
@@ -340,13 +349,16 @@ componentWillMount(){
                             valueTextFontSize={"30px"}
                             paddingVertical={10}
                             textColor={"#000000"}
-                            
+
                           />
+                          <div style={{fontSize:"30px", fontWeight: "bold", textAlign:"center"}}>
+                            {this.state.indiceData ? this.state.indiceData.resultado : "0"}
+                          </div>
                         </Col>
                       </Row>
                     </div>
                   </Col>
-                </Row> 
+                </Row>
               </CardBody>
             </Card>
           </Col>

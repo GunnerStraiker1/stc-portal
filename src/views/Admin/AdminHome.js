@@ -15,7 +15,7 @@ class AdminHome extends Component{
     constructor(props){
         super(props)
         this.state={
-            file:'', 
+            file:'',
             visible: false,
         }
     }
@@ -40,16 +40,16 @@ class AdminHome extends Component{
         var url = ''
         switch (type) {
             case 'programForm':
-                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadPrograma';
+                url = 'https://stcserver2.rhippie.com/uploadPrograma';
                 break;
             case 'indicadorForm':
-                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadIndicador';
+                url = 'https://stcserver2.rhippie.com/uploadIndicador';
                 break;
             case 'infantilIndicadorForm':
-                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadIndicadorInfantil';
+                url = 'https://stcserver2.rhippie.com/uploadIndicadorInfantil';
                 break;
             case 'programOscForm':
-                url = 'http://ec2-18-224-4-71.us-east-2.compute.amazonaws.com/uploadProgramaOSC';
+                url = 'https://stcserver2.rhippie.com/uploadProgramaOSC';
                 break;
             default:
                 break;
@@ -69,7 +69,7 @@ class AdminHome extends Component{
     }
 
 render(){
-        
+
     return(
         <div>
             <Container fluid={true}>
@@ -82,31 +82,31 @@ render(){
                             <CardBody>
                                 <Tabs defaultActiveKey="programas" id="uncontrolled-tab-example">
                                     <Tab eventKey="programas" title="Programas">
-                                        <Programas submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        <Programas submitProgram={this.submitProgram} visible={this.state.visible}
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="osc" title="Programas OSC">
-                                        <ProgramasOSC submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        <ProgramasOSC submitProgram={this.submitProgram} visible={this.state.visible}
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="indicadores" title="Indicadores Adultos">
-                                        <Indicadores submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        <Indicadores submitProgram={this.submitProgram} visible={this.state.visible}
                                             changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="infantil" title="Indicadores Infantiles">
-                                        <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible}
                                                 changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                     <Tab eventKey="indices" title="Indices Adultos">
-                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible}
                                                 changeHandler={this.changeHandler} onToogle={this.onToogle}/> */}
                                     </Tab>
                                     <Tab eventKey="indicesInfantil" title="Indices Infantiles">
-                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        {/* <IndicadoresInfantiles submitProgram={this.submitProgram} visible={this.state.visible}
                                                 changeHandler={this.changeHandler} onToogle={this.onToogle}/> */}
                                     </Tab>
                                         {/* <Col sm="12">
-                                        
+
                                             <Card>
                                                 <CardHeader>
                                                     <h2>Añadir Indicadores Infantiles</h2>
@@ -128,13 +128,13 @@ render(){
                                                 </CardBody>
                                             </Card>
                                         </Col> */}
-                                    
+
                                     <Tab eventKey="estadisticas" title="Estadisticas" >
-                                        <Estadisticas submitProgram={this.submitProgram} visible={this.state.visible} 
+                                        <Estadisticas submitProgram={this.submitProgram} visible={this.state.visible}
                                         changeHandler={this.changeHandler} onToogle={this.onToogle} />
                                     </Tab>
                                     <Tab eventKey="repos" title="Repositorios">
-                                    <Repositorios submitProgram={this.submitProgram} visible={this.state.visible} 
+                                    <Repositorios submitProgram={this.submitProgram} visible={this.state.visible}
                                         changeHandler={this.changeHandler} onToogle={this.onToogle}/>
                                     </Tab>
                                 </Tabs>

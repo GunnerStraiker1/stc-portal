@@ -1,4 +1,6 @@
 import React from 'react';
+import MetodologiaPrograma from './views/Metodologia/MetodologiaPrograma';
+import MetodolodiaRepositorio from './views/Metodologia/MetodologiaRepositorio';
 
 const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Indicadores = React.lazy(() => import('./views/Indicadores/Indicadores'))
@@ -9,6 +11,10 @@ const Gubernamentales = React.lazy(()=> import('./views/Programas/Gubernamentale
 const OSC = React.lazy(()=> import('./views/Programas/ProgramasOSC'))
 const Repositorios = React.lazy(()=> import('./views/Repositorios/Repositorios'))
 const Estadisticas = React.lazy(()=> import('./views/Estadisticas/Estadisticas'))
+const MetodologiaIndices = React.lazy(()=> import('./views/Metodologia/MetodologiaIndices'))
+const MetodolodiaEstadistica = React.lazy(()=> import('./views/Metodologia/MetodologiaEstadistica'));
+const MetodologiaProgramas = React.lazy(()=> import('./views/Metodologia/MetodologiaPrograma'))
+const MetodologiaRepositorio = React.lazy(()=> import('./views/Metodologia/MetodologiaRepositorio'))
 
 const CoreUIIcons = React.lazy(()=> import('./views/Icons/CoreUIIcons/CoreUIIcons'))
 const Flags = React.lazy(()=> import('./views/Icons/Flags/Flags'))
@@ -29,6 +35,10 @@ const routes = [
   { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },
   { path: '/estadisticas', exact: true, name: 'statics', component: Estadisticas },
   { path: '/admin', exact: true, name:'Admin', component: Admin },
+  { path: '/metodologiaIndices', exact: true, name:'MetodologiaIndices', component: MetodologiaIndices },
+  { path: '/metodologiaEstadistica', exact: true, name:'metodologiaEstadistica', component: MetodolodiaEstadistica },
+  { path: '/metodologiaPrograma', exact: true, name:'metodologiaPrograma', component: MetodologiaProgramas },
+  { path: '/metodologiaRepositorio', exact: true, name:'metodologiaRepositorio', component: MetodologiaRepositorio },
   // { path: '/theme/colors', name: 'Colors', component: Colors },
   // { path: '/theme/typography', name: 'Typography', component: Typography },
   // { path: '/base', exact: true, name: 'Base', component: Cards },

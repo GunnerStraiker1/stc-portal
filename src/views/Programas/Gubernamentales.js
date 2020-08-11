@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('https://serverstc.rhippie.com/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://serverstc.rhippie.com/menuEdosProgramas')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class Gubernamentales extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://serverstc.rhippie.com/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://serverstc.rhippie.com/menuEdosProgramas')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,13 +79,13 @@ export default class Gubernamentales extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('https://serverstc.rhippie.com/menuProgramas/'+ e.target.value)
+        axios.get('https://stcserver2.rhippie.com/menuProgramas/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
           this.setState({menuPrograms, disabled: false})
         })
         break;
-    
+
       case 'program':
         this.setState({program: e.target.value})
         break;
@@ -97,9 +97,9 @@ export default class Gubernamentales extends Component{
     if (this.state.program !== "") {
       this.setState({
         programa: this.state.programs[this.state.program]
-      })  
+      })
     }
-    
+
     //   nombre: this.state.programs[this.state.program-1].nombre,
     //   objetivo: this.state.programs[this.state.program-1].objetivo,
     //   descripcion: this.state.programs[this.state.program-1].descripcion,

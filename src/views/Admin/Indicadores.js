@@ -23,7 +23,7 @@ export default class Indicadores extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://serverstc.rhippie.com/indicadores')
+        axios.get('https://stcserver2.rhippie.com/indicadores')
         .then(res => {
             const indicadores = res.data;
             console.log(indicadores)
@@ -32,7 +32,7 @@ export default class Indicadores extends Component{
     }
 
     // componentDidUpdate = () =>{
-    //     axios.get('https://serverstc.rhippie.com/indicadores')
+    //     axios.get('https://stcserver2.rhippie.com/indicadores')
     //     .then(res => {
     //         const indicadores = res.data;
     //         console.log(indicadores)
@@ -41,7 +41,7 @@ export default class Indicadores extends Component{
     // }
 
     componentDidMount(){
-        axios.get('https://serverstc.rhippie.com/indicadores')
+        axios.get('https://stcserver2.rhippie.com/indicadores')
         .then(res => {
             const indicadores = res.data;
             this.setState({indicadores})
@@ -74,7 +74,7 @@ export default class Indicadores extends Component{
           else{
             if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
               this.setState({statusDisabled: false, año: e.currentTarget.value})
-              axios.get('https://serverstc.rhippie.com/menuIndicadores/' + e.currentTarget.value)
+              axios.get('https://stcserver2.rhippie.com/menuIndicadores/' + e.currentTarget.value)
               .then(res => {
                 const indicadoresMenu = res.data;
                 this.setState({indicadoresMenu})
@@ -119,7 +119,7 @@ export default class Indicadores extends Component{
     }
 
     onDelete= () =>{
-    //     axios.delete("https://serverstc.rhippie.com/deleteProgram/" + this.state.id)
+    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -198,7 +198,7 @@ export default class Indicadores extends Component{
 
                     </Row>
                     {
-                        this.state.indicadoresTable.length > 0 ? 
+                        this.state.indicadoresTable.length > 0 ?
                         this.state.indicadoresTable.map((indicador,key) =>{
                             let respuestas = indicador.respuestas.split('#$%&')
                             let votos = indicador.votos.split('#$%&')
@@ -229,7 +229,7 @@ export default class Indicadores extends Component{
                                                             if (key !== respuestas.length-1) {
                                                                 return(
                                                                     <th key={key}>{respues.toUpperCase()}</th>
-                                                                )   
+                                                                )
                                                             }
                                                             return true
                                                         })}
@@ -305,18 +305,18 @@ export default class Indicadores extends Component{
                         //                                     //     console.log(respuestas)
                         //                                     //     let votos = indicador.votos.split('#$%&')
                         //                                     //     let porcentajes = indicador.porcentajes.split('#$%&')
-                                                                
+
                         //                                     //     return(
                         //                                     //         <thead>
                         //                                     //         {/* {respuestas.map((respuesta) =>{
                         //                                     //             return (<th>{respuesta}</th>)
                         //                                     //         })}     */}
                         //                                     //         </thead>
-                                                                    
+
 
                         //                                     //     )
-                                                                
-                                                                
+
+
                         //                                     // }})
                         //                                 }
                         //                                 <thead>

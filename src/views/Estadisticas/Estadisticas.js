@@ -13,7 +13,7 @@ export default class Estadisticas extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://serverstc.rhippie.com/estadisticas')
+    axios.get('https://stcserver2.rhippie.com/estadisticas')
     .then(res => {
       const stats = res.data;
       console.log(stats)
@@ -30,7 +30,7 @@ export default class Estadisticas extends Component{
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-              
+
               </CardHeader>
               <CardBody>
                 <Table responsive size="lg">
@@ -53,7 +53,7 @@ export default class Estadisticas extends Component{
                             <td>{stat.estado}</td>
                             <td>{stat.fuente}</td>
                             <td style={{textAlign:"center"}}>
-                              <a href={"https://serverstc.rhippie.com/fileEstadistica/" + stat.url} target="_blank" rel="noopener noreferrer">
+                              <a href={"https://stcserver2.rhippie.com/fileEstadistica/" + stat.url} target="_blank" rel="noopener noreferrer">
                                 <i className="fa fa-download fa-lg mt-4"></i>
                               </a>
                               <br />
