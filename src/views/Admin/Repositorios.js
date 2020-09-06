@@ -26,7 +26,7 @@ export default class Repositories extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://stcserver2.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com//repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -34,7 +34,7 @@ export default class Repositories extends Component{
     }
 
     componentDidUpdate = () =>{
-        axios.get('https://stcserver2.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com//repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -42,7 +42,7 @@ export default class Repositories extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://stcserver2.rhippie.com/repositorios')
+        axios.get('https://stcserver2.rhippie.com//repositorios')
         .then(res => {
             const repos = res.data;
             this.setState({repos})
@@ -83,30 +83,50 @@ export default class Repositories extends Component{
         let fileParts = this.uploadInput.files[0].name.split('.');
         let fileName = fileParts[0];
         let fileType = fileParts[1];
-        axios.post("https://stcserver2.rhippie.com/uploadFileRepo",{
-            fileName : fileName,
-            fileType : fileType
-        })
+        const token = localStorage.getItem('token')
+        let formData = new FormData()
+        formData.append('upload', file)
+        const config = {
+            headers:{
+                'Authorization': "Bearer " + token,
+                'content-type': 'multipart/form-data'
+            }
+        }
+        // https://stcserver2.rhippie.com/uploadFileRepo
+        axios.post("https://stcserver2.rhippie.com//uploadFileRepo", formData,config)
+        // {
+        //     fileName : fileName,
+        //     fileType : fileType
+        // },
+        // {
+        //   headers:{
+        //     'Authorization' : "Bearer " + token
+        //   }
+        // }
+        // )
         .then(response =>{
-            var returnData = response.data.data.returnData;
-            var signedRequest = returnData.signedRequest;
-            var url = returnData.url;
-            console.log(url)
-            this.setState({url: url})
+            // console.log(response)
+            // var returnData = response.data.data.returnData;
+            // console.log(returnData)
+            // var signedRequest = returnData.signedRequest;
+            // var url = returnData.url;
+            // console.log(url)
+            // this.setState({url: url})
 
-            var options = {
-                headers: {
-                  'Content-Type': fileType
-                }
-            };
+            // var options = {
+            //     headers: {
+            //       'Content-Type': fileType
+            //     }
+            // };
 
-            axios.put(signedRequest,file,options)
-            .then(result => {
-                this.setState({success: true});
-            })
-            .catch(error => {
-                alert("ERROR " + JSON.stringify(error));
-            })
+            // console.log(signedRequest)
+            // axios.put(signedRequest,file,options)
+            // .then(result => {
+            //     this.setState({success: true});
+            // })
+            // .catch(error => {
+            //     alert("ERROR " + JSON.stringify(error));
+            // })
 
             const data = {
                 "archivo" : this.state.nombre,
@@ -115,7 +135,13 @@ export default class Repositories extends Component{
                 "estado": this.state.estado,
                 "descarga": fileName+"."+fileType
             }
-            axios.post('https://stcserver2.rhippie.com/createNewRepo', data)
+            axios.post('https://stcserver2.rhippie.com//createNewRepo',
+            data,
+            {
+              headers:{
+                'Authorization' : "Bearer " + token
+              }
+            })
             .then(result => {
                 console.log(result)
             })

@@ -71,14 +71,14 @@ componentWillMount(){
     this.setState({heigthGraph: 250 });
   }
   else{
-    if(widthInner <= 1440){
+    // if(widthInner <= 1440){
       this.setState({widthGraph: (widthInner/3)});
       this.setState({heigthGraph: 300 });
-    }
-    else{
-      this.setState({widthGraph: (widthInner/3)});
-      this.setState({heigthGraph: 500 });
-    }
+    // }
+    // else{
+    //   this.setState({widthGraph: (widthInner/3)});
+    //   this.setState({heigthGraph: 500 });
+    // }
   }
 
   window.addEventListener('resize',()=>{
@@ -123,7 +123,10 @@ componentWillMount(){
         axios.get('https://stcserver2.rhippie.com/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
-          this.setState({indiceName: indiceName, statusMenu: false})
+          this.setState({indiceName: indiceName})
+        })
+        .finally(()=>{
+          this.setState({statusMenu: false})
         })
       }
       else{

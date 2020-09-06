@@ -71,14 +71,14 @@ componentWillMount(){
     this.setState({heigthGraph: 250 });
   }
   else{
-    if(widthInner <= 1440){
+    // if(widthInner <= 1440){
       this.setState({widthGraph: (widthInner/3)});
       this.setState({heigthGraph: 300 });
-    }
-    else{
-      this.setState({widthGraph: (widthInner/3)});
-      this.setState({heigthGraph: 500 });
-    }
+    // }
+    // else{
+    //   this.setState({widthGraph: (widthInner/3)});
+    //   this.setState({heigthGraph: 500 });
+    // }
   }
 
   window.addEventListener('resize',()=>{
@@ -88,7 +88,7 @@ componentWillMount(){
     }
     else{
       this.setState({widthGraph: (widthInner/3)});
-      this.setState({heigthGraph: 500 });
+      this.setState({heigthGraph: 300 });
     }
   });
 }

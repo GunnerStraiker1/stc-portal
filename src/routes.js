@@ -20,7 +20,7 @@ const CoreUIIcons = React.lazy(()=> import('./views/Icons/CoreUIIcons/CoreUIIcon
 const Flags = React.lazy(()=> import('./views/Icons/Flags/Flags'))
 const FontAwesome = React.lazy(()=> import('./views/Icons/FontAwesome/FontAwesome'))
 const SimpleLineIcons = React.lazy(()=> import('./views/Icons/SimpleLineIcons/SimpleLineIcons'))
-const Admin = React.lazy(() => import('././views/Admin/AdminHome'))
+// const Admin = React.lazy(() => import('././views/Admin/AdminHome'))
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -34,7 +34,7 @@ const routes = [
   { path: '/programasOsc', exact: true, name: 'OSC', component: OSC },
   { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },
   { path: '/estadisticas', exact: true, name: 'statics', component: Estadisticas },
-  { path: '/admin', exact: true, name:'Admin', component: Admin },
+  // { path: '/admin', exact: true, name:'Admin', component: Admin },
   { path: '/metodologiaIndices', exact: true, name:'MetodologiaIndices', component: MetodologiaIndices },
   { path: '/metodologiaEstadistica', exact: true, name:'metodologiaEstadistica', component: MetodolodiaEstadistica },
   { path: '/metodologiaPrograma', exact: true, name:'metodologiaPrograma', component: MetodologiaProgramas },

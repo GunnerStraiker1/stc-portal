@@ -11,6 +11,7 @@ export default class Indicadores extends Component{
         super(props)
         this.state={
             indicadores:[],
+            anios:[],
             indicador:"",
             estado:"",
             indicadoresMenu:[],
@@ -23,6 +24,12 @@ export default class Indicadores extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
+        axios.get('https://stcserver2.rhippie.com/aniosIndicadores')
+        .then(res => {
+            const anios = res.data;
+            console.log(anios)
+            this.setState({anios})
+        })
         axios.get('https://stcserver2.rhippie.com/indicadores')
         .then(res => {
             const indicadores = res.data;
@@ -41,6 +48,12 @@ export default class Indicadores extends Component{
     // }
 
     componentDidMount(){
+      axios.get('https://stcserver2.rhippie.com/aniosIndicadores')
+        .then(res => {
+            const anios = res.data;
+            console.log(anios)
+            this.setState({anios})
+        })
         axios.get('https://stcserver2.rhippie.com/indicadores')
         .then(res => {
             const indicadores = res.data;
@@ -155,6 +168,7 @@ export default class Indicadores extends Component{
                         </CardBody>
                     </Card>
                 </Col>
+
                 <Col sm={12}>
                     <h4>Información en Base de Datos</h4>
                     <Row>
@@ -162,8 +176,13 @@ export default class Indicadores extends Component{
                             <Label>Seleccionar Año</Label>
                             <Input type="select" name="select" id="año" onChange={this.changeSelection}>
                                 <option unselectable>Selecciona un año</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
+                                {
+                                  this.state.anios.map((anio) =>{
+                                    return(
+                                      <option value={anio.año} >{anio.año}</option>
+                                    )
+                                  })
+                                }
                             </Input>
                         </Col>
                         <Col xs="12" sm="4" md="4">
