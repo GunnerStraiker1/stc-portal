@@ -42,32 +42,34 @@ class AdminHome extends Component {
     var url = ''
     switch (type) {
       case 'programForm':
-        url = 'https://stcserver2.rhippie.com/uploadPrograma';
+        url = 'http://localhost:8080/uploadPrograma';
         break;
       case 'indicadorForm':
-        url = 'https://stcserver2.rhippie.com/uploadIndicador';
+        url = 'http://localhost:8080/uploadIndicador';
         break;
       case 'infantilIndicadorForm':
-        url = 'https://stcserver2.rhippie.com/uploadIndicadorInfantil';
+        url = 'http://localhost:8080/uploadIndicadorInfantil';
         break;
       case 'programOscForm':
-        url = 'https://stcserver2.rhippie.com/uploadProgramaOSC';
+        url = 'http://localhost:8080/uploadProgramaOSC';
         break;
 
       case 'indicesForm':
-        url = 'https://stcserver2.rhippie.com/uploadIndice';
+        url = 'http://localhost:8080/uploadIndice';
         break;
 
       case 'indicesInfantilesForm':
-        url = 'https://stcserver2.rhippie.com/uploadIndiceInfantil';
+        url = 'http://localhost:8080/uploadIndiceInfantil';
         break;
       default:
         break;
     }
     const formData = new FormData();
     formData.append('file', file)
+    const token = localStorage.getItem('token')
     const config = {
       headers: {
+        'Authorization': "Bearer " + token,
         'content-type': 'multipart/form-data'
       }
     }

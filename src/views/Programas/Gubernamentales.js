@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('https://stcserver2.rhippie.com/programas')
+    axios.get('http://localhost:8080/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
+      axios.get('http://localhost:8080/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class Gubernamentales extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://stcserver2.rhippie.com/programas')
+    axios.get('http://localhost:8080/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
+      axios.get('http://localhost:8080/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,10 +79,13 @@ export default class Gubernamentales extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('https://stcserver2.rhippie.com/menuProgramas/'+ e.target.value)
+        axios.get('http://localhost:8080/menuProgramas/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
-          this.setState({menuPrograms, disabled: false})
+          this.setState({menuPrograms})
+        })
+        .finally(()=>{
+          this.setState({disabled: false})
         })
         break;
 
@@ -99,23 +102,6 @@ export default class Gubernamentales extends Component{
         programa: this.state.programs[this.state.program]
       })
     }
-
-    //   nombre: this.state.programs[this.state.program-1].nombre,
-    //   objetivo: this.state.programs[this.state.program-1].objetivo,
-    //   descripcion: this.state.programs[this.state.program-1].descripcion,
-    //   cobertura: this.state.programs[this.state.program-1].cobertura,
-    //   requisitos: this.state.programs[this.state.program-1].requisitos,
-    //   programa: this.state.programs[this.state.program-1].programa,
-    //   periodo: this.state.programs[this.state.program-1].periodo
-    // })
-    // this.state.programs.map((program, key) =>{
-    //   // console.log(program)
-    //   if (program.estado === this.state.edo && program.programa === this.state.program) {
-    //     console.log(program)
-    //     this.setState({programa: program})
-    //   }
-    //   return true
-    // })
   }
 
   render(){
@@ -123,7 +109,6 @@ export default class Gubernamentales extends Component{
     <div className="animated fadeIn">
 <Row>
   <Col md="12">
-    {console.log(this.state)}
     <Card>
       <CardHeader>
         <Row>
@@ -157,20 +142,6 @@ export default class Gubernamentales extends Component{
                       )
                     })
                   }
-                  {/* <option value='1'>Programa de Combate a la Desnutrición Infantil en el Estado de Yucatán</option>
-                  <option value='2'>Programa de Atención a la Salud Materna y Perinatal. Arranque Parejo en la Vida</option>
-                  <option value='3'>Planificación Familiar y Anticoncepción. Salud Reproductiva</option>
-                  <option value='4'>Programa de Atención a la Salud de la Adolescencia (PASA)</option>
-                  <option value='5'>Programa de Vacunación Universal</option>
-                  <option disabled>Promoción de la Salud Escolar</option>
-                  <option disabled>Determinantes de la Salud</option>
-                  <option disabled>Programa de Actividad Física Preventiva y Terapéutica en Yucatán</option>
-                  <option disabled>Atención a la Salud Bucal en Yucatán</option>
-                  <option disabled>Programa Estatal para la Prevención y Control del VIH, SIDA e Infecciones de Transmisión Sexual</option>
-                  <option disabled>Atención a la Salud de la Infancia</option>
-                  <option disabled>Prevención y Tratamiento del Cáncer en la Infancia y la Adolescencia</option>
-                  <option disabled>Programa de Prevención y Control del Cólera</option>
-                  <option disabled>Resolución Alterna de Conflictos del Acto Médico en Yucatán (Comisión de Arbitraje Médico del Estado de Yucatán)</option> */}
                 </Input>
               </Col>
               <Col md="2">

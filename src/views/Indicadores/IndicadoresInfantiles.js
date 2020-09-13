@@ -37,7 +37,7 @@ export default class IndicadoresInfantiles extends Component {
   };
 
   componentDidMount(){
-    axios.get('https://stcserver2.rhippie.com/indicadoresInfantil')
+    axios.get('http://localhost:8080/indicadoresInfantil')
     .then(res => {
       const indicadores = res.data;
       this.setState({indicadores})
@@ -68,7 +68,7 @@ export default class IndicadoresInfantiles extends Component {
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('https://stcserver2.rhippie.com/menuIndicadoresInfantil/' + e.currentTarget.value)
+          axios.get('http://localhost:8080/menuIndicadoresInfantil/' + e.currentTarget.value)
           .then(res => {
             let indicadorDataMenu = res.data;
             this.setState({indicadoresMenu: indicadorDataMenu})

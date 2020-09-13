@@ -44,13 +44,13 @@ export default class Indicadores extends Component {
   };
 
   componentDidMount() {
-    axios.get('https://stcserver2.rhippie.com/aniosIndicadores')
+    axios.get('http://localhost:8080/aniosIndicadores')
         .then(res => {
             const anios = res.data;
             console.log(anios)
             this.setState({anios})
         })
-    axios.get('https://stcserver2.rhippie.com/indicadores')
+    axios.get('http://localhost:8080/indicadores')
       .then(res => {
         const indicadores = res.data;
         this.setState({ indicadores })
@@ -82,7 +82,7 @@ export default class Indicadores extends Component {
       else {
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({ statusDisabled: false, año: e.currentTarget.value })
-          axios.get('https://stcserver2.rhippie.com/menuIndicadores/' + e.currentTarget.value)
+          axios.get('http://localhost:8080/menuIndicadores/' + e.currentTarget.value)
             .then(res => {
               const indicadoresMenu = res.data;
               this.setState({ indicadoresMenu })

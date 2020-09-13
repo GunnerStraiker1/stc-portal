@@ -19,7 +19,7 @@ class Login extends Component {
   login = (e) =>{
     e.preventDefault()
     // const user ={}
-    axios.post('https://stcserver2.rhippie.com//login', { username: this.state.username, password: this.state.password})
+    axios.post('http://localhost:8080/login', { username: this.state.username, password: this.state.password})
     .then(res =>{
       console.log(res.data.success)
       if(res.data.success === 1){

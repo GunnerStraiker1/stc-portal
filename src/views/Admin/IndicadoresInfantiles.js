@@ -23,7 +23,7 @@ export default class IndicadoresInfantiles extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://stcserver2.rhippie.com/indicadoresInfantil')
+        axios.get('http://localhost:8080/indicadoresInfantil')
         .then(res => {
             const indicadores = res.data;
             this.setState({indicadores})
@@ -31,7 +31,7 @@ export default class IndicadoresInfantiles extends Component{
     }
 
     // componentDidUpdate = () =>{
-    //     axios.get('https://stcserver2.rhippie.com/indicadores')
+    //     axios.get('http://localhost:8080/indicadores')
     //     .then(res => {
     //         const indicadores = res.data;
     //         console.log(indicadores)
@@ -40,7 +40,7 @@ export default class IndicadoresInfantiles extends Component{
     // }
 
     componentDidMount(){
-        axios.get('https://stcserver2.rhippie.com/indicadoresInfantil')
+        axios.get('http://localhost:8080/indicadoresInfantil')
         .then(res => {
             const indicadores = res.data;
             this.setState({indicadores})
@@ -73,7 +73,7 @@ export default class IndicadoresInfantiles extends Component{
           else{
             if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
               this.setState({statusDisabled: false, año: e.currentTarget.value})
-              axios.get('https://stcserver2.rhippie.com/menuIndicadoresInfantil/' + e.currentTarget.value)
+              axios.get('http://localhost:8080/menuIndicadoresInfantil/' + e.currentTarget.value)
               .then(res => {
                 const indicadoresMenu = res.data;
                 this.setState({indicadoresMenu})
@@ -118,7 +118,7 @@ export default class IndicadoresInfantiles extends Component{
     }
 
     onDelete= () =>{
-    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
+    //     axios.delete("http://localhost:8080/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -148,7 +148,7 @@ export default class IndicadoresInfantiles extends Component{
                                 Documento cargado con éxito
                             </Alert>
                             <div style={{textAlign:"right", marginRight:"2em"}}>
-                                <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
+                                <input type="submit" value="Cargar" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
                             </div>
                         </form>
                         </CardBody>

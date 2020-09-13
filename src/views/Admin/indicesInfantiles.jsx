@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Alert, Container, Button, Form } from 'react-bootstrap'
 import axios from 'axios'
-import { Label, Input } from 'reactstrap'
+import { Label, Input, Modal, ModalBody, ModalFooter } from 'reactstrap'
 
 export default class IndicesInfantiles extends Component {
 
@@ -19,7 +19,9 @@ export default class IndicesInfantiles extends Component {
       año: "",
       edo: "",
       fieldsDisabled: true,
+      modalVisible: false,
 
+      idIndice: "",
       nombreIndice: "",
       resultadoIndice: "",
       explicacionIndice: "",
@@ -32,13 +34,13 @@ export default class IndicesInfantiles extends Component {
   }
 
   componentWillReceiveProps = (props) => {
-    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
+    axios.get('http://localhost:8080/indicesNiniosAnio')
       .then(res => {
         const anios = res.data;
         console.log(anios)
         this.setState({ anios })
       })
-    axios.get('https://stcserver2.rhippie.com/indicesNinios')
+    axios.get('http://localhost:8080/indicesNinios')
       .then(res => {
         const indices = res.data;
         console.log(indices)
@@ -47,18 +49,30 @@ export default class IndicesInfantiles extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://stcserver2.rhippie.com/indicesNinios')
+    axios.get('http://localhost:8080/indicesNinios')
       .then(res => {
         const indices = res.data;
         console.log(indices)
         this.setState({ indices })
       })
-    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
+    axios.get('http://localhost:8080/indicesNiniosAnio')
       .then(res => {
         const anios = res.data;
         console.log(anios)
         this.setState({ anios })
       })
+  }
+
+  toggleModal = () => {
+    this.setState({ modalVisible: !this.state.modalVisible })
+  }
+
+  onConfirmation = (e) => {
+    console.log("JAJAJ")
+    e.preventDefault();
+    this.setState({
+      modalVisible: true
+    })
   }
 
   changeSelection = (e) => {
@@ -69,7 +83,7 @@ export default class IndicesInfantiles extends Component {
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('https://stcserver2.rhippie.com/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('http://localhost:8080/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
           .then(res => {
             const indiceName = res.data;
             this.setState({ indiceName: indiceName, statusMenu: false })
@@ -78,7 +92,7 @@ export default class IndicesInfantiles extends Component {
       else {
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({ año: e.currentTarget.value })
-          axios.get('https://stcserver2.rhippie.com/indicesInfantilesEstados/' + e.currentTarget.value)
+          axios.get('http://localhost:8080/indicesInfantilesEstados/' + e.currentTarget.value)
             .then(res => {
               const estados = res.data;
               this.setState({ estados })
@@ -96,12 +110,13 @@ export default class IndicesInfantiles extends Component {
 
   visualization = () => {
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("https://stcserver2.rhippie.com/indiceInfantilInfo/" + id)
+    axios.get("http://localhost:8080/indiceInfantilInfo/" + id)
       .then(res => {
         const indiceData = res.data[0]
         indiceData.resultado = parseFloat(indiceData.resultado)
         this.setState({
           indiceData: indiceData,
+          idInfice: indiceData.id,
           nombreIndice: indiceData.indice,
           resultadoIndice: indiceData.resultado,
           explicacionIndice: indiceData.explicacion,
@@ -132,7 +147,7 @@ export default class IndicesInfantiles extends Component {
                   Documento cargado con éxito
                 </Alert>
                 <div style={{ textAlign: "right", marginRight: "2em" }}>
-                  <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram" />
+                  <input type="submit" value="Cargar" name="submit" className="btn btn-outline-primary" id="sendprogram" />
                 </div>
               </form>
             </Card.Body>
@@ -277,6 +292,17 @@ export default class IndicesInfantiles extends Component {
             <div></div>
         }
 
+        <div>
+          <Modal isOpen={this.state.modalVisible} toggle={this.toggleModal}>
+            <ModalBody>
+              ¿Desea eliminar el índice: "{this.state.nombreIndice ? this.state.nombreIndice : ''}"
+                        </ModalBody>
+            <ModalFooter>
+              <Button variant="danger" onClick={this.onDelete}>Eliminar</Button>
+              <Button variant="primary" onClick={this.toggleModal}>Cancelar</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </Row>
     )
   }

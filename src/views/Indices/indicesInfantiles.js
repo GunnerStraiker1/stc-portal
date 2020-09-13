@@ -50,14 +50,14 @@ export default class indicesInfantiles extends Component{
   }
 
   componentWillReceiveProps = (props) =>{
-    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
+    axios.get('http://localhost:8080/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
 }
 componentDidMount(){
-    axios.get('https://stcserver2.rhippie.com/indicesNiniosAnio')
+    axios.get('http://localhost:8080/indicesNiniosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
@@ -121,7 +121,7 @@ componentWillMount(){
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
         console.log(estadoParam)
-        axios.get('https://stcserver2.rhippie.com/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('http://localhost:8080/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName, statusMenu: false})
@@ -130,7 +130,7 @@ componentWillMount(){
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('https://stcserver2.rhippie.com/indicesInfantilesEstados/' + e.currentTarget.value)
+          axios.get('http://localhost:8080/indicesInfantilesEstados/' + e.currentTarget.value)
           .then(res => {
             const estados = res.data;
             this.setState({estados})
@@ -145,7 +145,7 @@ componentWillMount(){
 
   visualization = () =>{
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("https://stcserver2.rhippie.com/indiceInfantilInfo/" + id)
+    axios.get("http://localhost:8080/indiceInfantilInfo/" + id)
     .then(res =>{
       const indiceData = res.data[0]
       indiceData.resultado = parseFloat(indiceData.resultado)

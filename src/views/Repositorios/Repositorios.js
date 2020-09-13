@@ -17,7 +17,7 @@ export default class Repositorios extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://stcserver2.rhippie.com//repositorios')
+    axios.get('http://localhost:8080//repositorios')
     .then(res => {
       const repos = res.data;
       this.setState({repos})

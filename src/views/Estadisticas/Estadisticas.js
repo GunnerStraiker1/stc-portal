@@ -13,7 +13,7 @@ export default class Estadisticas extends Component{
   }
 
   componentDidMount(){
-    axios.get('https://stcserver2.rhippie.com/estadisticas')
+    axios.get('http://localhost:8080/estadisticas')
     .then(res => {
       const stats = res.data;
       console.log(stats)

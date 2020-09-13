@@ -14,6 +14,7 @@ export default class Indicadores extends Component{
             anios:[],
             indicador:"",
             estado:"",
+            año:"",
             indicadoresMenu:[],
             indicadoresTable: [],
             statusDisabled: false,
@@ -24,13 +25,13 @@ export default class Indicadores extends Component{
     }
 
     componentWillReceiveProps = (props) =>{
-        axios.get('https://stcserver2.rhippie.com/aniosIndicadores')
+        axios.get('http://localhost:8080/aniosIndicadores')
         .then(res => {
             const anios = res.data;
             console.log(anios)
             this.setState({anios})
         })
-        axios.get('https://stcserver2.rhippie.com/indicadores')
+        axios.get('http://localhost:8080/indicadores')
         .then(res => {
             const indicadores = res.data;
             console.log(indicadores)
@@ -39,7 +40,7 @@ export default class Indicadores extends Component{
     }
 
     // componentDidUpdate = () =>{
-    //     axios.get('https://stcserver2.rhippie.com/indicadores')
+    //     axios.get('http://localhost:8080/indicadores')
     //     .then(res => {
     //         const indicadores = res.data;
     //         console.log(indicadores)
@@ -48,13 +49,13 @@ export default class Indicadores extends Component{
     // }
 
     componentDidMount(){
-      axios.get('https://stcserver2.rhippie.com/aniosIndicadores')
+      axios.get('http://localhost:8080/aniosIndicadores')
         .then(res => {
             const anios = res.data;
             console.log(anios)
             this.setState({anios})
         })
-        axios.get('https://stcserver2.rhippie.com/indicadores')
+        axios.get('http://localhost:8080/indicadores')
         .then(res => {
             const indicadores = res.data;
             this.setState({indicadores})
@@ -87,7 +88,7 @@ export default class Indicadores extends Component{
           else{
             if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
               this.setState({statusDisabled: false, año: e.currentTarget.value})
-              axios.get('https://stcserver2.rhippie.com/menuIndicadores/' + e.currentTarget.value)
+              axios.get('http://localhost:8080/menuIndicadores/' + e.currentTarget.value)
               .then(res => {
                 const indicadoresMenu = res.data;
                 this.setState({indicadoresMenu})
@@ -101,17 +102,15 @@ export default class Indicadores extends Component{
       }
 
       visualizeGraphs = () =>{
-        //  || (indicadorData.indicador.toUpperCase() === this.state.auxindicador.toUpperCase())
-        var indicadoresFiltered = [];
-        this.state.indicadores.map((indicadorData) =>{
-          if (indicadorData.indicador.toUpperCase() === this.state.indicador.toUpperCase()
-          && indicadorData.año === this.state.año
-          && indicadorData.estado.toUpperCase() === this.state.estado.toUpperCase()) {
-           return indicadoresFiltered.push(indicadorData)
-          }
-          return true
+
+        let indicadoresFiltered = this.state.indicadores.filter((value,idx) =>{
+          return( value.año === this.state.año &&
+            value.indicador.toUpperCase() === this.state.indicador.toUpperCase() &&
+            value.estado.toUpperCase() === this.state.estado.toUpperCase())
         })
+
         console.log(indicadoresFiltered)
+
         this.setState({indicadoresTable : indicadoresFiltered})
         // this.createPies(indicadoresFiltered);
       }
@@ -132,7 +131,7 @@ export default class Indicadores extends Component{
     }
 
     onDelete= () =>{
-    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
+    //     axios.delete("http://localhost:8080/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -162,7 +161,7 @@ export default class Indicadores extends Component{
                                 Documento cargado con éxito
                             </Alert>
                             <div style={{textAlign:"right", marginRight:"2em"}}>
-                                <input type="submit" value="Upload" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
+                                <input type="submit" value="Cargar" name="submit" className="btn btn-outline-primary" id="sendprogram"/>
                             </div>
                         </form>
                         </CardBody>
