@@ -30,7 +30,7 @@ export default class Repositories extends Component {
   }
 
   componentWillReceiveProps = (props) => {
-    axios.get('http://localhost:8080//repositorios')
+    axios.get('http://localhost:8080/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })
@@ -38,7 +38,7 @@ export default class Repositories extends Component {
   }
 
   componentDidUpdate = () => {
-    axios.get('http://localhost:8080//repositorios')
+    axios.get('http://localhost:8080/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })
@@ -46,7 +46,7 @@ export default class Repositories extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080//repositorios')
+    axios.get('http://localhost:8080/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })

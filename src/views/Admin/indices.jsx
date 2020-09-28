@@ -70,7 +70,6 @@ export default class Indices extends Component {
   }
 
   onConfirmation = (e) => {
-    console.log("JAJAJ")
     e.preventDefault();
     this.setState({
       modalVisible: true
