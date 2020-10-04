@@ -7,11 +7,11 @@ Col, Row, Collapse,  Label, Input} from 'reactstrap';
 export default class Gubernamentales extends Component{
 
   componentDidCatch(){
-    axios.get('http://localhost:8080/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://localhost:8080/menuEdosProgramas')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -20,11 +20,11 @@ export default class Gubernamentales extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8080/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
     .then(res => {
       const programs = res.data;
       this.setState({programs})
-      axios.get('http://localhost:8080/menuEdosProgramas')
+      axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res =>{
         const menuEdos = res.data;
         this.setState({menuEdos})
@@ -79,7 +79,7 @@ export default class Gubernamentales extends Component{
         this.setState({
           edo: e.target.value
         })
-        axios.get('http://localhost:8080/menuProgramas/'+ e.target.value)
+        axios.get('https://stcserver2.rhippie.com/menuProgramas/'+ e.target.value)
         .then(res=>{
           const menuPrograms = res.data
           this.setState({menuPrograms})

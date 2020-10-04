@@ -30,7 +30,7 @@ export default class Repositories extends Component {
   }
 
   componentWillReceiveProps = (props) => {
-    axios.get('http://localhost:8080/repositorios')
+    axios.get('https://stcserver2.rhippie.com/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })
@@ -38,7 +38,7 @@ export default class Repositories extends Component {
   }
 
   componentDidUpdate = () => {
-    axios.get('http://localhost:8080/repositorios')
+    axios.get('https://stcserver2.rhippie.com/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })
@@ -46,7 +46,7 @@ export default class Repositories extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/repositorios')
+    axios.get('https://stcserver2.rhippie.com/repositorios')
       .then(res => {
         const repos = res.data;
         this.setState({ repos })
@@ -78,13 +78,13 @@ export default class Repositories extends Component {
         'Authorization': "Bearer " + token,
       }
     }
-    axios.post("http://localhost:8080/deleteFileRepo", { file: this.state.file }, config)
+    axios.post("https://stcserver2.rhippie.com/deleteFileRepo", { file: this.state.file }, config)
     .then((response) =>{
       if(!response.data.success){
         console.log("error")
         return false
       }
-      axios.delete("http://localhost:8080/deleteRepo/" + this.state.id,config)
+      axios.delete("https://stcserver2.rhippie.com/deleteRepo/" + this.state.id,config)
       .then((finalResponse) =>{
         if (!finalResponse.data.success) {
           console.log("error BD")
@@ -95,7 +95,7 @@ export default class Repositories extends Component {
         })
       })
     })
-    //     axios.delete("http://localhost:8080/deleteProgram/" + this.state.id)
+    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -120,8 +120,8 @@ export default class Repositories extends Component {
         'content-type': 'multipart/form-data'
       }
     }
-    // http://localhost:8080/uploadFileRepo
-    axios.post("http://localhost:8080//uploadFileRepo", formData, config)
+    // https://stcserver2.rhippie.com/uploadFileRepo
+    axios.post("https://stcserver2.rhippie.com//uploadFileRepo", formData, config)
       .then(response => {
         const data = {
           "archivo": this.state.nombre,
@@ -130,7 +130,7 @@ export default class Repositories extends Component {
           "estado": this.state.estado,
           "descarga": fileName + "." + fileType
         }
-        axios.post('http://localhost:8080//createNewRepo',
+        axios.post('https://stcserver2.rhippie.com//createNewRepo',
           data,
           {
             headers: {

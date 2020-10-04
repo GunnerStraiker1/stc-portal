@@ -36,13 +36,13 @@ export default class Indices extends Component {
 
   componentWillReceiveProps = (props) => {
     //https://stcserver2.rhippie.com
-    axios.get('http://localhost:8080/indicesAdultosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultosAnio')
       .then(res => {
         const anios = res.data;
         console.log(anios)
         this.setState({ anios })
       })
-    axios.get('http://localhost:8080/indicesAdultos')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultos')
       .then(res => {
         const indices = res.data;
         console.log(indices)
@@ -51,13 +51,13 @@ export default class Indices extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/indicesAdultos')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultos')
       .then(res => {
         const indices = res.data;
         console.log(indices)
         this.setState({ indices })
       })
-    axios.get('http://localhost:8080/indicesAdultosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultosAnio')
       .then(res => {
         const anios = res.data;
         console.log(anios)
@@ -84,7 +84,7 @@ export default class Indices extends Component {
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('http://localhost:8080/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('https://stcserver2.rhippie.com/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
           .then(res => {
             const indiceName = res.data;
             this.setState({ indiceName: indiceName, statusMenu: false })
@@ -93,7 +93,7 @@ export default class Indices extends Component {
       else {
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({ año: e.currentTarget.value })
-          axios.get('http://localhost:8080/indicesEstados/' + e.currentTarget.value)
+          axios.get('https://stcserver2.rhippie.com/indicesEstados/' + e.currentTarget.value)
             .then(res => {
               const estados = res.data;
               this.setState({ estados })
@@ -111,7 +111,7 @@ export default class Indices extends Component {
 
   visualization = () => {
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("http://localhost:8080/indiceInfo/" + id)
+    axios.get("https://stcserver2.rhippie.com/indiceInfo/" + id)
       .then(res => {
         const indiceData = res.data[0]
         indiceData.resultado = parseFloat(indiceData.resultado)

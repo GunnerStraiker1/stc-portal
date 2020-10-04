@@ -42,24 +42,24 @@ class AdminHome extends Component {
     var url = ''
     switch (type) {
       case 'programForm':
-        url = 'http://localhost:8080/uploadPrograma';
+        url = 'https://stcserver2.rhippie.com/uploadPrograma';
         break;
       case 'indicadorForm':
-        url = 'http://localhost:8080/uploadIndicador';
+        url = 'https://stcserver2.rhippie.com/uploadIndicador';
         break;
       case 'infantilIndicadorForm':
-        url = 'http://localhost:8080/uploadIndicadorInfantil';
+        url = 'https://stcserver2.rhippie.com/uploadIndicadorInfantil';
         break;
       case 'programOscForm':
-        url = 'http://localhost:8080/uploadProgramaOSC';
+        url = 'https://stcserver2.rhippie.com/uploadProgramaOSC';
         break;
 
       case 'indicesForm':
-        url = 'http://localhost:8080/uploadIndice';
+        url = 'https://stcserver2.rhippie.com/uploadIndice';
         break;
 
       case 'indicesInfantilesForm':
-        url = 'http://localhost:8080/uploadIndiceInfantil';
+        url = 'https://stcserver2.rhippie.com/uploadIndiceInfantil';
         break;
       default:
         break;

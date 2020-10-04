@@ -30,7 +30,7 @@ export default class Estadisticas extends Component {
   }
 
   // componentWillReceiveProps = (props) =>{
-  //     axios.get('http://localhost:8080/estadisticas')
+  //     axios.get('https://stcserver2.rhippie.com/estadisticas')
   //     .then(res => {
   //         const stats = res.data;
   //         this.setState({stats})
@@ -38,7 +38,7 @@ export default class Estadisticas extends Component {
   // }
 
   // componentDidUpdate = () =>{
-  //     axios.get('http://localhost:8080/estadisticas')
+  //     axios.get('https://stcserver2.rhippie.com/estadisticas')
   //     .then(res => {
   //         const stats = res.data;
   //         this.setState({stats})
@@ -46,7 +46,7 @@ export default class Estadisticas extends Component {
   // }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/estadisticas')
+    axios.get('https://stcserver2.rhippie.com/estadisticas')
       .then(res => {
         const stats = res.data;
         console.log(stats)
@@ -72,13 +72,13 @@ export default class Estadisticas extends Component {
         'Authorization': "Bearer " + token,
       }
     }
-    axios.post("http://localhost:8080/deleteFileStat", { file: this.state.file }, config)
+    axios.post("https://stcserver2.rhippie.com/deleteFileStat", { file: this.state.file }, config)
       .then((response) => {
         if (!response.data.success) {
           console.log("error")
           return false
         }
-        axios.delete("http://localhost:8080/deleteStat/" + this.state.id, config)
+        axios.delete("https://stcserver2.rhippie.com/deleteStat/" + this.state.id, config)
           .then((finalResponse) => {
             if (!finalResponse.data.success) {
               console.log("error BD")
@@ -89,7 +89,7 @@ export default class Estadisticas extends Component {
             })
           })
       })
-    //     axios.delete("http://localhost:8080/deleteProgram/" + this.state.id)
+    //     axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id)
     //     .then((response) =>{
     //         this.setState({modalVisible: false, key:0,id:0})
     //         console.log(response)
@@ -114,7 +114,7 @@ export default class Estadisticas extends Component {
         'content-type': 'multipart/form-data'
       }
     }
-    axios.post("http://localhost:8080/uploadFileEsta", formData, config)
+    axios.post("https://stcserver2.rhippie.com/uploadFileEsta", formData, config)
       .then(response => {
         const data = {
           "nombre": this.state.nombre,
@@ -123,7 +123,7 @@ export default class Estadisticas extends Component {
           "estado": this.state.estado,
           "url": fileName + "." + fileType
         }
-        axios.post('http://localhost:8080/createNewEstadistica',
+        axios.post('https://stcserver2.rhippie.com/createNewEstadistica',
           data,
           {
             headers: {

@@ -17,7 +17,7 @@ export default class Repositorios extends Component{
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8080//repositorios')
+    axios.get('https://stcserver2.rhippie.com//repositorios')
     .then(res => {
       const repos = res.data;
       this.setState({repos})
@@ -55,7 +55,7 @@ export default class Repositorios extends Component{
                           <td style={{textAlign:"center"}}>{repo.fuente}</td>
                           <td style={{textAlign:"center"}}>{repo.estado}</td>
                           <td style={{textAlign:"center"}}>
-                            <a href={"https://stc-docs.sfo2.digitaloceanspaces.com/" + repo.descarga} target="_blank" rel="noopener noreferrer">
+                            <a href={"https://stcreposs.nyc3.digitaloceanspaces.com/" + repo.descarga} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-file-pdf-o fa-lg mt-4"></i>
                             </a>
                             <br />

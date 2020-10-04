@@ -109,12 +109,12 @@ export default class Indicadores extends Component {
   }arrayRespuestas
 
   componentDidMount() {
-    axios.get("http://localhost:8080/aniosIndicadores").then((res) => {
+    axios.get("https://stcserver2.rhippie.com/aniosIndicadores").then((res) => {
       const anios = res.data;
       console.log(anios);
       this.setState({ anios });
     });
-    axios.get("http://localhost:8080/indicadores").then((res) => {
+    axios.get("https://stcserver2.rhippie.com/indicadores").then((res) => {
       const indicadores = res.data;
       this.setState({ indicadores });
     });
@@ -144,7 +144,7 @@ export default class Indicadores extends Component {
         this.setState({ estado: estadoParam });
         axios
           .get(
-            "http://localhost:8080/menuIndicadores/" +
+            "https://stcserver2.rhippie.com/menuIndicadores/" +
               this.state.año +
               "/" +
               estadoParam
@@ -166,7 +166,7 @@ export default class Indicadores extends Component {
           this.setState({ año: e.currentTarget.value });
           axios
             .get(
-              "http://localhost:8080/indicadoresEstados/" +
+              "https://stcserver2.rhippie.com/indicadoresEstados/" +
                 e.currentTarget.value
             )
             .then((res) => {

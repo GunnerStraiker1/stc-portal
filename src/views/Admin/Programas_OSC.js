@@ -34,12 +34,12 @@ export default class Programas_OSC extends Component {
   }
 
   componentWillReceiveProps = (props) => {
-    axios.get('http://localhost:8080/programasOSC')
+    axios.get('https://stcserver2.rhippie.com/programasOSC')
       .then(res => {
         const programs = res.data;
         this.setState({ programs })
       })
-    axios.get('http://localhost:8080/menuEdosProgramasOSC')
+    axios.get('https://stcserver2.rhippie.com/menuEdosProgramasOSC')
       .then(res => {
         const menuEdos = res.data;
         this.setState({ menuEdos })
@@ -47,7 +47,7 @@ export default class Programas_OSC extends Component {
   }
 
   // componentDidUpdate = () =>{
-  //     axios.get('http://localhost:8080/programasOSC')
+  //     axios.get('https://stcserver2.rhippie.com/programasOSC')
   //     .then(res => {
   //         const programs = res.data;
   //         this.setState({programs})
@@ -55,13 +55,13 @@ export default class Programas_OSC extends Component {
   // }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/programasOSC')
+    axios.get('https://stcserver2.rhippie.com/programasOSC')
       .then(res => {
         const programs = res.data;
         // console.log(programs)
         this.setState({ programs })
       })
-    axios.get('http://localhost:8080/menuEdosProgramasOSC')
+    axios.get('https://stcserver2.rhippie.com/menuEdosProgramasOSC')
       .then(res => {
         const menuEdos = res.data;
         this.setState({ menuEdos })
@@ -85,7 +85,7 @@ export default class Programas_OSC extends Component {
         "Authorization": "Bearer " + token
       }
     }
-    axios.delete("http://localhost:8080/deleteProgramOsc/" + this.state.id, config)
+    axios.delete("https://stcserver2.rhippie.com/deleteProgramOsc/" + this.state.id, config)
       .then((response) => {
         this.setState({ modalVisible: false, key: 0, id: 0 })
         console.log(response)
@@ -103,7 +103,7 @@ export default class Programas_OSC extends Component {
         this.setState({
           edo: e.target.value
         })
-        axios.get('http://localhost:8080/menuProgramasOSC/' + e.target.value)
+        axios.get('https://stcserver2.rhippie.com/menuProgramasOSC/' + e.target.value)
           .then(res => {
             const menuPrograms = res.data
             this.setState({ menuPrograms })

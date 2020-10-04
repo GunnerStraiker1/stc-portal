@@ -83,11 +83,11 @@ export default class IndicadoresInfantiles extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/aniosIndicadoresInfantil").then((res) => {
+    axios.get("https://stcserver2.rhippie.com/aniosIndicadoresInfantil").then((res) => {
       const anios = res.data;
       this.setState({ anios });
     });
-    axios.get("http://localhost:8080/indicadoresInfantil").then((res) => {
+    axios.get("https://stcserver2.rhippie.com/indicadoresInfantil").then((res) => {
       const indicadores = res.data;
       this.setState({ indicadores });
     });
@@ -102,7 +102,7 @@ export default class IndicadoresInfantiles extends Component {
         this.setState({ estado: estadoParam });
         axios
           .get(
-            "http://localhost:8080/menuIndicadoresInfantil/" +
+            "https://stcserver2.rhippie.com/menuIndicadoresInfantil/" +
               this.state.año +
               "/" +
               estadoParam
@@ -124,7 +124,7 @@ export default class IndicadoresInfantiles extends Component {
           this.setState({ statusDisabled: false, año: e.currentTarget.value });
           axios
             .get(
-              "http://localhost:8080/indicadoresInfantilEstados/" +
+              "https://stcserver2.rhippie.com/indicadoresInfantilEstados/" +
                 e.currentTarget.value
             )
             .then((res) => {

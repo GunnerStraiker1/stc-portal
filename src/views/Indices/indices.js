@@ -50,14 +50,14 @@ export default class indices extends Component{
   }
 
   componentWillReceiveProps = (props) =>{
-    axios.get('http://localhost:8080/indicesAdultosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
     })
 }
 componentDidMount(){
-    axios.get('http://localhost:8080/indicesAdultosAnio')
+    axios.get('https://stcserver2.rhippie.com/indicesAdultosAnio')
     .then(res => {
         const anios = res.data;
         this.setState({anios})
@@ -120,7 +120,7 @@ componentWillMount(){
       if (e.currentTarget.id === "edo") {
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
-        axios.get('http://localhost:8080/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('https://stcserver2.rhippie.com/indicesAdultosMenu/' + this.state.año + "/" + estadoParam)
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName})
@@ -132,7 +132,7 @@ componentWillMount(){
       else{
         if (e.currentTarget.id === "año" && e.target.value !== 'Selecciona un año') {
           this.setState({statusDisabled: false, año: e.currentTarget.value})
-          axios.get('http://localhost:8080/indicesEstados/' + e.currentTarget.value)
+          axios.get('https://stcserver2.rhippie.com/indicesEstados/' + e.currentTarget.value)
           .then(res => {
             const estados = res.data;
             this.setState({estados})
@@ -147,7 +147,7 @@ componentWillMount(){
 
   visualization = () =>{
     const id = this.state.indiceName[this.state.indiceNameSelected].id
-    axios.get("http://localhost:8080/indiceInfo/" + id)
+    axios.get("https://stcserver2.rhippie.com/indiceInfo/" + id)
     .then(res =>{
       const indiceData = res.data[0]
       indiceData.resultado = parseFloat(indiceData.resultado)

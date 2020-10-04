@@ -32,12 +32,12 @@ export default class Programas extends Component {
   }
 
   componentWillReceiveProps = (props) => {
-    axios.get('http://localhost:8080/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
       .then(res => {
         const programs = res.data;
         this.setState({ programs })
       })
-    axios.get('http://localhost:8080/menuEdosProgramas')
+    axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res => {
         const menuEdos = res.data;
         this.setState({ menuEdos })
@@ -45,13 +45,13 @@ export default class Programas extends Component {
   }
 
   // componentDidUpdate = () => {
-  //   axios.get('http://localhost:8080/programas')
+  //   axios.get('https://stcserver2.rhippie.com/programas')
   //     .then(res => {
   //       const programs = res.data;
   //       console.log(programs)
   //       this.setState({ programs })
   //     })
-  //   axios.get('http://localhost:8080/menuEdosProgramas')
+  //   axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
   //     .then(res => {
   //       const menuEdos = res.data;
   //       this.setState({ menuEdos })
@@ -59,13 +59,13 @@ export default class Programas extends Component {
   // }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/programas')
+    axios.get('https://stcserver2.rhippie.com/programas')
       .then(res => {
         const programs = res.data;
         console.log(programs)
         this.setState({ programs })
       })
-    axios.get('http://localhost:8080/menuEdosProgramas')
+    axios.get('https://stcserver2.rhippie.com/menuEdosProgramas')
       .then(res => {
         const menuEdos = res.data;
         this.setState({ menuEdos })
@@ -89,7 +89,7 @@ export default class Programas extends Component {
         "Authorization": "Bearer " + token
       }
     }
-    axios.delete("http://localhost:8080/deleteProgram/" + this.state.id, config )
+    axios.delete("https://stcserver2.rhippie.com/deleteProgram/" + this.state.id, config )
       .then((response) => {
         this.setState({ modalVisible: false, key: 0, id: 0 })
         console.log(response)
@@ -107,7 +107,7 @@ export default class Programas extends Component {
         this.setState({
           edo: e.target.value
         })
-        axios.get('http://localhost:8080/menuProgramas/' + e.target.value)
+        axios.get('https://stcserver2.rhippie.com/menuProgramas/' + e.target.value)
           .then(res => {
             const menuPrograms = res.data
             this.setState({ menuPrograms })
