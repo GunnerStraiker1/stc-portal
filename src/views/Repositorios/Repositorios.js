@@ -55,7 +55,7 @@ export default class Repositorios extends Component{
                           <td style={{textAlign:"center"}}>{repo.fuente}</td>
                           <td style={{textAlign:"center"}}>{repo.estado}</td>
                           <td style={{textAlign:"center"}}>
-                            <a href={"https://stcreposs.nyc3.digitaloceanspaces.com/" + repo.descarga} target="_blank" rel="noopener noreferrer">
+                            <a href={"https://stcrepos.nyc3.digitaloceanspaces.com/" + repo.descarga} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-file-pdf-o fa-lg mt-4"></i>
                             </a>
                             <br />
