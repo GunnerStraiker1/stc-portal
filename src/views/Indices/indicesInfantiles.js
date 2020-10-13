@@ -351,8 +351,22 @@ componentWillMount(){
                             textColor={"#000000"}
 
                           />
-                          <div style={{fontSize:"30px", fontWeight: "bold", textAlign:"center"}}>
-                            {this.state.indiceData ? this.state.indiceData.resultado : "0"}
+                          <div
+                            style={{
+                              fontSize: "30px",
+                              fontWeight: "bold",
+                              textAlign: "center",
+                            }}
+                          >
+                            {this.state.indiceData
+                              ? this.state.indiceData.resultado
+                              : "0"}
+                            <br />
+                            <span style={{ fontSize: 40 }}>
+                              {this.state.indiceData
+                                ? this.state.indiceData.explicacion.toUpperCase()
+                                : "Explicación"}
+                            </span>
                           </div>
                         </Col>
                       </Row>
