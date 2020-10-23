@@ -24,6 +24,7 @@ import {
 import graphBack from "./media/colors.png";
 import axios from "axios";
 import "../Indices/indices.css";
+import { isChrome, isEdge } from "react-device-detect";
 
 var CustomTootip = ({ active, payload, label }) => {
   if (active) {
@@ -138,9 +139,11 @@ export default class indices extends Component {
         axios
           .get(
             "https://stcserver2.rhippie.com/indicesAdultosMenu/" +
-              this.state.año +
-              "/" +
-              estadoParam
+              this.state.año, {
+                params:{
+                  edo: estadoParam
+                }
+              }
           )
           .then((res) => {
             const indiceName = res.data;
@@ -485,11 +488,11 @@ export default class indices extends Component {
                               0.9,
                               1,
                             ]}
-                            currentValueText={
-                              this.state.indiceData !== null
-                                ? this.state.indiceData.explicacion.toUpperCase()
-                                : "Selecciona un Índice"
-                            }
+                            // currentValueText={
+                            //   this.state.indiceData !== null
+                            //     ? this.state.indiceData.explicacion.toUpperCase()
+                            //     : "Selecciona un Índice"
+                            // }
                             needleColor="#020202"
                             segmentColors={[
                               "#A20606",
@@ -514,11 +517,11 @@ export default class indices extends Component {
                               textAlign: "center",
                             }}
                           >
-                            {this.state.indiceData
+                            {isEdge || isChrome ? null : this.state.indiceData
                               ? this.state.indiceData.resultado
-                              : "0"}
-                            <br />
-                            <span style={{ fontSize: 40 }}>
+                              : 0}
+                            {isEdge || isChrome ? null:  <br />}
+                            <span style={{ fontSize: 35 }}>
                               {this.state.indiceData
                                 ? this.state.indiceData.explicacion.toUpperCase()
                                 : "Explicación"}

@@ -6,6 +6,7 @@ Col, Row, Collapse, Label, Input} from 'reactstrap';
 import graphBack from './media/colors.png'
 import axios from 'axios'
 import ReactSpeedmeter from 'react-d3-speedometer'
+import {isChrome, isFirefox, isEdge} from 'react-device-detect'
 import '../Indices/indices.css'
 
 var CustomTootip= ({ active, payload, label}) =>{
@@ -121,7 +122,7 @@ componentWillMount(){
         // eslint-disable-next-line default-case
         const estadoParam = e.target.value
         console.log(estadoParam)
-        axios.get('https://stcserver2.rhippie.com/indicesNiniosMenu/' + this.state.año + "/" + estadoParam)
+        axios.get('https://stcserver2.rhippie.com/indicesNiniosMenu/' + this.state.año, {params:{edo:estadoParam}})
         .then(res =>{
           const indiceName = res.data;
           this.setState({indiceName: indiceName, statusMenu: false})
@@ -332,7 +333,7 @@ componentWillMount(){
                               0, 0.1, 0.2, 0.3, 0.4, 0.5 ,0.6, 0.7, 0.8, 0.9, 1
                             ]}
 
-                            currentValueText= {this.state.indiceData !== null ? this.state.indiceData.explicacion.toUpperCase() : "0"}
+                            // currentValueText= {this.state.indiceData !== null ? this.state.indiceData.explicacion.toUpperCase() : "0"}
                             needleColor="#020202"
                             segmentColors={[
                               "#A20606",
@@ -358,11 +359,11 @@ componentWillMount(){
                               textAlign: "center",
                             }}
                           >
-                            {this.state.indiceData
+                            {isEdge || isChrome ? null : this.state.indiceData
                               ? this.state.indiceData.resultado
                               : "0"}
-                            <br />
-                            <span style={{ fontSize: 40 }}>
+                            {isEdge || isChrome ? null:  <br />}
+                            <span style={{ fontSize: 35 }}>
                               {this.state.indiceData
                                 ? this.state.indiceData.explicacion.toUpperCase()
                                 : "Explicación"}

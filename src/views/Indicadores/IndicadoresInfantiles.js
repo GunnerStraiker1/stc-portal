@@ -103,9 +103,12 @@ export default class IndicadoresInfantiles extends Component {
         axios
           .get(
             "https://stcserver2.rhippie.com/menuIndicadoresInfantil/" +
-              this.state.año +
-              "/" +
-              estadoParam
+              this.state.año,
+              {
+                params:{
+                  edo: estadoParam
+                }
+              }
           )
           .then((res) => {
             const indicadoresMenu = res.data;
@@ -335,7 +338,7 @@ export default class IndicadoresInfantiles extends Component {
                                 />
                                 <YAxis
                                   label={{
-                                    value: "# de votos",
+                                    value: "Cantidad de Respuestas",
                                     angle: -90,
                                     position: "insideLeft",
                                   }}
@@ -344,6 +347,7 @@ export default class IndicadoresInfantiles extends Component {
                                 <Legend height={50} verticalAlign="top" />
                                 <Bar
                                   dataKey="votos"
+                                  name='Cantidad de Respuestas'
                                   fill="#AEB8FF"
                                   barSize={100}
                                 />

@@ -28,8 +28,9 @@ export default {
       name: 'Indicadores',
       icon: 'fa fa-th-large',
       children:[
+        {name: 'Introduccion a los Indicadores', url:'/metodologiaIndicadores', icon:'fa fa-th-large'},
         {name: 'Indicadores Adultos', url:'/indicadores', icon:'fa fa-th-large'},
-        {name: 'Indicadores Infantiles', url:'/indicadoresInfantiles', icon:'fa fa-th-large'},
+        {name: 'Indicadores de Niñas y Niños', url:'/indicadoresInfantiles', icon:'fa fa-th-large'},
       ]
     },
     {
@@ -40,8 +41,8 @@ export default {
       icon: 'fa fa-tags',
       children:[
         {name: 'Metodología Utilizada', url:'/metodologiaIndices', icon:'fa fa-th-large'},
-        {name: 'Indices Adultos', url:'/indices', icon:'fa fa-tags'},
-        {name: 'Indices Infantiles', url:'/indicesInfantiles', icon:'fa fa-tags'},
+        {name: 'Índices Adultos', url:'/indices', icon:'fa fa-tags'},
+        {name: 'Índices de Niñas y Niños', url:'/indicesInfantiles', icon:'fa fa-tags'},
       ]
     },
     {

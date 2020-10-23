@@ -145,9 +145,13 @@ export default class Indicadores extends Component {
         axios
           .get(
             "https://stcserver2.rhippie.com/menuIndicadores/" +
-              this.state.año +
-              "/" +
-              estadoParam
+              this.state.año,
+              {
+                params:{
+                  edo: estadoParam
+                }
+              }
+
           )
           .then((res) => {
             const indicadoresMenu = res.data;
@@ -233,7 +237,7 @@ export default class Indicadores extends Component {
           if (voto[key] > 0)
             dataPregunta.push({
               name: res.toUpperCase(),
-              votos:
+              cantidad:
                 voto[key] !== undefined || voto[key] !== null
                   ? parseInt(voto[key])
                   : 0,
@@ -244,7 +248,7 @@ export default class Indicadores extends Component {
       });
       dataPregunta.some((e) => e.name === "NI EN DESACUERDO NI DE ACUERDO")
         ? (dataPregunta = this.mapOrder(dataPregunta, arrayRespuestas, "name"))
-        : dataPregunta.sort((a, b) => parseInt(b.votos) - parseInt(a.votos));
+        : dataPregunta.sort((a, b) => parseInt(b.cantidad) - parseInt(a.cantidad));
       preguntas.push(pregunta.toUpperCase());
       respuestas.push(dataPregunta);
       return true;
@@ -339,7 +343,7 @@ export default class Indicadores extends Component {
                         </CardHeader>
                         <CardBody>
                           <ResponsiveContainer width="100%" aspect={4.0 / 1.8}>
-                            <BarChart data={this.state.preguntas.data[key]}>
+                            <BarChart data={this.state.preguntas.data[key]} >
                               <CartesianGrid strokeDasharray="2 2" />
                               <XAxis
                                 tick={<CustomizedAxisTick />}
@@ -350,15 +354,16 @@ export default class Indicadores extends Component {
                               />
                               <YAxis
                                 label={{
-                                  value: "# de votos",
+                                  value: "Cantidad de Respuestas",
                                   angle: -90,
                                   position: "insideLeft",
                                 }}
                               />
                               <Tooltip cursor={{ fill: "transparent" }} />
-                              <Legend height={50} verticalAlign="top" />
+                              <Legend height={50} verticalAlign="top"/>
                               <Bar
-                                dataKey="votos"
+                                dataKey={"cantidad"}
+                                name={'Cantidad de Respuestas'}
                                 fill="#AEB8FF"
                                 barSize={100}
                               />

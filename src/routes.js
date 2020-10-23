@@ -11,6 +11,7 @@ const Gubernamentales = React.lazy(()=> import('./views/Programas/Gubernamentale
 const OSC = React.lazy(()=> import('./views/Programas/ProgramasOSC'))
 const Repositorios = React.lazy(()=> import('./views/Repositorios/Repositorios'))
 const Estadisticas = React.lazy(()=> import('./views/Estadisticas/Estadisticas'))
+const MetodologiaIndicadores = React.lazy(()=> import('./views/Metodologia/MetodologiaIndicadores'))
 const MetodologiaIndices = React.lazy(()=> import('./views/Metodologia/MetodologiaIndices'))
 const MetodolodiaEstadistica = React.lazy(()=> import('./views/Metodologia/MetodologiaEstadistica'));
 const MetodologiaProgramas = React.lazy(()=> import('./views/Metodologia/MetodologiaPrograma'))
@@ -35,6 +36,7 @@ const routes = [
   { path: '/repositorios', exact: true, name: 'repo', component: Repositorios },
   { path: '/estadisticas', exact: true, name: 'statics', component: Estadisticas },
   // { path: '/admin', exact: true, name:'Admin', component: Admin },
+  { path: '/metodologiaIndicadores', exact: true, name:'MetodologiaIndicadores', component: MetodologiaIndicadores },
   { path: '/metodologiaIndices', exact: true, name:'MetodologiaIndices', component: MetodologiaIndices },
   { path: '/metodologiaEstadistica', exact: true, name:'metodologiaEstadistica', component: MetodolodiaEstadistica },
   { path: '/metodologiaPrograma', exact: true, name:'metodologiaPrograma', component: MetodologiaProgramas },

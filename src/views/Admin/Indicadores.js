@@ -82,9 +82,11 @@ export default class Indicadores extends Component {
         axios
           .get(
             "https://stcserver2.rhippie.com/menuIndicadores/" +
-              this.state.año +
-              "/" +
-              estadoParam
+              this.state.año,{
+                params:{
+                  edo: estadoParam
+                }
+              }
           )
           .then((res) => {
             const indicadoresMenu = res.data;
@@ -252,7 +254,7 @@ export default class Indicadores extends Component {
                 })}
               </Input>
             </Col>
-            
+
             <Col xs="12" sm="2" md="2" style={{textAlign: "center"}}>
               <Button
                 color="primary"
