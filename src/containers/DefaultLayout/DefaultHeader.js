@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
 //Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle,
@@ -24,10 +24,12 @@ class DefaultHeader extends Component {
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
+        <NavLink to='/inicio'>
         <AppNavbarBrand
           full={{ src: "https://stc.rhippie.com/assets/img/logo.png", width: "80%", height: "100%", alt: 'Save the Children' }}
           minimized={{ src: "https://stc.rhippie.com/assets/img/logo.png", width: "80%", height: "100%", alt: 'Save the Children' }}
         />
+        </NavLink>
         {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
 
         {/* <Nav className="d-md-down-none" navbar>

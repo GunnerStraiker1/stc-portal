@@ -23,6 +23,7 @@ import {
   Text,
 } from "recharts";
 import "./indicadores.css";
+import { isMobile } from "react-device-detect";
 // import 'chartjs-plugin-labels'
 
 //chartjs-plugin-labels
@@ -105,8 +106,16 @@ export default class Indicadores extends Component {
         "Y",
         "Z",
       ],
+      isMobile: false,
     };
   }arrayRespuestas
+
+  componentWillMount() {
+    let widthInner = window.innerWidth;
+    if (widthInner <= 600) {
+      this.setState({ isMobile:true });
+    }
+  }
 
   componentDidMount() {
     axios.get("https://stcserver2.rhippie.com/aniosIndicadores").then((res) => {
@@ -242,13 +251,17 @@ export default class Indicadores extends Component {
                   ? parseInt(voto[key])
                   : 0,
             });
-          alphabetKey++;
         }
         return true;
       });
       dataPregunta.some((e) => e.name === "NI EN DESACUERDO NI DE ACUERDO")
         ? (dataPregunta = this.mapOrder(dataPregunta, arrayRespuestas, "name"))
         : dataPregunta.sort((a, b) => parseInt(b.cantidad) - parseInt(a.cantidad));
+
+      dataPregunta.map((item,idx) =>{
+        item.alphabet = this.state.alphabet[idx]
+      })
+
       preguntas.push(pregunta.toUpperCase());
       respuestas.push(dataPregunta);
       return true;
@@ -281,7 +294,7 @@ export default class Indicadores extends Component {
                     </Input>
                   </Col>
                   <Col xs="12" sm="3" md="3">
-                    <Label>Seleccionar Estado</Label>
+                    <Label>Seleccionar Estado/Municipio</Label>
                     <Input
                       type="select"
                       name="select"
@@ -289,7 +302,7 @@ export default class Indicadores extends Component {
                       onChange={this.changeSelection}
                       disabled={this.state.estadosMenuStatus}
                     >
-                      <option unselectable>Selecciona un estado</option>
+                      <option unselectable>Selecciona un Estado/Municipio</option>
                       {this.state.estados.map((edo) => {
                         return (
                           <option value={edo.estado}>
@@ -334,6 +347,7 @@ export default class Indicadores extends Component {
                 </Row>
               </CardHeader>
               <Row>
+                {console.log(this.state.preguntas.data)}
                 {this.state.preguntas.preguntas.map((pregunta, key) => {
                   return (
                     <Col xs="12" md="12" key={key}>
@@ -342,12 +356,13 @@ export default class Indicadores extends Component {
                           <h4>{key + 1 + ".- " + pregunta}</h4>
                         </CardHeader>
                         <CardBody>
-                          <ResponsiveContainer width="100%" aspect={4.0 / 1.8}>
+                          <ResponsiveContainer width="99%" aspect={ this.state.isMobile ?  1.0 / 1.8 : 4.0/1.8}>
                             <BarChart data={this.state.preguntas.data[key]} >
                               <CartesianGrid strokeDasharray="2 2" />
                               <XAxis
                                 tick={<CustomizedAxisTick />}
-                                dataKey={"name"}
+                                dataKey={this.state.isMobile ? "alphabet" : "name"}
+                                type='category'
                                 height={180}
                                 interval={0}
                                 label={{ value: "Respuestas" }}
@@ -370,23 +385,23 @@ export default class Indicadores extends Component {
                             </BarChart>
                           </ResponsiveContainer>
                           {
-                            // this.state.preguntas.data[key].length > 4 ? "alphabetRef" :
-                            // this.state.preguntas.data[key].length > 4 ?
-                            //   <Card>
-                            //     <CardHeader>
-                            //       <Button block color="link" className="text-left m-0 p-0" onClick={() => console.log("4")} aria-expanded={true}>
-                            //         <h4 style={{textAlign:"center"}}>RESPUESTAS</h4>
-                            //       </Button>
-                            //     </CardHeader>
-                            //     <CardBody>
-                            //       <Row>
-                            //         {this.state.preguntas.data[key].map((data, key) => {
-                            //           return <Col sm={4} style={{marginBottom:"1em", textAlign:"left"}}><h5><b>{data.alphabetRef}</b> :  {data.name}</h5></Col>
-                            //         })}
-                            //       </Row>
-                            //     </CardBody>
-                            //   </Card>
-                            //   : null
+                            isMobile ?
+                              <Card>
+                                <CardHeader>
+                                  <Button block color="link" className="text-left m-0 p-0" onClick={() => console.log("4")} aria-expanded={true}>
+                                    <h4 style={{textAlign:"center"}}>RESPUESTAS</h4>
+                                  </Button>
+                                </CardHeader>
+                                <CardBody>
+                                  <Row>
+                                    {this.state.preguntas.data[key].map((data, key) => {
+                                      return <Col sm={4} style={{marginBottom:"1em", textAlign:"left"}}><h5><b>{data.alphabet}</b> :  {data.name}</h5></Col>
+                                    })}
+                                  </Row>
+                                </CardBody>
+                              </Card>
+                              :
+                              null
                           }
                         </CardBody>
                       </Card>

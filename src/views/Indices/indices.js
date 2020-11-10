@@ -227,7 +227,7 @@ export default class indices extends Component {
                         </Input>
                       </Col>
                       <Col md="4">
-                        <Label>Seleccionar Ciudad</Label>
+                        <Label>Seleccionar Estado/Municipio</Label>
                         <Input
                           type="select"
                           name="select"
@@ -236,7 +236,7 @@ export default class indices extends Component {
                           onChange={this.changeSelection}
                         >
                           <option unselectable={"on"}>
-                            Selecciona un Estado
+                            Selecciona un Estado/Municipio
                           </option>
                           {this.state.estados.map((edo) => {
                             return (

@@ -189,10 +189,10 @@ componentWillMount(){
                     </Col>
                       <Col md="4">
                         <Label>
-                          Seleccionar Ciudad
+                          Seleccionar Estado/Municipio
                         </Label>
                         <Input type="select" name="select" id="edo" disabled={this.state.statusDisabled ? true:null} onChange={this.changeSelection}>
-                          <option unselectable={"on"}>Selecciona un Estado</option>
+                          <option unselectable={"on"}>Selecciona un Estado/Municipio</option>
                           {
                             this.state.estados.map((edo, key) =>{
                               return(

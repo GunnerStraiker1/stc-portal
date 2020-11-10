@@ -1,7 +1,7 @@
 export default {
   items: [
     {
-      name: 'Landing Page',
+      name: 'Página Principal',
       url: '/Inicio',
       icon: 'fa fa-home',
     },
@@ -75,12 +75,12 @@ export default {
       ]
     },
     {
-      name: 'Repositorios',
+      name: 'Biblioteca',
       icon: 'fa fa-tags',
       children:[
-        {name: 'Introducción a los Repositorios', url:'/metodologiaRepositorio', icon:'fa fa-tags'},
+        {name: 'Introducción a Biblioteca', url:'/metodologiaRepositorio', icon:'fa fa-tags'},
         {
-          name: 'Repositorios',
+          name: 'Biblioteca',
           url: '/repositorios',
           icon: 'fa fa-tags',
         }
